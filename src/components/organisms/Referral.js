@@ -64,7 +64,8 @@ const Referral = () => {
         <CopyToClipboard text={ref} onCopy={copy}>
           <Button
             font="12px"
-            bg="primary"
+            bg="white"
+            color="black"
             p="8px 24px"
             m="4px 0"
             bold

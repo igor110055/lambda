@@ -3,7 +3,7 @@ const supportedBanks = [
     code: "jpm",
     color: "#3D3A4B",
     official_name: "JPMORGAN CHASE BANK, NATIONAL ASSOCIATION",
-    name: "J.P. Morgan",
+    name: "Chase Bank",
   },
   {
     code: "citi",

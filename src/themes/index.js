@@ -7,8 +7,9 @@ const base = {
 };
 
 const colors = {
-  primary: process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
-  board: process.env.REACT_APP_BOARD_COLOR || "#0095eb",
+  primary:
+    "#329EFC" || process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
+  board: process.env.REACT_APP_BOARD_COLOR || "#329EFC",
   chart: process.env.REACT_APP_CHART_COLOR || "#68CA6D",
   actionBg: process.env.REACT_APP_ACTION_BG,
   danger: "#FF4747",
@@ -21,7 +22,7 @@ export const light = {
     ...colors,
     text: "#141414",
     invertText: "#fff",
-    bg: "#E0E0E0",
+    bg: "#f0f0f0",
     bgContrast: "white",
     skeleton: "linear-gradient(-90deg, #f0f0f0 0%, #f8f8f8 50%, #f0f0f0 100%)",
 

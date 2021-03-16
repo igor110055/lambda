@@ -197,11 +197,12 @@ function Invest({ action }) {
 
       <Button
         type="submit"
-        bg="primary"
-        color="invertText"
+        bg="white"
+        color="black"
         bold
         full
         m="24px 0 0"
+        p="14px"
         radius="8px"
         disabled={isSubmitting}
       >
@@ -348,11 +349,12 @@ function Transfer({ action }) {
 
       <Button
         type="submit"
-        bg="primary"
-        color="invertText"
+        bg="white"
+        color="black"
         bold
         full
         m="24px 0 0"
+        p="14px"
         radius="8px"
         disabled={isSubmitting}
       >
