@@ -4,6 +4,7 @@ import { ReactSVG } from "react-svg";
 
 import Loader from "../molecules/Loader";
 import supportedBanks from "../../store/supportedBanks";
+import { FaUniversity } from "react-icons/fa";
 
 const Icon = styled(ReactSVG)`
   height: ${({ size }) => size || "40px"};
@@ -33,4 +34,16 @@ const BankBrand = ({ logo, ...props }) => {
     />
   );
 };
+
+export const BankDefaultBrand = styled(FaUniversity)`
+  height: ${({ size }) => size || "40px"};
+  width: 40px;
+  padding: 4px;
+  vertical-align: top;
+
+  background-color: ${({ bg }) => bg && bg};
+  color: white;
+  border-radius: 4px;
+`;
+
 export default BankBrand;

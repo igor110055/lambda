@@ -4,20 +4,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
-import SubText from "../atoms/SubText";
 import Input from "../atoms/Input";
+import Select from "../atoms/Select";
 import Button from "../atoms/Button";
 import Spinner from "../atoms/Spinner";
-import CardBrand from "../atoms/CardBrand";
-
-import ControlledBankInput from "../molecules/ControlledBankInput";
 
 import { bankSchema } from "../../validators/bank";
 
 import supportedBanks from "../../store/supportedBanks";
 
 const BankForm = ({ onSubmit }) => {
-  const { register, control, handleSubmit, errors, formState } = useForm({
+  const { register, handleSubmit, errors, formState } = useForm({
     defaultValues: {
       bank: "",
       userId: "",
@@ -30,16 +27,7 @@ const BankForm = ({ onSubmit }) => {
 
   return (
     <Container as="form" onSubmit={handleSubmit(onSubmit)} wide>
-      <ControlledBankInput
-        extra={
-          <Container flex="space-between" wide>
-            <SubText p="0" font="12px" bold>
-              Secure Password
-            </SubText>
-            <CardBrand size="24px" logo={"visa"} />
-          </Container>
-        }
-        radius="8px"
+      {/* <ControlledBankInput
         hint="Select Bank"
         label="Bank"
         placeholder="Select Bank"
@@ -47,7 +35,21 @@ const BankForm = ({ onSubmit }) => {
         control={control}
         name="bank"
         error={errors.bank?.message}
-      />
+      /> */}
+      <Select
+        label="Bank"
+        radius="8px"
+        name="bank"
+        ref={register}
+        error={errors.bank?.message}
+      >
+        <option value="">-- Choose Bank --</option>
+        {supportedBanks.map((bank) => (
+          <option key={bank.code} value={bank.name}>
+            {bank.official_name}
+          </option>
+        ))}
+      </Select>
       <Input
         label="User ID"
         placeholder="User ID"

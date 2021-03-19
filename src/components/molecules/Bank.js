@@ -6,7 +6,7 @@ import { FaPlus, FaTrash } from "react-icons/fa";
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
 import SubText from "../atoms/SubText";
-import BankBrand from "../atoms/BankBrand";
+import BankBrand, { BankDefaultBrand } from "../atoms/BankBrand";
 
 import supportedBanks from "../../store/supportedBanks";
 
@@ -43,7 +43,7 @@ export const Bank = ({ bank, action, active, ...props }) => {
       {...props}
     >
       <Container flex="flex-start" align="flex-start" wide>
-        <BankBrand size="48px" logo={bank.bank} />
+        <BankDefaultBrand size="36px" />
       </Container>
       <Container flexCol="flex-start" wide>
         <Container>
@@ -112,6 +112,8 @@ export const AdminBankItem = ({ bank, action, ...props }) => {
 };
 
 export const BankItem = ({ bank, action, ...props }) => {
+  const selectedBank = supportedBanks.find((b) => b.name === bank.bank);
+
   return (
     <Container
       p="12px"
@@ -132,7 +134,7 @@ export const BankItem = ({ bank, action, ...props }) => {
         </Text>
       </Container>
 
-      <BankBrand size="32px" logo={bank.bank} />
+      <BankDefaultBrand size="26px" logo={bank.bank} bg={selectedBank?.color} />
     </Container>
   );
 };

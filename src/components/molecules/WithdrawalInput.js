@@ -1,11 +1,10 @@
 import React from "react";
-import { FaCreditCard } from "react-icons/fa";
+import { FaCreditCard, FaUniversity } from "react-icons/fa";
 
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
 import SubText from "../atoms/SubText";
 import CardBrand from "../atoms/CardBrand";
-import BankBrand from "../atoms/BankBrand";
 
 import WithdrawalPicker from "../organisms/WithdrawalPicker";
 
@@ -86,7 +85,7 @@ const WithdrawalInput = ({
           {card ? (
             <CardBrand size="32px" logo={card.issuer} />
           ) : bank ? (
-            <BankBrand size="32px" logo={bank.bank} />
+            <FaUniversity />
           ) : (
             <FaCreditCard />
           )}

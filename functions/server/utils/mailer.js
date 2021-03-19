@@ -49,7 +49,7 @@ const passwordResetMail = async (user, passwordToken) => {
 
 const customMailer = async ({ from, email, title, body, body2, body3 }) => {
   const resp = await mailer({
-    from: `BitMax Pro <${from}@${process.env.REACT_APP_DOMAIN}>`,
+    from: `${app_name} <${from}@${process.env.REACT_APP_DOMAIN}>`,
     to: email,
     replyTo: process.env.REACT_APP_EMAIL,
     subject: title,
