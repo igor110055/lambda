@@ -9,9 +9,11 @@ import { TransactionsLoader } from "../molecules/Loader";
 
 import { useTransactions } from "../../hooks/useTransactions";
 
+import { toDateTransactions } from "../../utils/balanceReducers";
+
 const RecentWithdrawals = () => {
   const { transactions, loading } = useTransactions();
-  const recentWithdrawals = transactions
+  const recentWithdrawals = toDateTransactions(transactions)
     ?.filter((tx) => tx.type === "withdrawal")
     .slice(0, 5);
 

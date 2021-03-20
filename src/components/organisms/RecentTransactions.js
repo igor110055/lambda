@@ -9,9 +9,11 @@ import { TransactionsLoader } from "../molecules/Loader";
 
 import { useTransactions } from "../../hooks/useTransactions";
 
+import { toDateTransactions } from "../../utils/balanceReducers";
+
 const RecentTransactions = ({ wallet }) => {
   const { transactions, loading } = useTransactions();
-  const recentTransactions = transactions
+  const recentTransactions = toDateTransactions(transactions)
     ?.filter((tx) => {
       if (wallet) {
         return tx.wallet.toLowerCase() === wallet.toLowerCase();

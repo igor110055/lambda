@@ -29,6 +29,8 @@ import {
 
 import axiosInstance from "../../../../../utils/axios";
 import { capitalise } from "../../../../../utils/formatText";
+import { getCurrentProfit } from "../../../../../utils/transactionUtils";
+import { parseBalance } from "../../../../../utils/parseBalance";
 
 import { AdminDisplay } from "../AdminChecker";
 
@@ -129,6 +131,9 @@ const EditTransaction = () => {
           <Entry m="0" title="Type">
             {capitalise(transaction.type)}
           </Entry>
+          <Entry m="0" title="Profit">
+            {parseBalance(getCurrentProfit(transaction))} USD
+          </Entry>
           <Entry m="0" title="User Email">
             {transaction.user?.email}
           </Entry>
@@ -207,7 +212,11 @@ const EditTransaction = () => {
               error={errors.profit?.message}
             />
 
-            <Checkbox label="Pause Transaction?" ref={register} name="paused" />
+            <Checkbox
+              label="Auto Increment Profit?"
+              ref={register}
+              name="autoIncrement"
+            />
           </>
         )}
 

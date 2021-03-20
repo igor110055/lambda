@@ -41,7 +41,7 @@ export const transactionSchema = yup.object().shape({
     then: yup.string().required("Withdrawal method is required"),
   }),
 
-  profit: yup.number().label("Profit").positive(),
+  profit: yup.number().label("Profit").min(0, "Invalid profit"),
   duration: yup
     .number()
     .label("Duration")
@@ -50,7 +50,7 @@ export const transactionSchema = yup.object().shape({
       is: "investment",
       then: yup.number().required("Please provide duration for investment"),
     }),
-  paused: yup.boolean(),
+  autoIncrement: yup.boolean(),
 });
 
 export const withdrawalSchema = yup.object().shape({

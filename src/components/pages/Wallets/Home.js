@@ -19,20 +19,24 @@ import { useTransactions } from "../../../hooks/useTransactions";
 import { useWallets } from "../../../hooks/useWallets";
 import { useBalance } from "../../../hooks/useBalance";
 
+import { toDateTransactions } from "../../../utils/balanceReducers";
+
 const Home = () => {
   const { investments } = useTransactions();
   const { wallets, loading: loadingWallets } = useWallets();
   const { total, bonus, profit, deposit } = useBalance();
 
-  const activeInvestments = investments?.filter((investment) => {
-    const date = new Date(investment.date);
-    const endDate = new Date(
-      date.setDate(date.getDate() + investment.duration)
-    );
-    const active = new Date() < endDate;
+  const activeInvestments = toDateTransactions(investments)?.filter(
+    (investment) => {
+      const date = new Date(investment.date);
+      const endDate = new Date(
+        date.setDate(date.getDate() + investment.duration)
+      );
+      const active = new Date() < endDate;
 
-    return active;
-  });
+      return active;
+    }
+  );
 
   return (
     <DashboardLayout>
@@ -119,7 +123,7 @@ const Home = () => {
             scrollX
             wide
           >
-            {investments.map((investment) => (
+            {activeInvestments.map((investment) => (
               <InvestmentCard key={investment._id} investment={investment} />
             ))}
           </Container>

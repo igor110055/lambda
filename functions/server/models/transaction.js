@@ -45,7 +45,7 @@ const TransactionSchema = new Schema({
       return this.type === "investment";
     },
   },
-  paused: {
+  autoIncrement: {
     type: Boolean,
     default: function () {
       return this.type === "investment" ? false : undefined;

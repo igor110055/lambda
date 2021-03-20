@@ -15,6 +15,9 @@ import DashboardLayout from "../templates/Dashboard";
 import { useTransaction } from "../../hooks/useTransactions";
 import { useWallets } from "../../hooks/useWallets";
 
+import { getCurrentProfit } from "../../utils/transactionUtils";
+import { parseBalance } from "../../utils/parseBalance";
+
 const Investment = () => {
   const { id } = useParams();
   const history = useHistory();
@@ -55,7 +58,7 @@ const Investment = () => {
             {transaction.amount.toLocaleString()} USD
           </Entry>
           <Entry title="Profit">
-            +{transaction.profit?.toLocaleString()} USD
+            +{parseBalance(getCurrentProfit(transaction))} USD
           </Entry>
           <Entry title="Duration">
             {transaction.duration} Day{transaction.duration > 1 ? "s" : ""}

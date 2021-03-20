@@ -14,6 +14,8 @@ import DashboardLayout from "../templates/Dashboard";
 import { useTransactions } from "../../hooks/useTransactions";
 import { useWallets } from "../../hooks/useWallets";
 
+import { toDateTransactions } from "../../utils/balanceReducers";
+
 const Transactions = () => {
   const { state } = useLocation();
   const stateWallet = state?.wallet;
@@ -24,11 +26,13 @@ const Transactions = () => {
 
   const changeWallet = ({ target }) => setWallet(target.value);
 
-  const filteredTransactions = transactions?.filter((tx) => {
-    if (wallet && wallet !== "All") {
-      return tx.wallet.toLowerCase() === wallet.toLowerCase();
-    } else return true;
-  });
+  const filteredTransactions = toDateTransactions(transactions)?.filter(
+    (tx) => {
+      if (wallet && wallet !== "All") {
+        return tx.wallet.toLowerCase() === wallet.toLowerCase();
+      } else return true;
+    }
+  );
 
   useEffect(() => {
     if (wallets && stateWallet) {

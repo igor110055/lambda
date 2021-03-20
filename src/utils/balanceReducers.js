@@ -1,4 +1,5 @@
 import { parseBalance } from "./parseBalance";
+import { getCurrentProfit } from "./transactionUtils";
 
 // get transactions not greater than current date
 export const toDateTransactions = (txs) =>
@@ -11,7 +12,7 @@ export const toDateTransactions = (txs) =>
 export const total = (txs) => {
   const balance = toDateTransactions(txs)?.reduce((total, tx) => {
     let sum = total + tx.amount;
-    if (tx.profit) sum += tx.profit;
+    if (tx.profit) sum += getCurrentProfit(tx);
     return sum;
   }, 0);
   return parseBalance(balance);
@@ -25,7 +26,7 @@ export const available = (txs) => {
       const startDate = new Date(tx.date);
       const completeDate = startDate.setDate(startDate.getDate() + tx.duration);
       const complete = new Date() > completeDate;
-      if (complete) sum += tx.profit;
+      if (complete) sum += getCurrentProfit(tx);
       return sum;
     } else {
       return total + tx.amount;
@@ -54,6 +55,6 @@ export const deposit = (txs) => {
 export const profit = (txs) => {
   const balance = toDateTransactions(txs)
     ?.filter((tx) => tx.type === "investment")
-    ?.reduce((total, tx) => total + tx.profit, 0);
+    ?.reduce((total, tx) => total + getCurrentProfit(tx), 0);
   return parseBalance(balance);
 };

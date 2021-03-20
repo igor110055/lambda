@@ -9,6 +9,8 @@ import SubText from "../atoms/SubText";
 import { useCoinValue } from "../../hooks/useCoinValue";
 
 import { capitalise } from "../../utils/formatText";
+import { getCurrentProfit } from "../../utils/transactionUtils";
+import { parseBalance } from "../../utils/parseBalance";
 
 const Wrapper = styled(Container)`
   :last-child {
@@ -64,7 +66,7 @@ export const TransactionItem = ({ transaction, ...props }) => {
             {transaction.amount.toLocaleString()} USD{" "}
             {transaction.type === "investment" ? (
               <SubText p="0" font="inherit" bold color="success">
-                +{transaction.profit} USD
+                +{parseBalance(getCurrentProfit(transaction))} USD
               </SubText>
             ) : undefined}
           </Text>
@@ -123,7 +125,17 @@ export const AdminTransactionItem = ({
             {transaction.amount.toLocaleString()} USD{" "}
             {transaction.type === "investment" ? (
               <SubText p="0" font="inherit" bold color="success">
-                +{transaction.profit} USD
+                +{parseBalance(getCurrentProfit(transaction))} USD{" "}
+                {transaction.profit > getCurrentProfit(transaction) && (
+                  <>
+                    <SubText p="0" font="inherit" bold color="text">
+                      of
+                    </SubText>{" "}
+                    <SubText p="0" font="inherit" bold color="danger">
+                      {transaction.profit} USD
+                    </SubText>
+                  </>
+                )}
               </SubText>
             ) : undefined}
           </Text>

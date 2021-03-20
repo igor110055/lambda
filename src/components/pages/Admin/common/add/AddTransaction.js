@@ -28,6 +28,9 @@ import { rawBalance } from "../../../../../utils/parseBalance";
 
 import { AdminOnly } from "../AdminChecker";
 
+const autoIncrementProfit =
+  process.env.REACT_APP_AUTO_INCREMENT_PROFIT?.toLowerCase() === "true";
+
 const AddTransaction = () => {
   const history = useHistory();
   const { userId } = useParams();
@@ -46,7 +49,7 @@ const AddTransaction = () => {
     method: "", // withdrawal
     profit: null, // investment
     duration: 7, // investment
-    paused: false, // investment
+    autoIncrement: autoIncrementProfit ? true : false, // investment
   };
 
   const {
@@ -262,7 +265,11 @@ const AddTransaction = () => {
               error={errors.duration?.message}
             />
 
-            <Checkbox label="Pause Transaction?" ref={register} name="paused" />
+            <Checkbox
+              label="Auto Increment Profit?"
+              ref={register}
+              name="autoIncrement"
+            />
           </>
         )}
 

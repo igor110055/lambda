@@ -133,10 +133,19 @@ function Invest({ action }) {
   const { amount } = watch();
   const { isSubmitting } = formState;
 
+  const autoIncrementProfit =
+    process.env.REACT_APP_AUTO_INCREMENT_PROFIT &&
+    process.env.REACT_APP_AUTO_INCREMENT_PROFIT.toLowerCase() === "true";
+
   const makeInvestment = async () => {
     const formData = getValues();
     // console.log("submitting investment");
-    action({ ...formData, type: "investment", wallet: symbol });
+    action({
+      ...formData,
+      type: "investment",
+      wallet: symbol,
+      autoIncrement: autoIncrementProfit,
+    });
     reset({
       amount: null,
       duration: 7,

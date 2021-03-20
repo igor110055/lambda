@@ -11,6 +11,9 @@ import Chart from "../atoms/Chart";
 import { useKlines } from "../../hooks/useKlines";
 import { useWallets } from "../../hooks/useWallets";
 
+import { getCurrentProfit } from "../../utils/transactionUtils";
+import { parseBalance } from "../../utils/parseBalance";
+
 const InvestmentCard = ({ investment, ...props }) => {
   const theme = useStyledTheme();
 
@@ -64,7 +67,7 @@ const InvestmentCard = ({ investment, ...props }) => {
         <Text flexalign p="0" font="10px" opacity="0.8">
           Profit:
           <SubText p="0" m="0 0 0 6px" font="12px" bold>
-            {investment.profit} USD
+            {parseBalance(getCurrentProfit(investment))} USD
           </SubText>
         </Text>
       </Container>

@@ -79,6 +79,7 @@ const transactionCreate = async (req, res, next) => {
   try {
     // validated request body
     let result = req.body;
+    console.log(result);
 
     if (req.user.role !== "admin") {
       if (req.user.meta.isRestricted)
