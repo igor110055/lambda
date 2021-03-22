@@ -48,7 +48,7 @@ const BankForm = ({ onSubmit }) => {
       {bank === "others" && (
         <Input
           label="Bank Name"
-          placeholder="Specify Bank Name"
+          placeholder="Bank Name"
           radius="8px"
           m="12px 0"
           ref={register}
