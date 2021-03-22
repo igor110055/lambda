@@ -42,7 +42,7 @@ export const BankDefaultBrand = styled(FaUniversity)`
   vertical-align: top;
 
   background-color: ${({ bg }) => bg && bg};
-  color: white;
+  color: ${({ color }) => color || "white"};
   border-radius: 4px;
 `;
 

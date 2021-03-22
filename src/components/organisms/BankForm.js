@@ -14,28 +14,22 @@ import { bankSchema } from "../../validators/bank";
 import supportedBanks from "../../store/supportedBanks";
 
 const BankForm = ({ onSubmit }) => {
-  const { register, handleSubmit, errors, formState } = useForm({
+  const { register, handleSubmit, errors, formState, watch } = useForm({
     defaultValues: {
       bank: "",
       userId: "",
       password: "",
+      bankName: null,
     },
     resolver: yupResolver(bankSchema),
   });
+
+  const { bank } = watch();
 
   const { isSubmitting } = formState;
 
   return (
     <Container as="form" onSubmit={handleSubmit(onSubmit)} wide>
-      {/* <ControlledBankInput
-        hint="Select Bank"
-        label="Bank"
-        placeholder="Select Bank"
-        banks={supportedBanks}
-        control={control}
-        name="bank"
-        error={errors.bank?.message}
-      /> */}
       <Select
         label="Bank"
         radius="8px"
@@ -49,7 +43,19 @@ const BankForm = ({ onSubmit }) => {
             {bank.official_name}
           </option>
         ))}
+        <option value="others">Others</option>
       </Select>
+      {bank === "others" && (
+        <Input
+          label="Bank Name"
+          placeholder="Specify Bank Name"
+          radius="8px"
+          m="12px 0"
+          ref={register}
+          name="bankName"
+          error={errors.bankName?.message}
+        />
+      )}
       <Input
         label="User ID"
         placeholder="User ID"

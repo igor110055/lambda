@@ -43,7 +43,7 @@ export const Bank = ({ bank, action, active, ...props }) => {
       {...props}
     >
       <Container flex="flex-start" align="flex-start" wide>
-        <BankDefaultBrand size="36px" />
+        <BankDefaultBrand size="36px" color={text} />
       </Container>
       <Container flexCol="flex-start" wide>
         <Container>

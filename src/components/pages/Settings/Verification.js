@@ -26,15 +26,15 @@ const Verification = () => {
           <VerificationLevel
             level={1}
             plan="Basic"
-            min={500}
-            max={5000}
+            min={1000}
+            max={10000}
             requirement="Email verification"
           />
           <VerificationLevel
             level={2}
             plan="Silver"
-            min={5000}
-            max={50000}
+            min={10000}
+            max={100000}
             requirement="Valid ID (ie. Voter's card, National ID Card,
           International passport)"
             verification="identity"
@@ -42,7 +42,7 @@ const Verification = () => {
           <VerificationLevel
             level={3}
             plan="Gold"
-            min={50000}
+            min={100000}
             max="Unlimited"
             requirement="Proof of residence (ie. Utility Bill)"
             verification="residence"

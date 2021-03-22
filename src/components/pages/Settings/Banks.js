@@ -70,7 +70,8 @@ const Banks = () => {
     toggleAddBank();
   };
 
-  const addBank = async (bank) => {
+  const addBank = async ({ bankName, ...bank }) => {
+    if (bankName) bank.bank = bankName;
     try {
       start();
       await axiosInstance.post("/profile/bank", bank);
