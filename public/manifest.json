@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "BitMax Pro",
+  "name": "Trade and invest in Bitcoin and other Cryptos from the BitMax Pro Web App",
   "icons": [
     {
       "src": "assets/manifest-icon-192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable any"
     },
     {
-      "src": "favicon.ico",
+      "src": "assets/icon/favicon.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
