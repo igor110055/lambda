@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router";
 
 import Container from "../../atoms/Container";
 import Text from "../../atoms/Text";
