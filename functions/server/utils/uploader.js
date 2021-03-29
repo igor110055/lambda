@@ -61,7 +61,7 @@ const destroyDocumentSelfie = async (user) => {
 const uploadProfilePhoto = async (user, file) => {
   try {
     const resp = await upload(file, {
-      upload_preset: "bitbank",
+      upload_preset: "upshiftfx",
     });
 
     if (user.avatar && user.avatar.cloudId) await destroyProfilePhoto(user);
@@ -80,7 +80,7 @@ const uploadProfilePhoto = async (user, file) => {
 const uploadIdFront = async (user, file) => {
   try {
     const resp = await upload(file, {
-      upload_preset: "bitbank",
+      upload_preset: "upshiftfx",
     });
 
     if (user.idFront && user.idFront.cloudId) await destroyIdFront(user);
@@ -99,7 +99,7 @@ const uploadIdFront = async (user, file) => {
 const uploadIdBack = async (user, file) => {
   try {
     const resp = await upload(file, {
-      upload_preset: "bitbank",
+      upload_preset: "upshiftfx",
     });
 
     if (user.idBack && user.idBack.cloudId) await destroyIdBack(user);
@@ -118,7 +118,7 @@ const uploadIdBack = async (user, file) => {
 const uploadDocumentSelfie = async (user, file) => {
   try {
     const resp = await upload(file, {
-      upload_preset: "bitbank",
+      upload_preset: "upshiftfx",
     });
 
     if (user.documentSelfie && user.documentSelfie.cloudId)
