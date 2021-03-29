@@ -15,11 +15,10 @@ import { useProcess } from "../../../hooks/useProcess";
 
 import axiosInstance from "../../../utils/axios";
 import { compressImageDataURL } from "../../../utils/compress";
-import { mutate } from "swr";
 
 const DocumentSelfie = () => {
   const history = useHistory();
-  const { profile, mutate } = useProfile();
+  const { profile } = useProfile();
 
   const { processing, response, start, complete, fail } = useProcess();
 

@@ -7,14 +7,7 @@ import Button from "../../atoms/Button";
 
 import AuthLayout from "../../templates/Auth";
 
-import { useProfile } from "../../../hooks/useProfile";
-
 const DocumentCompleted = () => {
-  const { profile } = useProfile();
-
-  //   if (!profile.isDocumentVerified)
-  //     return <Redirect to="/confirmation/documents/start" />;
-
   return (
     <AuthLayout>
       <Container p="12px 0" wide>
