@@ -30,9 +30,14 @@ const profilePhotoSchema = Joi.object({
   profilePhoto: Joi.any().required(),
 });
 
+const documentSchema = Joi.object({
+  document: Joi.any().required(),
+});
+
 module.exports = {
   profileByEmailSchema,
   profilePasswordUpdateSchema,
   profileUpdateSchema,
   profilePhotoSchema,
+  documentSchema,
 };

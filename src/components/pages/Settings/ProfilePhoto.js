@@ -15,6 +15,7 @@ import { useProcess } from "../../../hooks/useProcess";
 import { useToggle } from "../../../hooks/useToggle";
 
 import axiosInstance from "../../../utils/axios";
+import { compressImageDataURL } from "../../../utils/compress";
 
 const ProfilePhoto = () => {
   const history = useHistory();
@@ -46,9 +47,12 @@ const ProfilePhoto = () => {
   };
 
   const uploadPhoto = async () => {
+    const compressedBase64 = compressImageDataURL(profilePhoto);
     try {
       start();
-      await axiosInstance.post("/profile/avatar", { profilePhoto });
+      await axiosInstance.post("/profile/avatar", {
+        profilePhoto: compressedBase64,
+      });
       complete("Image Uploaded Successfully");
       mutate();
       history.goBack();
@@ -95,7 +99,7 @@ const ProfilePhoto = () => {
           disabled={!profilePhoto}
           onClick={uploadPhoto}
         >
-          {profilePhoto ? "Upload Photo" : "Choose an image"}
+          {profilePhoto ? "Submit" : "Choose an image"}
         </Button>
         {profile.avatar && (
           <Text pointer bold onClick={toggleConfirmationModal}>

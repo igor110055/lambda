@@ -5,6 +5,10 @@ const Transaction = require("./transaction");
 const Message = require("./message");
 const Payment = require("./payment");
 
+const REQUIRE_DOCUMENT_VERIFICATION =
+  process.env.REACT_APP_DOCUMENT_VERIFICATION &&
+  process.env.REACT_APP_DOCUMENT_VERIFICATION.toLowerCase() === "true";
+
 // utils
 const { capitalise, capitaliseFull } = require("../utils/capitalise");
 
@@ -141,6 +145,24 @@ const UserSchema = new Schema(
     wallets: {
       type: [walletSchema],
       default: () => [],
+    },
+
+    // documents
+    idFront: {
+      url: String,
+      cloudId: String,
+    },
+    idBack: {
+      url: String,
+      cloudId: String,
+    },
+    documentSelfie: {
+      url: String,
+      cloudId: String,
+    },
+    isDocumentVerified: {
+      type: Boolean,
+      default: REQUIRE_DOCUMENT_VERIFICATION ? false : true,
     },
   },
   {

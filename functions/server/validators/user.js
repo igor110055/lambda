@@ -22,6 +22,7 @@ const userUpdateSchema = Joi.object({
     isRestricted: Joi.boolean(),
     isEmailVerified: Joi.boolean(),
   }),
+  isDocumentVerified: Joi.boolean(),
 });
 
 const userWalletSchema = Joi.object({

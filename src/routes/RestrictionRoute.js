@@ -13,6 +13,11 @@ import KYC from "../components/pages/restriction/KYC";
 import EmailVerification from "../components/pages/restriction/EmailVerification";
 import VerifyEmail from "../components/pages/restriction/VerifyEmail";
 import Deactivated from "../components/pages/restriction/Deactivated";
+import DocumentStart from "../components/pages/restriction/DocumentStart";
+import IdFront from "../components/pages/restriction/IdFront";
+import IdBack from "../components/pages/restriction/IdBack";
+import DocumentSelfie from "../components/pages/restriction/DocumentSelfie";
+import DocumentCompleted from "../components/pages/restriction/DocumentCompleted";
 
 import { useProfile } from "../hooks/useProfile";
 
@@ -33,14 +38,11 @@ const AuthChecker = ({ children }) => {
 };
 
 export default function RestrictionRoute() {
-  const { path, url } = useRouteMatch();
+  const { path } = useRouteMatch();
 
   return (
     <AuthChecker>
       <Switch>
-        <Route exact path={`${path}`}>
-          <p>Confirm something</p>
-        </Route>
         <Route exact path={`${path}/kyc`}>
           <KYC />
         </Route>
@@ -54,8 +56,25 @@ export default function RestrictionRoute() {
           <Deactivated />
         </Route>
 
+        {/* documents */}
+        <Route exact path={`${path}/documents/start`}>
+          <DocumentStart />
+        </Route>
+        <Route exact path={`${path}/documents/1`}>
+          <IdFront />
+        </Route>
+        <Route exact path={`${path}/documents/2`}>
+          <IdBack />
+        </Route>
+        <Route exact path={`${path}/documents/3`}>
+          <DocumentSelfie />
+        </Route>
+        <Route exact path={`${path}/documents/completed`}>
+          <DocumentCompleted />
+        </Route>
+
         <Route>
-          <Redirect to={`${url}`} />
+          <Redirect to="/" />
         </Route>
       </Switch>
     </AuthChecker>

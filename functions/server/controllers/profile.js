@@ -8,6 +8,10 @@ const { emailVerificationMail } = require("../utils/mailer");
 const {
   destroyProfilePhoto,
   uploadProfilePhoto,
+  uploadIdFront,
+  uploadIdBack,
+  uploadSelfie,
+  uploadDocumentSelfie,
 } = require("../utils/uploader");
 
 const profileUser = async (req, res, next) => {
@@ -255,6 +259,69 @@ const profilePhotoUpload = async (req, res, next) => {
   }
 };
 
+const idFrontUpload = async (req, res, next) => {
+  try {
+    // validated request body
+    const { document } = req.body;
+
+    const userId = req.user.id;
+
+    const user = await User.findById(userId);
+    if (!user) return next(createError.NotFound("User not found"));
+
+    //  cloudinary avatar upload
+    await uploadIdFront(user, document);
+
+    res.json({
+      message: "ID front uploaded successfully",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const idBackUpload = async (req, res, next) => {
+  try {
+    // validated request body
+    const { document } = req.body;
+
+    const userId = req.user.id;
+
+    const user = await User.findById(userId);
+    if (!user) return next(createError.NotFound("User not found"));
+
+    //  cloudinary avatar upload
+    await uploadIdBack(user, document);
+
+    res.json({
+      message: "ID back uploaded successfully",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const documentSelfieUpload = async (req, res, next) => {
+  try {
+    // validated request body
+    const { document } = req.body;
+
+    const userId = req.user.id;
+
+    const user = await User.findById(userId);
+    if (!user) return next(createError.NotFound("User not found"));
+
+    //  cloudinary avatar upload
+    await uploadDocumentSelfie(user, document);
+
+    res.json({
+      message: "Document Selfie uploaded successfully",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   profileUser,
   profileFriend,
@@ -268,4 +335,7 @@ module.exports = {
   profileRequestEmailVerification,
   profilePhotoReset,
   profilePhotoUpload,
+  idFrontUpload,
+  idBackUpload,
+  documentSelfieUpload,
 };

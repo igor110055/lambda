@@ -40,18 +40,20 @@ const Upload = ({
           hidden
         />
         {image ? (
-          <Image
-            src={image}
-            h={h || "300px"}
-            w={w || "300px"}
-            radius={radius || "8px"}
-            alt=""
-          />
+          <>
+            <Image
+              src={image}
+              h={h || "300px"}
+              w={w || "300px"}
+              radius={radius || "4px"}
+              alt=""
+            />
+          </>
         ) : (
           <Container
             p="12px"
             border="2px solid"
-            radius={radius || "8px"}
+            radius={radius || "4px"}
             w={w || "300px"}
             h={h || "300px"}
             flex="center"
@@ -67,7 +69,7 @@ const Upload = ({
 
       {image && (
         <Text
-          font="13px"
+          font="11px"
           p="0"
           align="center"
           bold

@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { FaArrowAltCircleUp } from "react-icons/fa";
+import { FaArrowAltCircleUp, FaMailBulk } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 
 import Container from "../../../atoms/Container";
@@ -76,12 +76,67 @@ const Account = () => {
       </Container>
 
       <AdminDisplay>
+        <RequestDocuments user={user} mutate={mutate} />
         <RequestUpgrade user={user} mutate={mutate} />
         <UpgradeForm user={user} mutate={mutate} />
       </AdminDisplay>
     </Container>
   );
 };
+
+function RequestDocuments({ user, mutate }) {
+  const { show, toggle } = useToggle();
+
+  const changeDocumentVerifiedStatus = async () => {
+    try {
+      await axiosInstance.put("/users/" + user._id, {
+        isDocumentVerified: !user.isDocumentVerified,
+      });
+      mutate();
+    } catch (err) {
+      // console.log(err.response);
+    }
+  };
+
+  return (
+    <Container p="12px" wide>
+      <SettingsHeading heading="Document Upload" />
+      <SettingsItem
+        title={
+          user.isDocumentVerified
+            ? "Request Document Upload"
+            : "Cancel Document Request"
+        }
+        body="Request this user to submit his documents"
+        color={user.isDocumentVerified ? undefined : "actionBg"}
+        opacity="1"
+        icon={<FaMailBulk />}
+        onClick={toggle}
+      />
+      <SettingsItem
+        title="View Uploaded Documents"
+        body="View all documents uploaded by this user"
+        to={`./documents`}
+      />
+
+      <ConfirmationModal
+        open={show}
+        title={
+          user.isDocumentVerified
+            ? "Request Document Upload"
+            : "Cancel Document Request"
+        }
+        message={
+          user.isDocumentVerified
+            ? "User would be required to upload his documents"
+            : "User would no longer be required to upload his documents"
+        }
+        action={changeDocumentVerifiedStatus}
+        dismiss={toggle}
+      />
+    </Container>
+  );
+}
 
 function RequestUpgrade({ user, mutate }) {
   const { show, toggle } = useToggle();

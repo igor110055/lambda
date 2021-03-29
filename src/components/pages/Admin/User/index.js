@@ -17,6 +17,7 @@ import Cards from "./Cards";
 import Banks from "./Banks";
 import Payments from "./Payments";
 import Account from "./Account";
+import Documents from "./Documents";
 
 import AddTransaction from "../common/add/AddTransaction";
 import AddMessage from "../common/add/AddMessage";
@@ -66,6 +67,9 @@ const User = () => {
       </Route>
       <Route path={`${path}/banks`}>
         <Banks />
+      </Route>
+      <Route path={`${path}/documents`}>
+        <Documents />
       </Route>
 
       {/* add routes */}
