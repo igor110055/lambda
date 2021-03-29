@@ -115,6 +115,14 @@ const Home = () => {
 
         <Container p="12px" wide>
           <List>
+            <ListItem bg="bg" icon={<FaPlus />} to={`${url}/bank`}>
+              Bank Details
+            </ListItem>
+          </List>
+        </Container>
+
+        <Container p="12px" wide>
+          <List>
             <ListItem bg="bg" icon={<FaPaperPlane />} to={`${url}/email`}>
               Send Email
             </ListItem>

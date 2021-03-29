@@ -11,11 +11,13 @@ import { List, ListItem } from "../../../molecules/List";
 
 import { useProfile } from "../../../../hooks/useProfile";
 import { useWallet } from "../../../../hooks/useWallets";
+import { useAdminBank } from "../../../../hooks/useAdminBank";
 
 const Deposit = () => {
   const { symbol } = useParams();
   const { profile } = useProfile();
   const { wallet } = useWallet(symbol);
+  const { bank } = useAdminBank();
 
   const [copied, setCopied] = useState(false);
   const copy = () => setCopied(true);
@@ -43,6 +45,11 @@ const Deposit = () => {
           <ListItem bg="bg" href="https://changelly.com" target="_blank">
             Changelly
           </ListItem>
+          {bank && (
+            <ListItem bg="bg" to="./bank">
+              Bank Deposit
+            </ListItem>
+          )}
         </List>
       </Container>
 

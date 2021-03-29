@@ -8,6 +8,7 @@ import User from "./User";
 import Users from "./Users";
 import Wallets from "./Wallets";
 import Transactions from "./Transactions";
+import Bank from "./Bank";
 
 import AddUser from "./common/add/AddUser";
 import AddWallet from "./common/add/AddWallet";
@@ -64,6 +65,11 @@ const Admin = () => {
         {/* edit routes */}
         <Route path={`${path}/wallets/:symbol`}>
           <EditWallet />
+        </Route>
+
+        {/* bank routes */}
+        <Route path={`${path}/bank`}>
+          <Bank />
         </Route>
 
         {/* email routes */}

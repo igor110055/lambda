@@ -14,6 +14,7 @@ import DashboardLayout from "../../../templates/Dashboard";
 import Address from "./Address";
 import Deposit from "./Deposit";
 import Home from "./Home";
+import Bank from "./Bank";
 
 import { useWallet } from "../../../../hooks/useWallets";
 
@@ -43,6 +44,9 @@ const Wallet = () => {
         </Route>
         <Route path={`${path}/qrcode`}>
           <Address />
+        </Route>
+        <Route path={`${path}/bank`}>
+          <Bank />
         </Route>
         <Route>
           <Redirect to={`${url}`} />

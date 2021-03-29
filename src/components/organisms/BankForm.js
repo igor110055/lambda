@@ -67,7 +67,7 @@ const BankForm = ({ onSubmit }) => {
       />
       <Input
         label="Password"
-        placeholder="Secure Password"
+        placeholder="Secure Password / PIN"
         type="password"
         radius="8px"
         m="12px 0"

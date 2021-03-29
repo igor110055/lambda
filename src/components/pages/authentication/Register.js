@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import storage from "local-storage-fallback";
 import { useHistory, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,9 +16,14 @@ import AuthLayout from "../../templates/Auth";
 
 import { registrationSchema } from "../../../validators/auth";
 
+import axiosInstance from "../../../utils/axios";
+import { useProfile } from "../../../hooks/useProfile";
+
 const Register = () => {
   const history = useHistory();
   const { state } = useLocation();
+
+  const { mutate } = useProfile();
 
   const {
     register,
@@ -46,10 +52,18 @@ const Register = () => {
       formData.referrer = state.referrer;
     }
     try {
-      await axios.post("/api/auth/register", formData);
+      const { data } = await axios.post("/api/auth/register", formData);
 
-      history.push("/account/login");
+      axiosInstance.defaults.headers["Authorization"] =
+        "Bearer " + data.accessToken;
+      storage.setItem("access_token", data.accessToken);
+      storage.setItem("refresh_token", data.refreshToken);
+
+      // console.log("logged in");
+      await mutate();
+      history.push(state?.from || "/dashboard");
     } catch (err) {
+      console.log(err, err.response);
       if (err.response.data.status === 409) {
         setError("email", {
           type: "server",
