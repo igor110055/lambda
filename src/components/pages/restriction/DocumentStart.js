@@ -40,7 +40,7 @@ const DocumentStart = () => {
           multiline
         >
           We need to verify your information. Please submit the following
-          documents below
+          documents
         </Text>
       </Container>
 

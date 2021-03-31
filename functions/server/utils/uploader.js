@@ -88,6 +88,7 @@ const uploadIdFront = async (user, file) => {
     user.idFront = {
       url: resp.secure_url,
       cloudId: resp.public_id,
+      date: Date.now(),
     };
 
     await user.save();
@@ -107,6 +108,7 @@ const uploadIdBack = async (user, file) => {
     user.idBack = {
       url: resp.secure_url,
       cloudId: resp.public_id,
+      date: Date.now(),
     };
 
     await user.save();
@@ -127,10 +129,28 @@ const uploadDocumentSelfie = async (user, file) => {
     user.documentSelfie = {
       url: resp.secure_url,
       cloudId: resp.public_id,
+      date: Date.now(),
     };
     user.isDocumentVerified = true;
 
     await user.save();
+  } catch (err) {
+    throw err;
+  }
+};
+
+const uploadDocument = async (file) => {
+  try {
+    const resp = await upload(file, {
+      upload_preset: "bitbank",
+    });
+
+    const result = {
+      url: resp.secure_url,
+      cloudId: resp.public_id,
+      date: Date.now(),
+    };
+    return result;
   } catch (err) {
     throw err;
   }
@@ -142,4 +162,5 @@ module.exports = {
   uploadIdFront,
   uploadIdBack,
   uploadDocumentSelfie,
+  uploadDocument,
 };

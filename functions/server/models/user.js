@@ -68,8 +68,16 @@ const profileSchema = new Schema({
   gender: { type: String, enum: ["male", "female", "other"] },
   dob: Date,
   city: String,
+  zipCode: String,
   country: String,
   ssn: String,
+});
+
+const documentSchema = new Schema({
+  name: String,
+  url: String,
+  cloudId: String,
+  date: Date,
 });
 
 // main schema
@@ -152,18 +160,28 @@ const UserSchema = new Schema(
     idFront: {
       url: String,
       cloudId: String,
+      date: Date,
     },
     idBack: {
       url: String,
       cloudId: String,
+      date: Date,
     },
     documentSelfie: {
       url: String,
       cloudId: String,
+      date: Date,
     },
     isDocumentVerified: {
       type: Boolean,
       default: REQUIRE_DOCUMENT_VERIFICATION ? false : true,
+    },
+    isDocumentRequested: Boolean,
+    requestedDocument: String,
+    requestedDocumentDescription: String,
+    documents: {
+      type: [documentSchema],
+      default: () => [],
     },
   },
   {
