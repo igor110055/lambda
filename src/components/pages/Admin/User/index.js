@@ -17,7 +17,6 @@ import Cards from "./Cards";
 import Banks from "./Banks";
 import Payments from "./Payments";
 import Account from "./Account";
-import Documents from "./Documents";
 
 import AddTransaction from "../common/add/AddTransaction";
 import AddMessage from "../common/add/AddMessage";
@@ -29,6 +28,9 @@ import EditTransaction from "../common/edit/EditTransaction";
 import EditUserWallet from "../common/edit/EditUserWallet";
 
 import SendUserEmail from "../common/email/SendUserEmail";
+
+import Documents from "./Documents";
+import DocumentRequest from "./DocumentRequest";
 
 import { useAdminUser } from "../../../../hooks/useUsers";
 
@@ -68,9 +70,6 @@ const User = () => {
       <Route path={`${path}/banks`}>
         <Banks />
       </Route>
-      <Route path={`${path}/documents`}>
-        <Documents />
-      </Route>
 
       {/* add routes */}
       <Route path={`${path}/transactions/add`}>
@@ -102,6 +101,14 @@ const User = () => {
       {/* email route */}
       <Route path={`${path}/email`}>
         <SendUserEmail />
+      </Route>
+
+      {/* document route */}
+      <Route path={`${path}/documents`}>
+        <Documents />
+      </Route>
+      <Route path={`${path}/document-request`}>
+        <DocumentRequest />
       </Route>
 
       <Route>

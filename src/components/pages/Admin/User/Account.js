@@ -104,19 +104,24 @@ function RequestDocuments({ user, mutate }) {
       <SettingsItem
         title={
           user.isDocumentVerified
-            ? "Request Document Upload"
-            : "Cancel Document Request"
+            ? "Request ID Document Upload"
+            : "Cancel ID Document Request"
         }
-        body="Request this user to submit his documents"
+        body="Request this user to upload his ID documents"
         color={user.isDocumentVerified ? undefined : "actionBg"}
         opacity="1"
         icon={<FaMailBulk />}
         onClick={toggle}
       />
       <SettingsItem
+        title="Request Document Upload"
+        body="Request this user to upload a document"
+        to={"./document-request"}
+      />
+      <SettingsItem
         title="View Uploaded Documents"
         body="View all documents uploaded by this user"
-        to={`./documents`}
+        to={"./documents"}
       />
 
       <ConfirmationModal
@@ -156,7 +161,7 @@ function RequestUpgrade({ user, mutate }) {
   };
 
   return (
-    <Container p="12px" wide>
+    <Container p="12px" display="none" wide>
       <SettingsHeading heading="Account Upgrade" />
       <SettingsItem
         title={
@@ -261,8 +266,10 @@ function UpgradeForm({ user, mutate }) {
       <Button
         type="submit"
         m="24px 0 0"
-        radius="4px"
-        bg="primary"
+        bg="white"
+        color="black"
+        p="14px"
+        radius="8px"
         bold
         full
         disabled={isSubmitting || !isDirty}

@@ -4,7 +4,7 @@ import { FaDownload } from "react-icons/fa";
 import Text from "../atoms/Text";
 import Container from "../atoms/Container";
 
-export const DocumentItem = ({ title, url }) => {
+export const DocumentItem = ({ title, date, url }) => {
   if (!url) return null;
   return (
     <Container
@@ -16,9 +16,15 @@ export const DocumentItem = ({ title, url }) => {
       wide="true"
     >
       <Container flexCol="flex-start" wide>
-        <Text font="13px" p="0" m="0 0 4px 0" bold>
+        <Text font="12px" p="0" m="0 0 4px 0" bold>
           {title}
         </Text>
+        {date && (
+          <Text font="10px" p="0" opacity="0.6">
+            {new Date(date).toDateString()}{" "}
+            {new Date(date).toLocaleTimeString()}
+          </Text>
+        )}
       </Container>
       <a href={url} download>
         <FaDownload />
