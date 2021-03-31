@@ -30,8 +30,14 @@ const userWalletSchema = Joi.object({
   address: Joi.string().required(),
 });
 
+const userDocumentRequestSchema = Joi.object({
+  documentName: Joi.string().required(),
+  description: Joi.string(),
+});
+
 module.exports = {
   userSchema,
   userUpdateSchema,
   userWalletSchema,
+  userDocumentRequestSchema,
 };

@@ -17,6 +17,7 @@ import DocumentStart from "../components/pages/restriction/DocumentStart";
 import IdFront from "../components/pages/restriction/IdFront";
 import IdBack from "../components/pages/restriction/IdBack";
 import DocumentSelfie from "../components/pages/restriction/DocumentSelfie";
+import DocumentUpload from "../components/pages/restriction/DocumentUpload";
 import DocumentCompleted from "../components/pages/restriction/DocumentCompleted";
 
 import { useProfile } from "../hooks/useProfile";
@@ -68,6 +69,9 @@ export default function RestrictionRoute() {
         </Route>
         <Route exact path={`${path}/documents/3`}>
           <DocumentSelfie />
+        </Route>
+        <Route exact path={`${path}/documents/upload`}>
+          <DocumentUpload />
         </Route>
         <Route exact path={`${path}/documents/completed`}>
           <DocumentCompleted />

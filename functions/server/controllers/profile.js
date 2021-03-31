@@ -10,8 +10,8 @@ const {
   uploadProfilePhoto,
   uploadIdFront,
   uploadIdBack,
-  uploadSelfie,
   uploadDocumentSelfie,
+  uploadDocument,
 } = require("../utils/uploader");
 
 const profileUser = async (req, res, next) => {
@@ -227,7 +227,7 @@ const profilePhotoReset = async (req, res, next) => {
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
-    // cloudinary avatar destroy
+    // cloudinary destroy
     await destroyProfilePhoto(user);
 
     res.json({
@@ -248,7 +248,7 @@ const profilePhotoUpload = async (req, res, next) => {
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
-    //  cloudinary avatar upload
+    // cloudinary upload
     await uploadProfilePhoto(user, profilePhoto);
 
     res.json({
@@ -269,7 +269,7 @@ const idFrontUpload = async (req, res, next) => {
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
-    //  cloudinary avatar upload
+    // cloudinary upload
     await uploadIdFront(user, document);
 
     res.json({
@@ -290,7 +290,7 @@ const idBackUpload = async (req, res, next) => {
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
-    //  cloudinary avatar upload
+    // cloudinary upload
     await uploadIdBack(user, document);
 
     res.json({
@@ -311,12 +311,41 @@ const documentSelfieUpload = async (req, res, next) => {
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
-    //  cloudinary avatar upload
+    // cloudinary upload
     await uploadDocumentSelfie(user, document);
 
     res.json({
       message: "Document Selfie uploaded successfully",
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const documentUpload = async (req, res, next) => {
+  try {
+    // validated request body
+    const { document } = req.body;
+
+    const userId = req.user.id;
+
+    const user = await User.findById(userId);
+    if (!user) return next(createError.NotFound("User not found"));
+
+    //  cloudinary upload
+    const result = await uploadDocument(document);
+
+    // create new document
+    const documentName = user.requestedDocument || "Unnamed Document";
+    user.documents.unshift({ ...result, name: documentName });
+    user.isDocumentRequested = false;
+    user.requestedDocument = null;
+    user.requestedDocumentDescription = null;
+    await user.save();
+
+    const savedDocument = user.documents[0];
+
+    res.json(savedDocument);
   } catch (err) {
     next(err);
   }
@@ -338,4 +367,5 @@ module.exports = {
   idFrontUpload,
   idBackUpload,
   documentSelfieUpload,
+  documentUpload,
 };

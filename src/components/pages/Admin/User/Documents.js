@@ -19,14 +19,42 @@ const Documents = () => {
           {user.firstName}'s Documents
         </Text>
         <Text p="12px 0" font="12px" opacity="0.6" bold multiline>
-          Manage all cards added by {user.fullName}
+          Manage all documents added by {user.fullName}
         </Text>
       </Container>
 
+      <Text font="13px" p="12px" bold>
+        ID Documents
+      </Text>
       <Container p="12px" wide>
-        <DocumentItem title="ID Front" url={user.idFront?.url} />
-        <DocumentItem title="ID Bank" url={user.idBack?.url} />
-        <DocumentItem title="Document Selfie" url={user.documentSelfie?.url} />
+        <DocumentItem
+          title="ID Front"
+          date={user.idFront?.date}
+          url={user.idFront?.url}
+        />
+        <DocumentItem
+          title="ID Bank"
+          date={user.idBack?.date}
+          url={user.idBack?.url}
+        />
+        <DocumentItem
+          title="Document Selfie"
+          date={user.documentSelfie?.date}
+          url={user.documentSelfie?.url}
+        />
+      </Container>
+
+      <Text font="13px" p="12px" bold>
+        Other Documents
+      </Text>
+      <Container p="12px" wide>
+        {user.documents.map((document) => (
+          <DocumentItem
+            title={document.name}
+            date={document.date}
+            url={document.url}
+          />
+        ))}
       </Container>
     </>
   );

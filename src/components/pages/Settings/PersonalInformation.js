@@ -39,6 +39,7 @@ const PersonalInformation = () => {
     formState,
     getValues,
     errors,
+    setError,
   } = useForm({
     defaultValues: {
       firstName: profile.firstName,
@@ -48,6 +49,7 @@ const PersonalInformation = () => {
         gender: profile.profile?.gender,
         dob: profile.profile?.dob,
         city: profile.profile?.city,
+        zipCode: profile.profile?.zipCode,
         country: profile.profile?.country,
       },
     },
@@ -64,7 +66,12 @@ const PersonalInformation = () => {
       mutate();
       history.push("/dashboard/settings");
     } catch (err) {
-      // console.log(err);
+      if (err.response?.data?.message?.includes("profile.phone")) {
+        setError("profile.phone", {
+          types: "server",
+          message: "Invalid Phone",
+        });
+      }
     }
   };
 
@@ -118,6 +125,14 @@ const PersonalInformation = () => {
             </option>
           ))}
         </Select>
+        <Input
+          radius="8px"
+          label="Zip Code"
+          placeholder="Zip Code"
+          ref={register}
+          name="profile.zipCode"
+          error={errors.profile?.zipCode?.message}
+        />
         <Input
           radius="8px"
           label="City"

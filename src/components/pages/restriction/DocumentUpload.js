@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import Container from "../../atoms/Container";
 import Text from "../../atoms/Text";
@@ -11,17 +11,18 @@ import Upload from "../../molecules/Upload";
 import AuthLayout from "../../templates/Auth";
 
 import { useProcess } from "../../../hooks/useProcess";
+import { useProfile } from "../../../hooks/useProfile";
 
 import axiosInstance from "../../../utils/axios";
 import { compressImageDataURL } from "../../../utils/compress";
 
-const IdBack = () => {
+const DocumentSelfie = () => {
   const history = useHistory();
+  const { profile } = useProfile();
 
-  const { processing, response, start, complete, fail } = useProcess();
+  const { processing, success, response, start, complete, fail } = useProcess();
 
   const [document, setDocument] = useState();
-  const [error, setError] = useState(false);
 
   const handleDocument = (e) => {
     const file = e.target.files[0];
@@ -33,27 +34,35 @@ const IdBack = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setError(false);
     const compressedBase64 = compressImageDataURL(document);
 
     try {
       start();
-      await axiosInstance.post("/profile/document/2", {
+      await axiosInstance.post("/profile/document/upload", {
         document: compressedBase64,
       });
       complete({ mssg: "Document Submitted Successfully" });
-      history.push("/confirmation/documents/3");
+      history.push({
+        pathname: "/confirmation/documents/completed",
+        state: {
+          title: "Upload Successful",
+          message:
+            "Thank you. Your documents has been received and is currently being processed.",
+        },
+      });
     } catch (err) {
-      setError(true);
       fail(err.response.message);
+      console.log(err, err.response);
     }
   };
+
+  if (!profile.requestedDocument) return <Redirect to="/dashboard" />;
 
   return (
     <AuthLayout>
       <Container p="12px 0" wide>
         <Text font="16px" p="0" align="center" bold>
-          Step 2
+          Upload {profile.requestedDocument}
         </Text>
         <Text
           font="11px"
@@ -64,7 +73,7 @@ const IdBack = () => {
           bold
           multiline
         >
-          Kindly submit a photo of the back of your ID document
+          {profile.requestedDocumentDescription}
         </Text>
       </Container>
       <Container as="form" wide onSubmit={onSubmit}>
@@ -73,7 +82,7 @@ const IdBack = () => {
           action={handleDocument}
           hint="Select Document"
         />
-        {error && (
+        {!processing && !success && !(response === "Processing...") && (
           <Text p="0" m="4px 0 0 0" align="center" color="danger" bold>
             {response}
           </Text>
@@ -92,7 +101,7 @@ const IdBack = () => {
           {processing ? (
             <Spinner />
           ) : document ? (
-            "Upload Photo"
+            "Upload Document"
           ) : (
             "Choose an image"
           )}
@@ -102,4 +111,4 @@ const IdBack = () => {
   );
 };
 
-export default IdBack;
+export default DocumentSelfie;

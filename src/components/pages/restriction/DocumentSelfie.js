@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Container from "../../atoms/Container";
 import Text from "../../atoms/Text";
@@ -10,7 +10,6 @@ import Upload from "../../molecules/Upload";
 
 import AuthLayout from "../../templates/Auth";
 
-import { useProfile } from "../../../hooks/useProfile";
 import { useProcess } from "../../../hooks/useProcess";
 
 import axiosInstance from "../../../utils/axios";
@@ -18,7 +17,6 @@ import { compressImageDataURL } from "../../../utils/compress";
 
 const DocumentSelfie = () => {
   const history = useHistory();
-  const { profile } = useProfile();
 
   const { processing, response, start, complete, fail } = useProcess();
 
@@ -51,8 +49,6 @@ const DocumentSelfie = () => {
       console.log(err, err.response);
     }
   };
-
-  if (!profile.idBack) return <Redirect to="/confirmation/documents/2" />;
 
   return (
     <AuthLayout>

@@ -77,6 +77,11 @@ const Home = () => {
           to={`${url}/personal-information`}
         />
         <SettingsItem
+          title="Zip Code"
+          body={profile.profile?.zipCode}
+          to={`${url}/personal-information`}
+        />
+        <SettingsItem
           title="Date of Birth"
           body={convertDate(profile.profile?.dob)}
           to={`${url}/personal-information`}
