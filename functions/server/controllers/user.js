@@ -1,7 +1,6 @@
 const createError = require("http-errors");
 
 const User = require("../models/user");
-const { destroyIdentity, destroyResidence } = require("../utils/uploader");
 
 const userList = (req, res, next) => {
   try {
@@ -221,6 +220,43 @@ const userBankDelete = async (req, res, next) => {
   }
 };
 
+const userRequestDocument = async (req, res, next) => {
+  try {
+    const { documentName, description } = req.body;
+    const userId = req.params.id;
+
+    const user = await User.findById(userId);
+    if (!user) return next(createError.NotFound("User not found"));
+
+    user.isDocumentRequested = true;
+    user.requestedDocument = documentName;
+    user.requestedDocumentDescription = description;
+    await user.save();
+
+    res.json({ message: "Document requested successfully" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const userRequestDocumentCancel = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+
+    const user = await User.findById(userId);
+    if (!user) return next(createError.NotFound("User not found"));
+
+    user.isDocumentRequested = false;
+    user.requestedDocument = null;
+    user.requestedDocumentDescription = null;
+    await user.save();
+
+    res.json({ message: "Request cancelled successfully" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   userList,
   userCreate,
@@ -234,4 +270,6 @@ module.exports = {
   userWalletDelete,
   userCardDelete,
   userBankDelete,
+  userRequestDocument,
+  userRequestDocumentCancel,
 };

@@ -24,12 +24,18 @@ const PersonalInformation = () => {
   const history = useHistory();
   const { profile, mutate } = useProfile();
 
-  const {
-    show: showConfirmationModal,
-    toggle: toggleConfirmationModal,
-  } = useToggle();
+  const { show: showConfirmationModal, toggle: toggleConfirmationModal } =
+    useToggle();
 
-  const { register, handleSubmit, formState,watch, getValues, errors } = useForm({
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    getValues,
+    errors,
+    setError,
+  } = useForm({
     defaultValues: {
       firstName: profile.firstName,
       lastName: profile.lastName,
@@ -37,6 +43,7 @@ const PersonalInformation = () => {
         phone: profile.profile?.phone,
         gender: profile.profile?.gender,
         city: profile.profile?.city,
+        zipCode: profile.profile?.zipCode,
         country: profile.profile?.country,
         ssn: profile.profile?.ssn,
       },
@@ -44,7 +51,9 @@ const PersonalInformation = () => {
     resolver: yupResolver(profileSchema),
   });
 
-const { profile: {country}} = watch()
+  const {
+    profile: { country },
+  } = watch();
 
   const { isSubmitting } = formState;
 
@@ -56,7 +65,12 @@ const { profile: {country}} = watch()
       mutate();
       history.push("/dashboard/settings");
     } catch (err) {
-      // console.log(err.response);
+      if (err.response?.data?.message?.includes("profile.phone")) {
+        setError("profile.phone", {
+          types: "server",
+          message: "Invalid Phone",
+        });
+      }
     }
   };
 
@@ -110,6 +124,14 @@ const { profile: {country}} = watch()
             </option>
           ))}
         </Select>
+        <Input
+          radius="8px"
+          label="Zip Code"
+          placeholder="Zip Code"
+          ref={register}
+          name="profile.zipCode"
+          error={errors.profile?.zipCode?.message}
+        />
         <Input
           radius="8px"
           label="City"

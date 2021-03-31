@@ -101,7 +101,7 @@ const VerificationLevel = ({
         </Container>
       </Container>
 
-      <Container flex="center" wide>
+      {/* <Container flex="center" wide>
         <Text
           p="0"
           font="11px"
@@ -112,7 +112,7 @@ const VerificationLevel = ({
         >
           {requirement}
         </Text>
-      </Container>
+      </Container> */}
 
       {verified ? (
         <Button bg="primary" m="12px 0" radius="4px" bold full disabled>

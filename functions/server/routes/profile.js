@@ -86,11 +86,18 @@ router.post(
   validate(documentSchema),
   ProfileController.idBackUpload
 );
+
 // upload documentSelfie
 router.post(
   "/document/3",
   validate(documentSchema),
   ProfileController.documentSelfieUpload
+);
+// upload document
+router.post(
+  "/document/upload",
+  validate(documentSchema),
+  ProfileController.documentUpload
 );
 
 module.exports = router;

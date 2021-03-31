@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router";
 
 import Container from "../../atoms/Container";
 import Text from "../../atoms/Text";
@@ -6,12 +7,21 @@ import Button from "../../atoms/Button";
 
 import AuthLayout from "../../templates/Auth";
 
+import { useProfile } from "../../../hooks/useProfile";
+
 const DocumentCompleted = () => {
+  const { state } = useLocation();
+  const { mutate } = useProfile();
+
+  useEffect(() => {
+    mutate();
+  }, [mutate]);
+
   return (
     <AuthLayout>
       <Container p="12px 0" wide>
         <Text font="16px" p="0" align="center" bold>
-          Verification Completed
+          {state?.title || "Verification Completed"}
         </Text>
         <Text
           font="11px"
@@ -22,8 +32,8 @@ const DocumentCompleted = () => {
           bold
           multiline
         >
-          Thank you. Your data is beign processed and you can already access
-          your account
+          {state?.message ||
+            "Thank you. Your documents are being processed and you can already access your account"}
         </Text>
       </Container>
       <Container wide>
@@ -33,7 +43,6 @@ const DocumentCompleted = () => {
           radius="6px"
           p="12px 12px"
           m="12px 0"
-          font="13px"
           full="true"
           bold="true"
           to="/dashboard"

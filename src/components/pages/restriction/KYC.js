@@ -32,6 +32,7 @@ const KYC = () => {
         phone: "",
         gender: "",
         city: "",
+        zipCode: "",
         country: countries.find((c) => c.code === "US")?.name || "",
       },
     },
@@ -91,6 +92,15 @@ const KYC = () => {
             </option>
           ))}
         </Select>
+        <Input
+          radius="6px"
+          p="12px"
+          label="zip Code"
+          placeholder="Zip Code"
+          ref={register}
+          name="profile.zipCode"
+          error={errors.profile?.zipCode?.message}
+        />
         <Input
           radius="6px"
           p="12px"

@@ -49,9 +49,10 @@ const AuthChecker = ({ children }) => {
   if (!profile.meta.isActive) return <Redirect to="/confirmation/lock" />;
 
   if (!profile.isDocumentVerified) {
-    if (!(profile.role === "admin" || profile.role === "moderator")) {
-      return <Redirect to="/confirmation/documents/start" />;
-    }
+    // if (!(profile.role === "admin" || profile.role === "moderator")) {
+    //   return <Redirect to="/confirmation/documents/start" />;
+    // }
+    return <Redirect to="/confirmation/documents/start" />;
   }
 
   return children;
