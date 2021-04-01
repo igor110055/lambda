@@ -1,16 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Container from "../../../atoms/Container";
 import Text from "../../../atoms/Text";
 
-import { useAdminUser } from "../../../../hooks/useUsers";
-
 import DocumentItem from "../../../molecules/DocumentItem";
+
+import ConfirmationModal from "../../../organisms/ConfirmationModal";
+
+import { useAdminUser } from "../../../../hooks/useUsers";
+import { useToggle } from "../../../../hooks/useToggle";
+
+import axiosInstance from "../../../../utils/axios";
 
 const Documents = () => {
   const { userId } = useParams();
-  const { user } = useAdminUser(userId);
+  const { user, mutate } = useAdminUser(userId);
+
+  const [id, setId] = useState();
+
+  const {
+    show: showDeleteDocument,
+    toggle: toggleDeleteDocument,
+  } = useToggle();
+
+  const destroyPrompt = (cloudId) => {
+    setId(cloudId);
+    toggleDeleteDocument();
+  };
+
+  const destroy = async () => {
+    try {
+      await axiosInstance.delete(
+        `/users/${user._id}/documents/${encodeURIComponent(id)}`
+      );
+      mutate();
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
 
   return (
     <>
@@ -29,18 +57,18 @@ const Documents = () => {
       <Container p="12px" wide>
         <DocumentItem
           title="ID Front"
-          date={user.idFront?.date}
-          url={user.idFront?.url}
+          document={user.idFront}
+          destroy={destroyPrompt}
         />
         <DocumentItem
           title="ID Bank"
-          date={user.idBack?.date}
-          url={user.idBack?.url}
+          document={user.idBack}
+          destroy={destroyPrompt}
         />
         <DocumentItem
           title="Document Selfie"
-          date={user.documentSelfie?.date}
-          url={user.documentSelfie?.url}
+          document={user.documentSelfie}
+          destroy={destroyPrompt}
         />
       </Container>
 
@@ -50,12 +78,22 @@ const Documents = () => {
       <Container p="12px" wide>
         {user.documents.map((document) => (
           <DocumentItem
+            key={document.cloudId}
             title={document.name}
-            date={document.date}
-            url={document.url}
+            document={document}
+            destroy={destroyPrompt}
           />
         ))}
       </Container>
+
+      <ConfirmationModal
+        open={showDeleteDocument}
+        title="Delete Document"
+        message="Are you sure you want to delete this document?"
+        action={destroy}
+        dismiss={toggleDeleteDocument}
+        preventDismiss
+      />
     </>
   );
 };

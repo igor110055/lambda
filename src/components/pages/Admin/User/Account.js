@@ -104,10 +104,10 @@ function RequestDocuments({ user, mutate }) {
       <SettingsItem
         title={
           user.isDocumentVerified
-            ? "Request ID Document Upload"
+            ? "Request ID Document Re-Upload"
             : "Cancel ID Document Request"
         }
-        body="Request this user to upload his ID documents"
+        body="Request this user to re-upload his ID documents"
         color={user.isDocumentVerified ? undefined : "actionBg"}
         opacity="1"
         icon={<FaMailBulk />}

@@ -125,4 +125,11 @@ router.delete(
   UserController.userRequestDocumentCancel
 );
 
+// cancel user document request
+router.delete(
+  "/:id/documents/:cloudId",
+  permissions(["admin"]),
+  UserController.userDeleteDocument
+);
+
 module.exports = router;

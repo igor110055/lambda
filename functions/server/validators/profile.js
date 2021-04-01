@@ -32,7 +32,8 @@ const profilePhotoSchema = Joi.object({
 });
 
 const documentSchema = Joi.object({
-  document: Joi.any().required(),
+  url: Joi.string().required(),
+  cloudId: Joi.string().required(),
 });
 
 module.exports = {
