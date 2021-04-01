@@ -268,18 +268,42 @@ const userDeleteDocument = async (req, res, next) => {
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
+    // check if user documents
     const deletedDocument = user.documents.find(
       (doc) => doc.cloudId === cloudId
     );
-    if (!deletedDocument)
+    if (deletedDocument) {
+      const updatedDocuments = user.documents.filter(
+        (doc) => doc.cloudId !== cloudId
+      );
+      user.documents = updatedDocuments;
+    }
+
+    // check if user id front
+    const deletedIdFront = user.idFront.cloudId === cloudId;
+    if (deletedIdFront) {
+      user.idFront = null;
+    }
+    // check if user id back
+    const deletedIdBack = user.idBack.cloudId === cloudId;
+    if (deletedIdBack) {
+      user.idBack = null;
+    }
+    // check if user document selfie
+    const deletedDocumentSelfie = user.documentSelfie.cloudId === cloudId;
+    if (deletedDocumentSelfie) {
+      user.documentSelfie = null;
+    }
+
+    if (
+      !deletedDocument &&
+      !deletedIdFront &&
+      !deletedIdBack &&
+      !deletedDocumentSelfie
+    )
       return next(createError.NotFound("User Document not found"));
 
     await destroy(cloudId);
-
-    const updatedDocuments = user.documents.filter(
-      (doc) => doc.cloudId !== cloudId
-    );
-    user.documents = updatedDocuments;
     await user.save();
 
     res.json({ message: "Document deleted successfully" });

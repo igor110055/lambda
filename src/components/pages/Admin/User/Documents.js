@@ -55,9 +55,21 @@ const Documents = () => {
         ID Documents
       </Text>
       <Container p="12px" wide>
-        <DocumentItem title="ID Front" document={user.idFrontd} />
-        <DocumentItem title="ID Bank" document={user.idBack} />
-        <DocumentItem title="Document Selfie" document={user.documentSelfie} />
+        <DocumentItem
+          title="ID Front"
+          document={user.idFront}
+          destroy={destroyPrompt}
+        />
+        <DocumentItem
+          title="ID Back"
+          document={user.idBack}
+          destroy={destroyPrompt}
+        />
+        <DocumentItem
+          title="Document Selfie"
+          document={user.documentSelfie}
+          destroy={destroyPrompt}
+        />
       </Container>
 
       <Text font="13px" p="12px" bold>

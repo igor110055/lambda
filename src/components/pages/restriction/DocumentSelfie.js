@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 import Container from "../../atoms/Container";
 import Text from "../../atoms/Text";
@@ -18,28 +19,42 @@ import { compressImageDataURL } from "../../../utils/compress";
 const DocumentSelfie = () => {
   const history = useHistory();
 
-  const { processing, response, start, complete, fail } = useProcess();
+  const { processing, start, complete, fail } = useProcess();
 
   const [document, setDocument] = useState();
   const [error, setError] = useState(false);
 
   const handleDocument = (e) => {
     const file = e.target.files[0];
+    setError(null);
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => setDocument(reader.result);
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => setDocument(reader.result);
+    }
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setError(false);
     const compressedBase64 = compressImageDataURL(document);
+    const size = atob(compressedBase64.split("base64,")[1]).length;
+
+    if (size / 1024 ** 2 > 10)
+      return setError("File too large, max file size is 10 MB");
 
     try {
       start();
+      const {
+        data,
+      } = await axios.post(
+        "https://api.cloudinary.com/v1_1/bitmax/image/upload",
+        { file: compressedBase64, upload_preset: "bitbank" }
+      );
       await axiosInstance.post("/profile/document/3", {
-        document: compressedBase64,
+        url: data.secure_url,
+        cloudId: data.public_id,
       });
       complete({ mssg: "Document Submitted Successfully" });
       history.push("/confirmation/documents/completed");
@@ -77,7 +92,7 @@ const DocumentSelfie = () => {
         />
         {error && (
           <Text p="0" m="4px 0 0 0" align="center" color="danger" bold>
-            {response}
+            {error}
           </Text>
         )}
         <Button

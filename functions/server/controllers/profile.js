@@ -9,12 +9,7 @@ const User = require("../models/user");
 const { signEmailToken } = require("../utils/jwt");
 const { emailVerificationMail } = require("../utils/mailer");
 
-const {
-  uploadProfilePhoto,
-  uploadIdFront,
-  uploadIdBack,
-  uploadDocumentSelfie,
-} = require("../utils/uploader");
+const { uploadProfilePhoto } = require("../utils/uploader");
 
 const profileUser = async (req, res, next) => {
   try {
@@ -267,16 +262,16 @@ const profilePhotoUpload = async (req, res, next) => {
 
 const idFrontUpload = async (req, res, next) => {
   try {
-    // validated request body
-    const { document } = req.body;
+    // client cloudinary upload response
+    const result = req.body;
 
     const userId = req.user.id;
 
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
-    // cloudinary upload
-    await uploadIdFront(user, document);
+    user.idFront = { ...result, date: Date.now() };
+    await user.save();
 
     res.json({
       message: "ID front uploaded successfully",
@@ -288,16 +283,16 @@ const idFrontUpload = async (req, res, next) => {
 
 const idBackUpload = async (req, res, next) => {
   try {
-    // validated request body
-    const { document } = req.body;
+    // client cloudinary upload response
+    const result = req.body;
 
     const userId = req.user.id;
 
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
-    // cloudinary upload
-    await uploadIdBack(user, document);
+    user.idBack = { ...result, date: Date.now() };
+    await user.save();
 
     res.json({
       message: "ID back uploaded successfully",
@@ -309,16 +304,17 @@ const idBackUpload = async (req, res, next) => {
 
 const documentSelfieUpload = async (req, res, next) => {
   try {
-    // validated request body
-    const { document } = req.body;
+    // client cloudinary upload response
+    const result = req.body;
 
     const userId = req.user.id;
 
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
-    // cloudinary upload
-    await uploadDocumentSelfie(user, document);
+    user.documentSelfie = { ...result, date: Date.now() };
+    user.isDocumentVerified = true;
+    await user.save();
 
     res.json({
       message: "Document Selfie uploaded successfully",
