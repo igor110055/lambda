@@ -1,4 +1,7 @@
 const createError = require("http-errors");
+const cloudinary = require("../configs/cloudinary");
+
+const { destroy } = cloudinary.uploader;
 
 const User = require("../models/user");
 
@@ -188,8 +191,8 @@ const userCardDelete = async (req, res, next) => {
     const deletedCard = user.cards.find((card) => card.id === id);
     if (!deletedCard) return next(createError.NotFound("User Card not found"));
 
-    const updatedCards = user.cards.filter((card) => card.id !== id);
-    user.cards = updatedCards;
+    const updatedDocuments = user.cards.filter((card) => card.id !== id);
+    user.cards = updatedDocuments;
     await user.save();
 
     res.json({ message: "User Card successfully deleted" });
@@ -257,6 +260,34 @@ const userRequestDocumentCancel = async (req, res, next) => {
   }
 };
 
+const userDeleteDocument = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const cloudId = req.params.cloudId;
+
+    const user = await User.findById(userId);
+    if (!user) return next(createError.NotFound("User not found"));
+
+    const deletedDocument = user.documents.find(
+      (doc) => doc.cloudId === cloudId
+    );
+    if (!deletedDocument)
+      return next(createError.NotFound("User Document not found"));
+
+    await destroy(cloudId);
+
+    const updatedDocuments = user.documents.filter(
+      (doc) => doc.cloudId !== cloudId
+    );
+    user.documents = updatedDocuments;
+    await user.save();
+
+    res.json({ message: "Document deleted successfully" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   userList,
   userCreate,
@@ -272,4 +303,5 @@ module.exports = {
   userBankDelete,
   userRequestDocument,
   userRequestDocumentCancel,
+  userDeleteDocument,
 };

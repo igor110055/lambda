@@ -1,45 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Redirect, useHistory } from "react-router-dom";
+import axios from "axios";
 
 import Container from "../../atoms/Container";
 import Text from "../../atoms/Text";
 import Button from "../../atoms/Button";
 import Spinner from "../../atoms/Spinner";
 
-import Upload from "../../molecules/Upload";
-
 import AuthLayout from "../../templates/Auth";
 
-import { useProcess } from "../../../hooks/useProcess";
 import { useProfile } from "../../../hooks/useProfile";
+import { useProcess } from "../../../hooks/useProcess";
 
 import axiosInstance from "../../../utils/axios";
-import { compressImageDataURL } from "../../../utils/compress";
 
 const DocumentSelfie = () => {
   const history = useHistory();
   const { profile } = useProfile();
 
-  const { processing, success, response, start, complete, fail } = useProcess();
+  const { processing, start, complete } = useProcess();
 
+  const inputRef = useRef();
   const [document, setDocument] = useState();
+  const [error, setError] = useState(null);
 
   const handleDocument = (e) => {
     const file = e.target.files[0];
+    setError(null);
+    setDocument(null);
+    if (file) {
+      if (file.size / 1024 ** 2 > 10)
+        return setError("File too large, max file size is 10 MB");
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => setDocument(reader.result);
+      setDocument(file);
+    }
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const compressedBase64 = compressImageDataURL(document);
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    formData.append("file", document);
+    formData.append("upload_preset", "bitbank");
 
     try {
       start();
+      const { data } = await axios.post(
+        "https://api.cloudinary.com/v1_1/bitmax/image/upload",
+        formData
+      );
       await axiosInstance.post("/profile/document/upload", {
-        document: compressedBase64,
+        url: data.secure_url,
+        cloudId: data.public_id,
       });
       complete({ mssg: "Document Submitted Successfully" });
       history.push({
@@ -51,8 +61,7 @@ const DocumentSelfie = () => {
         },
       });
     } catch (err) {
-      fail(err.response.message);
-      console.log(err, err.response);
+      // console.log(err, err.response);
     }
   };
 
@@ -76,19 +85,22 @@ const DocumentSelfie = () => {
           {profile.requestedDocumentDescription}
         </Text>
       </Container>
-      <Container as="form" wide onSubmit={onSubmit}>
-        <Upload
-          image={document}
-          action={handleDocument}
-          hint="Select Document"
-        />
-        {!processing && !success && !(response === "Processing...") && (
+      <Container wide>
+        <input ref={inputRef} type="file" onChange={handleDocument} hidden />
+
+        <Container p="48px 0" flex="space-between" wide>
+          <Text>{document?.name || "No file chosen"}</Text>
+          <Button p="6px" bg="primary" onClick={() => inputRef.current.click()}>
+            {document ? "Choose another file" : "Choose file"}
+          </Button>
+        </Container>
+
+        {error && (
           <Text p="0" m="4px 0 0 0" align="center" color="danger" bold>
-            {response}
+            {error}
           </Text>
         )}
         <Button
-          type="submit"
           bg="primary"
           radius="6px"
           p="12px 12px"
@@ -97,13 +109,14 @@ const DocumentSelfie = () => {
           full
           bold
           disabled={processing || !document}
+          onClick={handleSubmit}
         >
           {processing ? (
             <Spinner />
           ) : document ? (
             "Upload Document"
           ) : (
-            "Choose an image"
+            "Choose a document"
           )}
         </Button>
       </Container>

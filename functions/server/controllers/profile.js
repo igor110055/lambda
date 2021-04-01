@@ -1,17 +1,19 @@
 const createError = require("http-errors");
 
+const cloudinary = require("../configs/cloudinary");
+
+const { destroy } = cloudinary.uploader;
+
 const User = require("../models/user");
 
 const { signEmailToken } = require("../utils/jwt");
 const { emailVerificationMail } = require("../utils/mailer");
 
 const {
-  destroyProfilePhoto,
   uploadProfilePhoto,
   uploadIdFront,
   uploadIdBack,
   uploadDocumentSelfie,
-  uploadDocument,
 } = require("../utils/uploader");
 
 const profileUser = async (req, res, next) => {
@@ -228,7 +230,11 @@ const profilePhotoReset = async (req, res, next) => {
     if (!user) return next(createError.NotFound("User not found"));
 
     // cloudinary destroy
-    await destroyProfilePhoto(user);
+    if (user.avatar && user.avatar.cloudId) {
+      await destroy(user.avatar.cloudId);
+      user.avatar = null;
+      await user.save();
+    }
 
     res.json({
       message: "Profile photo reset successful",
@@ -324,20 +330,18 @@ const documentSelfieUpload = async (req, res, next) => {
 
 const documentUpload = async (req, res, next) => {
   try {
-    // validated request body
-    const { document } = req.body;
+    // client cloudinary upload response
+    const result = req.body;
 
     const userId = req.user.id;
 
     const user = await User.findById(userId);
     if (!user) return next(createError.NotFound("User not found"));
 
-    //  cloudinary upload
-    const result = await uploadDocument(document);
-
     // create new document
     const documentName = user.requestedDocument || "Unnamed Document";
-    user.documents.unshift({ ...result, name: documentName });
+
+    user.documents.unshift({ ...result, date: Date.now(), name: documentName });
     user.isDocumentRequested = false;
     user.requestedDocument = null;
     user.requestedDocumentDescription = null;
