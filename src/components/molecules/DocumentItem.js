@@ -16,9 +16,9 @@ const Download = styled(FaDownload)`
 `;
 
 export const DocumentItem = ({ title, document, destroy: destroyAction }) => {
-  const destroy = () => destroyAction(document.cloudId);
+  const destroy = () => destroyAction(document?.cloudId);
 
-  if (!document.url) return null;
+  if (!document?.url) return null;
   return (
     <Container
       p="12px"
@@ -32,16 +32,20 @@ export const DocumentItem = ({ title, document, destroy: destroyAction }) => {
         <Text font="12px" p="0" m="0 0 4px 0" bold>
           {title}
         </Text>
-        {document.date && (
+        {document?.date && (
           <Text font="10px" p="0" opacity="0.6">
             {new Date(document.date).toDateString()}{" "}
             {new Date(document.date).toLocaleTimeString()}
           </Text>
         )}
       </Container>
-      <Container w="52px" flex="space-between" align="baseline">
-        <Trash onClick={destroy} />
-        <a href={document.url} download>
+      <Container
+        w="52px"
+        flex={destroyAction ? "space-between" : "flex-end"}
+        align="baseline"
+      >
+        {destroyAction && <Trash onClick={destroy} />}
+        <a href={document?.url} download>
           <Download />
         </a>
       </Container>
