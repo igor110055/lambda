@@ -12,9 +12,15 @@ import { PaymentsLoader } from "../molecules/Loader/PaymentsLoader";
 import DashboardLayout from "../templates/Dashboard";
 
 import { usePayments } from "../../hooks/usePayments";
+import { useWallet } from "../../hooks/useWallets";
+import { usePendingPayment } from "../../hooks/useBalance";
+
+import { rawBalance } from "../../utils/parseBalance";
 
 const Payments = () => {
   const { payments, loading } = usePayments();
+  const { wallet } = useWallet("btc");
+  const { total: pending } = usePendingPayment();
 
   return (
     <DashboardLayout>
@@ -65,7 +71,14 @@ const Payments = () => {
         <Container display="grid" gap="16px" minH="240px" p="12px" wide>
           {payments.length ? (
             payments.map((payment) => (
-              <PaymentItem key={payment._id} payment={payment} />
+              <PaymentItem
+                key={payment._id}
+                payment={payment}
+                href={`bitcoin:${wallet?.address}?amount=${rawBalance(
+                  pending
+                )}`}
+                webPayment
+              />
             ))
           ) : (
             <Container minH="240px" flexCol="center">

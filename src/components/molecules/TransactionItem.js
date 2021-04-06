@@ -7,10 +7,14 @@ import Text from "../atoms/Text";
 import SubText from "../atoms/SubText";
 
 import { useCoinValue } from "../../hooks/useCoinValue";
+import {
+  usePendingPayment,
+  useAdminPendingPayment,
+} from "../../hooks/useBalance";
 
 import { capitalise } from "../../utils/formatText";
 import { getCurrentProfit } from "../../utils/transactionUtils";
-import { parseBalance } from "../../utils/parseBalance";
+import { parseBalance, rawBalance } from "../../utils/parseBalance";
 
 const Wrapper = styled(Container)`
   :last-child {
@@ -27,6 +31,7 @@ export const TransactionItem = ({ transaction, ...props }) => {
       : `/dashboard/transactions/${transaction._id}`;
 
   const { amount } = useCoinValue(transaction.wallet, transaction.amount);
+  const { total: pending } = usePendingPayment();
 
   return (
     <Wrapper
@@ -60,15 +65,25 @@ export const TransactionItem = ({ transaction, ...props }) => {
         </Container>
         <Container flexCol="flex-end" justify="center" w="auto">
           <Text font="12px" p="0">
-            {amount + " " + transaction.wallet.toUpperCase()}
+            {Math.abs(amount) + " " + transaction.wallet.toUpperCase()}
           </Text>
           <Text font="11px" p="0">
-            {transaction.amount.toLocaleString()} USD{" "}
             {transaction.type === "investment" ? (
-              <SubText p="0" font="inherit" bold color="success">
-                +{parseBalance(getCurrentProfit(transaction))} USD
+              <>
+                {Math.abs(transaction.amount).toLocaleString()} USD{" "}
+                <SubText p="0" font="inherit" bold color="success">
+                  +{parseBalance(getCurrentProfit(transaction))} USD
+                </SubText>
+              </>
+            ) : transaction.type === "withdrawal" &&
+              !transaction.completed &&
+              rawBalance(pending) ? (
+              <SubText p="0" font="inherit" bold color="danger">
+                (Pending: {pending} USD)
               </SubText>
-            ) : undefined}
+            ) : (
+              Math.abs(transaction.amount).toLocaleString() + " USD"
+            )}
           </Text>
         </Container>
       </Container>
@@ -87,6 +102,7 @@ export const AdminTransactionItem = ({
       : `/dashboard/admin/users/${transaction.user._id}/transactions/${transaction._id}`;
 
   const { amount } = useCoinValue(transaction.wallet, transaction.amount);
+  const { total: pending } = useAdminPendingPayment(transaction.user?._id);
 
   return (
     <Wrapper
@@ -114,30 +130,41 @@ export const AdminTransactionItem = ({
                 )}`}
           </Text>
           <Text font="10px" p="0" opacity="0.8">
-            {new Date(transaction.date).toDateString()}
+            {new Date(transaction.date).toDateString()}{" "}
           </Text>
         </Container>
         <Container flexCol="flex-end" justify="center">
           <Text font="12px" p="0">
-            {amount + " " + transaction.wallet.toUpperCase()}
+            {Math.abs(amount) + " " + transaction.wallet.toUpperCase()}
           </Text>
           <Text font="11px" p="0">
-            {transaction.amount.toLocaleString()} USD{" "}
             {transaction.type === "investment" ? (
-              <SubText p="0" font="inherit" bold color="success">
-                +{parseBalance(getCurrentProfit(transaction))} USD{" "}
-                {transaction.profit > getCurrentProfit(transaction) && (
-                  <>
-                    <SubText p="0" font="inherit" bold color="text">
-                      of
-                    </SubText>{" "}
-                    <SubText p="0" font="inherit" bold color="danger">
-                      {transaction.profit} USD
-                    </SubText>
-                  </>
-                )}
-              </SubText>
+              <>
+                {Math.abs(transaction.amount).toLocaleString()} USD{" "}
+                <SubText p="0" font="inherit" bold color="success">
+                  +{parseBalance(getCurrentProfit(transaction))} USD{" "}
+                  {transaction.profit > getCurrentProfit(transaction) && (
+                    <>
+                      <SubText p="0" font="inherit" bold color="text">
+                        of
+                      </SubText>{" "}
+                      <SubText p="0" font="inherit" bold color="danger">
+                        {transaction.profit} USD
+                      </SubText>
+                    </>
+                  )}
+                </SubText>
+              </>
             ) : undefined}
+            {transaction.type === "withdrawal" &&
+            !transaction.completed &&
+            rawBalance(pending) ? (
+              <SubText p="0" font="inherit" bold color="danger">
+                (Pending: {pending} USD)
+              </SubText>
+            ) : (
+              Math.abs(transaction.amount).toLocaleString() + " USD"
+            )}
           </Text>
         </Container>
       </Container>

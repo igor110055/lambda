@@ -76,6 +76,10 @@ const TransactionSchema = new Schema({
   method: {
     type: Schema.Types.ObjectId,
   },
+  completed: {
+    type: Boolean,
+    default: () => true,
+  },
 });
 
 TransactionSchema.pre("save", function (next) {

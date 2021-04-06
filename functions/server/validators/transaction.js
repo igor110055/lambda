@@ -57,6 +57,7 @@ const transactionSchema = Joi.object({
       .required(),
     otherwise: Joi.forbidden(),
   }),
+  completed: Joi.boolean(),
 });
 
 const transactionUpdateSchema = Joi.object({
@@ -69,6 +70,9 @@ const transactionUpdateSchema = Joi.object({
   profit: Joi.number(),
   duration: Joi.number().min(1),
   autoIncrement: Joi.boolean(),
+
+  // withdrawal meta
+  completed: Joi.boolean(),
 });
 
 module.exports = {

@@ -43,6 +43,7 @@ const Payments = () => {
               key={payment._id}
               payment={payment}
               to={`/dashboard/admin/users/${payment.user}/payments/${payment._id}`}
+              message="Edit Payment"
             />
           ))
         ) : (

@@ -1,6 +1,8 @@
 import { useAdminUserTransactions, useTransactions } from "./useTransactions";
+import { useAdminUserPayments, usePayments } from "./usePayments";
 
 import * as reducers from "../utils/balanceReducers";
+import * as paymentReducers from "../utils/paymentReducers";
 
 export const useBalance = () => {
   const { transactions, loading } = useTransactions();
@@ -12,6 +14,14 @@ export const useBalance = () => {
   const profit = reducers.profit(transactions);
 
   return { total, available, bonus, deposit, profit, loading };
+};
+
+export const usePendingPayment = () => {
+  const { payments, loading } = usePayments();
+
+  const total = paymentReducers.total(payments);
+
+  return { total, loading };
 };
 
 export const useWalletBalance = (symbol) => {
@@ -37,6 +47,14 @@ export const useAdminBalance = (userId) => {
   const profit = reducers.profit(transactions);
 
   return { total, available, bonus, deposit, profit, loading };
+};
+
+export const useAdminPendingPayment = (userId) => {
+  const { payments, loading } = useAdminUserPayments(userId);
+
+  const total = paymentReducers.total(payments);
+
+  return { total, loading };
 };
 
 export const useAdminWalletBalance = (userId, symbol) => {

@@ -90,7 +90,7 @@ const EditTransaction = () => {
       mutateTransaction();
       mutateUserTransactions();
     } catch (err) {
-      // console.log(err.response);
+      console.log(err.response);
     }
   };
 
@@ -146,7 +146,12 @@ const EditTransaction = () => {
         </Container>
       </Container>
 
-      <Container as="form" onSubmit={handleSubmit(onSubmit)} p="12px" wide>
+      <Container
+        as="form"
+        onSubmit={handleSubmit(onSubmit, (e) => console.log(e))}
+        p="12px"
+        wide
+      >
         <input hidden ref={register} name="type" />
         {type === "income" && (
           <Input
@@ -218,6 +223,14 @@ const EditTransaction = () => {
               name="autoIncrement"
             />
           </>
+        )}
+
+        {type === "withdrawal" && (
+          <Checkbox
+            label="Withdrawal Completed?"
+            ref={register}
+            name="completed"
+          />
         )}
 
         <AdminDisplay>

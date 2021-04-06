@@ -101,7 +101,12 @@ const Withdraw = () => {
       });
       return;
     }
-    const transaction = { ...formData, user: profile._id, type: "withdrawal" };
+    const transaction = {
+      ...formData,
+      user: profile._id,
+      type: "withdrawal",
+      completed: false,
+    };
     try {
       start();
       await axiosInstance.post("/transactions", transaction);
