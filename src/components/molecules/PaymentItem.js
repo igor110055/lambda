@@ -28,7 +28,7 @@ const PaymentItem = ({ payment, href, to, message, webPayment, ...props }) => {
           opacity: "0.6",
         }}
       >
-        {payment.amount}
+        {payment.amount} USD
       </Entry>
 
       <Entry
