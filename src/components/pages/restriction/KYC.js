@@ -45,6 +45,7 @@ const KYC = () => {
         city: "",
         zipCode: "",
         country: countries.find((c) => c.code === "US")?.name || "",
+        employmentStatus: "",
       },
     },
     resolver: yupResolver(profileSchema),
@@ -139,6 +140,19 @@ const KYC = () => {
           name="profile.phone"
           error={errors.profile?.phone?.message}
         />
+        <Select
+          radius="6px"
+          p="12px"
+          label="Employment Status"
+          ref={register}
+          name="profile.employmentStatus"
+          error={errors.profile?.employmentStatus?.message}
+        >
+          <option value="Employed">Employed</option>
+          <option value="Unemployed">Unemployed</option>
+          <option value="Self Employed">Self Employed</option>
+          <option value="Retired">Retired</option>
+        </Select>
         <Select
           radius="6px"
           p="12px"

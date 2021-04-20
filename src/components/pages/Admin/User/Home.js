@@ -237,6 +237,10 @@ const Home = () => {
         />
         <SettingsItem title="Gender" body={capitalise(user.profile?.gender)} />
         <SettingsItem
+          title="Employment Status"
+          body={user.profile?.employmentStatus}
+        />
+        <SettingsItem
           title="Date Joined"
           body={new Date(user.createdAt).toDateString()}
         />

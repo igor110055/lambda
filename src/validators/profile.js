@@ -11,6 +11,7 @@ export const profileSchema = yup.object({
       city: yup.string().required("City is required"),
       zipCode: yup.string().required("Zip Code is required"),
       country: yup.string().required("Country is required"),
+      employmentStatus: yup.string().required("Employment Status is required"),
     })
     .required("Profile is required"),
 });

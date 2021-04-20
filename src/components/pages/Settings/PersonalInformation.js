@@ -9,7 +9,6 @@ import Select from "../../atoms/Select";
 import Button from "../../atoms/Button";
 import Text from "../../atoms/Text";
 
-import PhoneInput from "../../molecules/PhoneInput";
 import ControlledDateInput from "../../molecules/ControlledDateInput";
 
 import ConfirmationModal from "../../organisms/ConfirmationModal";
@@ -51,6 +50,7 @@ const PersonalInformation = () => {
         city: profile.profile?.city,
         zipCode: profile.profile?.zipCode,
         country: profile.profile?.country,
+        employmentStatus: profile.profile?.employmentStatus,
       },
     },
     resolver: yupResolver(profileSchema),
@@ -141,7 +141,7 @@ const PersonalInformation = () => {
           name="profile.city"
           error={errors.profile?.city?.message}
         />
-        <PhoneInput
+        <Input
           radius="8px"
           type="tel"
           label="Phone Number"
@@ -150,7 +150,18 @@ const PersonalInformation = () => {
           name="profile.phone"
           error={errors.profile?.phone?.message}
         />
-        {/* <Phone /> */}
+        <Select
+          radius="8px"
+          label="Employment Status"
+          ref={register}
+          name="profile.employmentStatus"
+          error={errors.profile?.employmentStatus?.message}
+        >
+          <option value="Employed">Employed</option>
+          <option value="Unemployed">Unemployed</option>
+          <option value="Self Employed">Self Employed</option>
+          <option value="Retired">Retired</option>
+        </Select>
         <Select
           radius="8px"
           label="Gender"
