@@ -11,7 +11,6 @@ import Button from "../../atoms/Button";
 import Spinner from "../../atoms/Spinner";
 
 import PhoneInput from "../../molecules/PhoneInput";
-import ControlledDateInput from "../../molecules/ControlledDateInput";
 
 import AuthLayout from "../../templates/Auth";
 
@@ -27,21 +26,13 @@ const KYC = () => {
   const history = useHistory();
   const { profile, mutate } = useProfile();
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    errors,
-    setError,
-    formState,
-  } = useForm({
+  const { register, handleSubmit, errors, formState } = useForm({
     defaultValues: {
       firstName: profile.firstName,
       lastName: profile.lastName,
       profile: {
         phone: "",
         gender: "",
-        dob: new Date(),
         city: "",
         country: countries.find((c) => c.code === "US")?.name || "",
       },
@@ -52,18 +43,6 @@ const KYC = () => {
   const { isSubmitting } = formState;
 
   const onSubmit = async (formData) => {
-    const dob = new Date(formData.profile.dob);
-    const today = new Date();
-    const tenYears = new Date(today.setFullYear(today.getFullYear() - 10));
-    const valid = dob < tenYears;
-
-    if (!valid) {
-      return setError("profile.dob", {
-        type: "server",
-        message: "Select valid Date",
-      });
-    }
-
     try {
       await axiosInstance.put("/profile", formData);
       await mutate();
@@ -141,16 +120,6 @@ const KYC = () => {
           <option value="female">Female</option>
           <option value="other">Other</option>
         </Select>
-        <ControlledDateInput
-          radius="6px"
-          p="12px"
-          label="Date of Birth"
-          hint="Pick Date"
-          placeholder="Date of Birth"
-          control={control}
-          name="profile.dob"
-          error={errors.profile?.dob?.message}
-        />
 
         <Button
           type="submit"
