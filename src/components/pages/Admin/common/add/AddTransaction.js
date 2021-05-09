@@ -48,6 +48,7 @@ const AddTransaction = () => {
     receiver_email: "", // transfer
     method: "", // withdrawal
     profit: null, // investment
+    extra: null, // investment
     duration: 7, // investment
     autoIncrement: autoIncrementProfit ? true : false, // investment
   };
@@ -263,6 +264,17 @@ const AddTransaction = () => {
               })}
               name="duration"
               error={errors.duration?.message}
+            />
+            <Input
+              label="Extra"
+              placeholder="Extra Profit"
+              type="number"
+              radius="8px"
+              ref={register({
+                valueAsNumber: true,
+              })}
+              name="extra"
+              error={errors.extra?.message}
             />
 
             <Checkbox

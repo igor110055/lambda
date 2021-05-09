@@ -39,6 +39,12 @@ const TransactionSchema = new Schema({
       return this.type === "investment";
     },
   },
+  extra: {
+    type: Number,
+    required: function () {
+      return this.type === "investment";
+    },
+  },
   duration: {
     type: Number,
     required: function () {

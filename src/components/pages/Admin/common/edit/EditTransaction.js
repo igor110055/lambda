@@ -212,6 +212,18 @@ const EditTransaction = () => {
               error={errors.profit?.message}
             />
 
+            <Input
+              label="Extra"
+              placeholder="Extra Profit"
+              type="number"
+              radius="8px"
+              ref={register({
+                valueAsNumber: true,
+              })}
+              name="extra"
+              error={errors.extra?.message}
+            />
+
             <Checkbox
               label="Auto Increment Profit?"
               ref={register}
