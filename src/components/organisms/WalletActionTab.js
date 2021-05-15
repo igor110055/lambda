@@ -108,7 +108,7 @@ function Invest({ action }) {
     amount: yup
       .number()
       .required("Amount is required")
-      .min(100, "Minimum amount is 100 USD")
+      .min(1000, "Minimum amount is 1000 USD")
       .max(balance, "You do not have sufficient balance"),
     duration: yup.number().required(),
   });
