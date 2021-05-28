@@ -27,13 +27,9 @@ import Select from "../../../../atoms/Select";
 
 const SendUserEmail = () => {
   const { userId } = useParams();
-
   const { user } = useAdminUser(userId);
 
-  const [paragraphs, setParagraphs] = useState(1);
-  const newParagraph = () => {
-    setParagraphs(paragraphs + 1);
-  };
+  const [paragraphs, setParagraphs] = useState(["", ""]);
 
   const {
     show: showEmailModal,
@@ -56,9 +52,6 @@ const SendUserEmail = () => {
     from: "support",
     customFrom: "",
     title: "",
-    body: "",
-    body2: null,
-    body3: null,
   };
 
   const {
@@ -67,7 +60,6 @@ const SendUserEmail = () => {
     watch,
     getValues,
     formState,
-    reset,
     setError,
     errors,
   } = useForm({
@@ -78,10 +70,21 @@ const SendUserEmail = () => {
   const { isSubmitting } = formState;
   const { from } = watch();
 
+  const newParagraph = () => {
+    setParagraphs([...paragraphs, ""]);
+  };
+
   const close = () => {
     closeProcess();
-    reset();
-    setParagraphs(1);
+    setParagraphs(["", ""]);
+  };
+
+  const handleParagraph = (e, i) => {
+    const newParagraphs = paragraphs.map((p, idx) => {
+      if (idx === i) return e.target.value;
+      return p;
+    });
+    setParagraphs(newParagraphs);
   };
 
   const DOMAIN = process.env.REACT_APP_DOMAIN;
@@ -89,8 +92,8 @@ const SendUserEmail = () => {
   const sendMail = async () => {
     const { customFrom, ...formData } = getValues();
 
-    let data = formData;
-    if (customFrom) data = { ...formData, from: customFrom };
+    let data = { ...formData, body: paragraphs };
+    if (customFrom) data = { ...formData, body: paragraphs, from: customFrom };
 
     try {
       start();
@@ -171,46 +174,25 @@ const SendUserEmail = () => {
           error={errors.title?.message}
         />
 
-        <Textarea
-          label="Body"
-          placeholder="Message Body"
-          rows="10"
-          radius="8px"
-          ref={register}
-          name="body"
-          error={errors.body?.message}
-        />
-
-        {paragraphs >= 2 && (
+        {paragraphs.map((_, i) => (
           <Textarea
-            placeholder="Second Paragraph"
-            rows="6"
+            key={i}
+            label={i === 0 ? "Body" : null}
+            placeholder={i === 0 ? "Enter Greeting" : "New Paragraph"}
+            value={paragraphs[i]}
+            rows={i === 0 ? "2" : "6"}
             radius="8px"
-            ref={register}
-            name="body2"
-            error={errors.body2?.message}
+            name="body"
+            onChange={(e) => handleParagraph(e, i)}
           />
-        )}
+        ))}
 
-        {paragraphs >= 3 && (
-          <Textarea
-            placeholder="Third Paragraph"
-            rows="6"
-            radius="8px"
-            ref={register}
-            name="body3"
-            error={errors.body3?.message}
-          />
-        )}
-
-        {paragraphs < 3 && (
-          <Text font="12px" flexalign justify="center" onClick={newParagraph}>
-            Add New Paragraph{" "}
-            <SubText font="inherit" p="0" m="0 0 0 12px" flexalign>
-              <FaPlus />
-            </SubText>
-          </Text>
-        )}
+        <Text font="12px" flexalign justify="center" onClick={newParagraph}>
+          Add New Paragraph{" "}
+          <SubText font="inherit" p="0" m="0 0 0 12px" flexalign>
+            <FaPlus />
+          </SubText>
+        </Text>
 
         {errors.server?.message && (
           <Text font="12px" color="danger" align="center" bold>
