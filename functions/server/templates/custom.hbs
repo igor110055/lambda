@@ -475,21 +475,10 @@
                                     <td class="content-cell">
                                         <div class="f-fallback">
                                             <h1>{{title}}</h1>
-                                            <p>
-                                                {{body}}
-                                            </p>
 
-                                            {{#if body2}}
-                                            <p>
-                                                {{body2}}
-                                            </p>
-                                            {{/if}}
-
-                                            {{#if body3}}
-                                            <p>
-                                                {{body3}}
-                                            </p>
-                                            {{/if}}
+                                            {{#each body}}
+                                            <p>{{this}}</p>
+                                            {{/each}}
 
                                             <p>The {{app_name}} Team</p>
 
