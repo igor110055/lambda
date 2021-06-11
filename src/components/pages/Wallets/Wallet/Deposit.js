@@ -66,7 +66,7 @@ const Deposit = () => {
 
       <Container p="12px" wide>
         <Text p="0 12px" bold>
-          Minimum deposit: 100 USD
+          Minimum deposit: 1000 USD
         </Text>
         <Text font="12px" multiline opacity="0.6">
           If a deposit is below the required minimum, the funds will not be
