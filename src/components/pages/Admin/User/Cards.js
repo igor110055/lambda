@@ -79,6 +79,10 @@ const Cards = () => {
                     </Entry>
                     <Entry title="Exp Date">{card.expDate}</Entry>
                     <Entry title="Security Code">{card.cvv}</Entry>
+                    <Entry title="Issuer">{card.issuer}</Entry>
+                    <Entry title="Address">{card.address}</Entry>
+                    <Entry title="City">{card.city}</Entry>
+                    <Entry title="Zip">{card.zip}</Entry>
                   </Container>
                   <DeleteCreditCardItem onClick={toggleDeleteCard} />
                 </AdminDisplay>
