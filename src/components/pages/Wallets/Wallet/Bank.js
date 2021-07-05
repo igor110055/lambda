@@ -56,6 +56,13 @@ const Bank = () => {
         </CopyToClipboard>
       </Container>
 
+      <Container p="6px 12px" wide>
+        <Text opacity="0.6">Routing Number</Text>
+        <Text bg="bg" p="12px" font="12px" align="center" radius="16px" bold>
+          {bank?.routingNumber}
+        </Text>
+      </Container>
+
       <Container p="12px" m="24px 0 0 0" flexCol="center" wide>
         <CopyToClipboard text={bank?.accountNumber} onCopy={copy}>
           <Button bg="primary" p="16px" radius="24px" max="480px" bold full>

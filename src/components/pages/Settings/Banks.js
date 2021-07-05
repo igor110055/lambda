@@ -54,16 +54,8 @@ const Banks = () => {
     }
   }, [profile]);
 
-  const {
-    show,
-    processing,
-    response,
-    success,
-    start,
-    complete,
-    fail,
-    close,
-  } = useProcess();
+  const { show, processing, response, success, start, complete, fail, close } =
+    useProcess();
 
   const closeProcess = () => {
     close();
@@ -180,6 +172,7 @@ const Banks = () => {
             <Entry title="Account Name">{profile.fullName}</Entry>
             <Entry title="User ID">{activeBank.userId}</Entry>
             <Entry title="Bank">{activeBank.bank}</Entry>
+            <Entry title="Routing Number">{activeBank.routingNumber}</Entry>
 
             <Button
               bg="danger"

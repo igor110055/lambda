@@ -11,11 +11,7 @@ import Upgrade from "../../organisms/Upgrade";
 
 import { useProfile } from "../../../hooks/useProfile";
 
-import {
-  capitalise,
-  convertDate,
-  formatPhoneNumber,
-} from "../../../utils/formatText";
+import { capitalise, formatPhoneNumber } from "../../../utils/formatText";
 import { getMembership } from "../../../utils/profileUtils";
 
 const Home = () => {
@@ -74,11 +70,6 @@ const Home = () => {
         <SettingsItem
           title="Country"
           body={profile.profile?.country}
-          to={`${url}/personal-information`}
-        />
-        <SettingsItem
-          title="Date of Birth"
-          body={convertDate(profile.profile?.dob)}
           to={`${url}/personal-information`}
         />
         <SettingsItem

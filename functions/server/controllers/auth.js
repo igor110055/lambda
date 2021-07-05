@@ -21,9 +21,13 @@ const register = async (req, res, next) => {
     // validated request body
     const result = req.body;
 
+    console.log("checking user");
+
     // check if user already exists
     const doesExist = await User.findOne({ email: result.email });
     if (doesExist) throw createError.Conflict("Email already registered");
+
+    console.log("creating user");
 
     // create new user as basic user
     const user = new User({ ...result, role: "basic" });
@@ -48,8 +52,12 @@ const register = async (req, res, next) => {
       await savedUserBonus.save();
     }
 
+    console.log("signing user token");
+
     // sign email token
     const emailToken = await signEmailToken(savedUser.id);
+
+    console.log("mailing user");
 
     //send email
     await welcomeMail(user, emailToken);
@@ -63,6 +71,7 @@ const register = async (req, res, next) => {
 
     res.json({ accessToken, refreshToken });
   } catch (err) {
+    console.log("register error", err.message);
     next(err);
   }
 };

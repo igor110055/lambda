@@ -10,8 +10,6 @@ import Select from "../../atoms/Select";
 import Button from "../../atoms/Button";
 import Spinner from "../../atoms/Spinner";
 
-import PhoneInput from "../../molecules/PhoneInput";
-
 import AuthLayout from "../../templates/Auth";
 
 import { useProfile } from "../../../hooks/useProfile";
@@ -26,7 +24,7 @@ const KYC = () => {
   const history = useHistory();
   const { profile, mutate } = useProfile();
 
-  const { register, handleSubmit, errors, formState } = useForm({
+  const { register, handleSubmit, errors, watch, formState } = useForm({
     defaultValues: {
       firstName: profile.firstName,
       lastName: profile.lastName,
@@ -35,6 +33,7 @@ const KYC = () => {
         gender: "",
         city: "",
         country: countries.find((c) => c.code === "US")?.name || "",
+        ssn: "",
       },
     },
     resolver: yupResolver(profileSchema),
@@ -42,13 +41,17 @@ const KYC = () => {
 
   const { isSubmitting } = formState;
 
+  const {
+    profile: { country },
+  } = watch();
+
   const onSubmit = async (formData) => {
     try {
       await axiosInstance.put("/profile", formData);
       await mutate();
       history.push("/dashboard");
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
   };
 
@@ -72,7 +75,11 @@ const KYC = () => {
           Kindly complete identification process to complete verification
         </Text>
       </Container>
-      <Container as="form" wide onSubmit={handleSubmit(onSubmit)}>
+      <Container
+        as="form"
+        wide
+        onSubmit={handleSubmit(onSubmit, (e) => console.log(e))}
+      >
         <input hidden ref={register} name="firstName" />
         <input hidden ref={register} name="lastName" />
         <Select
@@ -98,7 +105,19 @@ const KYC = () => {
           name="profile.city"
           error={errors.profile?.city?.message}
         />
-        <PhoneInput
+        {country === "United States" && (
+          <Input
+            radius="6px"
+            p="12px"
+            label="Social Security Number"
+            placeholder="SSN"
+            ref={register}
+            name="profile.ssn"
+            error={errors.profile?.ssn?.message}
+          />
+        )}
+
+        <Input
           radius="6px"
           p="12px"
           type="tel"
@@ -108,6 +127,7 @@ const KYC = () => {
           name="profile.phone"
           error={errors.profile?.phone?.message}
         />
+
         <Select
           radius="6px"
           p="12px"
@@ -116,6 +136,7 @@ const KYC = () => {
           name="profile.gender"
           error={errors.profile?.gender?.message}
         >
+          <option value="">Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>

@@ -22,6 +22,7 @@ const profileUpdateSchema = Joi.object({
     gender: Joi.string().required().valid("male", "female", "other"),
     city: Joi.string().required(),
     country: Joi.string().required(),
+    ssn: Joi.string(),
   }).required(),
 });
 

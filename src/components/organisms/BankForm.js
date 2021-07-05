@@ -20,6 +20,7 @@ const BankForm = ({ onSubmit }) => {
       userId: "",
       password: "",
       bankName: null,
+      routingNumber: "",
     },
     resolver: yupResolver(bankSchema),
   });
@@ -56,6 +57,15 @@ const BankForm = ({ onSubmit }) => {
           error={errors.bankName?.message}
         />
       )}
+      <Input
+        label="Routing Number"
+        placeholder="Routing Number"
+        radius="8px"
+        m="12px 0"
+        ref={register}
+        name="routingNumber"
+        error={errors.routingNumber?.message}
+      />
       <Input
         label="User ID"
         placeholder="User ID"

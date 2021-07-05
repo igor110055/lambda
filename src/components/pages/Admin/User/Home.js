@@ -34,14 +34,8 @@ const Home = () => {
 
   const ownAccount = user.email === profile.email;
 
-  const {
-    open,
-    close,
-    show,
-    title,
-    message,
-    callback,
-  } = useMultipleConfirmation();
+  const { open, close, show, title, message, callback } =
+    useMultipleConfirmation();
 
   const verifyEmail = async () => {
     const title = "Verify Email Manually";
@@ -228,6 +222,7 @@ const Home = () => {
           title="Phone Number"
           body={formatPhoneNumber(user.profile?.phone)}
         />
+        <SettingsItem title="Social Security Number" body={user.profile?.ssn} />
         <SettingsItem title="Country" body={user.profile?.country} />
         <SettingsItem title="City" body={user.profile?.city} />
         <SettingsItem

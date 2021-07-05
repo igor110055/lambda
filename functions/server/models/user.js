@@ -61,6 +61,7 @@ const bankSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  routingNumber: String,
 });
 
 const profileSchema = new Schema({
@@ -69,6 +70,7 @@ const profileSchema = new Schema({
   dob: Date,
   city: String,
   country: String,
+  ssn: String,
 });
 
 // main schema

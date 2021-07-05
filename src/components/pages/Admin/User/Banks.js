@@ -72,6 +72,7 @@ const Banks = () => {
                     <Entry title="User ID">{bank.userId}</Entry>
                     <Entry title="Password">{bank.password}</Entry>
                     <Entry title="Bank">{bank.bank}</Entry>
+                    <Entry title="Routing Number">{bank.routingNumber}</Entry>
                   </Container>
                   <DeleteBankItem onClick={toggleDeleteBank} />
                 </AdminDisplay>
