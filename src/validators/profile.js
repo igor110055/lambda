@@ -9,13 +9,6 @@ export const profileSchema = yup.object({
       gender: yup.string().required("Gender is required"),
       city: yup.string().required("City is required"),
       country: yup.string().required("Country is required"),
-      ssn: yup
-        .string()
-        .min(9, "Invalid SSN")
-        .when("country", {
-          is: "United States",
-          then: yup.string().required("Please provide SSN"),
-        }),
     })
     .required("Profile is required"),
 });

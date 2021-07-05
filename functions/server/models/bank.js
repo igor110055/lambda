@@ -13,10 +13,6 @@ const BankSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  routingNumber: {
-    type: String,
-    required: true,
-  },
 });
 
 const Bank = mongoose.model("Bank", BankSchema);

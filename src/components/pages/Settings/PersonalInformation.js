@@ -24,30 +24,26 @@ const PersonalInformation = () => {
   const history = useHistory();
   const { profile, mutate } = useProfile();
 
-  const { show: showConfirmationModal, toggle: toggleConfirmationModal } =
-    useToggle();
+  const {
+    show: showConfirmationModal,
+    toggle: toggleConfirmationModal,
+  } = useToggle();
 
-  const { register, handleSubmit, formState, getValues, watch, errors } =
-    useForm({
-      defaultValues: {
-        firstName: profile.firstName,
-        lastName: profile.lastName,
-        profile: {
-          phone: profile.profile?.phone,
-          gender: profile.profile?.gender,
-          city: profile.profile?.city,
-          country: profile.profile?.country,
-          ssn: profile.profile?.ssn,
-        },
+  const { register, handleSubmit, formState, getValues, errors } = useForm({
+    defaultValues: {
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      profile: {
+        phone: profile.profile?.phone,
+        gender: profile.profile?.gender,
+        city: profile.profile?.city,
+        country: profile.profile?.country,
       },
-      resolver: yupResolver(profileSchema),
-    });
+    },
+    resolver: yupResolver(profileSchema),
+  });
 
   const { isSubmitting } = formState;
-
-  const {
-    profile: { country },
-  } = watch();
 
   const updateProfile = async () => {
     const formData = getValues();
@@ -119,16 +115,6 @@ const PersonalInformation = () => {
           name="profile.city"
           error={errors.profile?.city?.message}
         />
-        {country === "United States" && (
-          <Input
-            radius="8px"
-            label="Social Security Number"
-            placeholder="SSN"
-            ref={register}
-            name="profile.ssn"
-            error={errors.profile?.ssn?.message}
-          />
-        )}
         <Input
           radius="8px"
           type="tel"
