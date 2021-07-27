@@ -10,8 +10,6 @@ import Select from "../../atoms/Select";
 import Button from "../../atoms/Button";
 import Spinner from "../../atoms/Spinner";
 
-import PhoneInput from "../../molecules/PhoneInput";
-
 import AuthLayout from "../../templates/Auth";
 
 import { useProfile } from "../../../hooks/useProfile";
@@ -114,7 +112,7 @@ const KYC = () => {
           />
         )}
 
-        <PhoneInput
+        <Input
           radius="6px"
           p="12px"
           type="tel"
