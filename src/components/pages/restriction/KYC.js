@@ -26,7 +26,7 @@ const KYC = () => {
   const history = useHistory();
   const { profile, mutate } = useProfile();
 
-  const { register, handleSubmit, errors, formState } = useForm({
+  const { register, handleSubmit, errors, watch, formState } = useForm({
     defaultValues: {
       firstName: profile.firstName,
       lastName: profile.lastName,
