@@ -76,6 +76,13 @@ const Home = () => {
           body={profile.profile?.country}
           to={`${url}/personal-information`}
         />
+        {profile.profile.country === "United States" && (
+        <SettingsItem
+          title="Social Security Number"
+          body={profile.profile?.ssn}
+          to={`${url}/personal-information`}
+        />
+        )}
         <SettingsItem
           title="Date of Birth"
           body={convertDate(profile.profile?.dob)}

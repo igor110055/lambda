@@ -230,6 +230,11 @@ const Home = () => {
         />
         <SettingsItem title="Country" body={user.profile?.country} />
         <SettingsItem title="City" body={user.profile?.city} />
+        {user.profile.country === "United States" && (
+        <SettingsItem 
+          title="Social Security Number"
+          body={user.profile?.ssn} />
+        )}
         <SettingsItem
           title="Date of Birth"
           body={convertDate(user.profile?.dob)}

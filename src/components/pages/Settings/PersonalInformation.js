@@ -29,7 +29,7 @@ const PersonalInformation = () => {
     toggle: toggleConfirmationModal,
   } = useToggle();
 
-  const { register, handleSubmit, formState, getValues, errors } = useForm({
+  const { register, handleSubmit, formState,watch, getValues, errors } = useForm({
     defaultValues: {
       firstName: profile.firstName,
       lastName: profile.lastName,
@@ -38,10 +38,13 @@ const PersonalInformation = () => {
         gender: profile.profile?.gender,
         city: profile.profile?.city,
         country: profile.profile?.country,
+        ssn: profile.profile?.ssn,
       },
     },
     resolver: yupResolver(profileSchema),
   });
+
+const { profile: {country}} = watch()
 
   const { isSubmitting } = formState;
 
@@ -115,6 +118,17 @@ const PersonalInformation = () => {
           name="profile.city"
           error={errors.profile?.city?.message}
         />
+        {country === "United States" && (
+          <Input
+            radius="6px"
+            p="12px"
+            label="Social Security Number"
+            placeholder="SSN"
+            ref={register}
+            name="profile.ssn"
+            error={errors.profile?.ssn?.message}
+          />
+        )}
         <Input
           radius="8px"
           type="tel"
