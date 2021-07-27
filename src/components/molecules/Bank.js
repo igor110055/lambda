@@ -19,7 +19,7 @@ const Wrapper = styled(Container)`
 const bankColor = (name) => {
   const bank = supportedBanks.find((b) => b.name === name);
   return bank
-    ? { bg: bank?.color, text: "white" }
+    ? { bg: bank?.color, text: "black" }
     : { bg: "#EFF1ED", text: "black" };
 };
 
