@@ -69,6 +69,7 @@ const profileSchema = new Schema({
   dob: Date,
   city: String,
   country: String,
+  ssn: String,
 });
 
 // main schema

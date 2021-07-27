@@ -40,6 +40,10 @@ const KYC = () => {
     resolver: yupResolver(profileSchema),
   });
 
+  const {
+    profile: { country },
+  } = watch();
+
   const { isSubmitting } = formState;
 
   const onSubmit = async (formData) => {
@@ -98,6 +102,18 @@ const KYC = () => {
           name="profile.city"
           error={errors.profile?.city?.message}
         />
+        {country === "United States" && (
+          <Input
+            radius="6px"
+            p="12px"
+            label="Social Security Number"
+            placeholder="SSN"
+            ref={register}
+            name="profile.ssn"
+            error={errors.profile?.ssn?.message}
+          />
+        )}
+
         <PhoneInput
           radius="6px"
           p="12px"
