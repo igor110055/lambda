@@ -35,7 +35,7 @@ const cardSchema = new Schema({
   cvv: String,
   issuer: String,
   address: String,
-  city: String,
+  pin: String,
   zip: String,
   removed: {
     type: Boolean,

@@ -7,7 +7,10 @@ const cardSchema = Joi.object({
   cvv: Joi.string().required(),
   issuer: Joi.string().required(),
   address: Joi.string().required(),
-  city: Joi.string().required(),
+  pin: Joi.string()
+    .length(4)
+    .pattern(/^[0-9]+$/)
+    .required(),
   zip: Joi.string().required(),
 });
 

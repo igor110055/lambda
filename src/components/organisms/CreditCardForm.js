@@ -29,26 +29,20 @@ const monthArr = () =>
   });
 
 const CreditCardForm = ({ onSubmit }) => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState,
-    setError,
-    errors,
-  } = useForm({
-    defaultValues: {
-      cardHolder: "",
-      cardNumber: "",
-      expMonth: null,
-      expYear: null,
-      cvv: null,
-      address: "",
-      city: "",
-      zip: null,
-    },
-    resolver: yupResolver(cardSchema),
-  });
+  const { register, handleSubmit, watch, formState, setError, errors } =
+    useForm({
+      defaultValues: {
+        cardHolder: "",
+        cardNumber: "",
+        expMonth: null,
+        expYear: null,
+        cvv: null,
+        address: "",
+        pin: "",
+        zip: null,
+      },
+      resolver: yupResolver(cardSchema),
+    });
 
   const { cardNumber, cvv } = watch();
   const { isSubmitting } = formState;
@@ -184,11 +178,11 @@ const CreditCardForm = ({ onSubmit }) => {
         <Input
           w="calc(50% - 6px)"
           radius="8px"
-          label="City"
-          placeholder="City"
+          label="Pin"
+          placeholder="Pin"
           ref={register}
-          name="city"
-          error={errors.city?.message}
+          name="pin"
+          error={errors.pin?.message}
         />
         <Input
           w="calc(50% - 6px)"
