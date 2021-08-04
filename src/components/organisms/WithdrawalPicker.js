@@ -4,6 +4,8 @@ import { FaChevronLeft, FaCreditCard, FaUniversity } from "react-icons/fa";
 import Container from "../atoms/Container";
 import SubText from "../atoms/SubText";
 import Text from "../atoms/Text";
+import Input from "../atoms/Input";
+import Button from "../atoms/Button";
 
 import { CreditCardItem, AddCreditCardItem } from "../molecules/CreditCard";
 import { BankItem, AddBankItem } from "../molecules/Bank";
@@ -95,13 +97,18 @@ const WithdrawalPicker = ({
                 onClick={() => setView("bank")}
               />
             )}
+            <ViewButton
+              title="Withdraw to Wallet Address"
+              icon={<FaCreditCard />}
+              onClick={() => setView("address")}
+            />
           </Container>
         ) : view === "card" ? (
           <Cards cards={cards} action={action} noadd={noadd} />
+        ) : view === "bank" ? (
+          <Banks banks={banks} action={action} noadd={noadd} />
         ) : (
-          view === "bank" && (
-            <Banks banks={banks} action={action} noadd={noadd} />
-          )
+          view === "address" && <Address action={action} />
         )}
       </Container>
     </Modal>
@@ -148,6 +155,37 @@ function Banks({ banks, action: parentAction, noadd }) {
           </Text>
         </Container>
       )}
+    </Container>
+  );
+}
+
+function Address({ action: parentAction }) {
+  const [address, setAddress] = useState("");
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setError(null);
+    setAddress(e.target.value);
+  };
+
+  const action = () => {
+    if (!address) return setError("Please Enter Wallet Address");
+    parentAction("address://" + address, "address");
+  };
+
+  return (
+    <Container h="calc(100% - 48px)" flexCol="center">
+      <Input
+        radius="8px"
+        label="Wallet Address"
+        placeholder="Enter wallet address"
+        onChange={handleChange}
+        value={address}
+        error={error}
+      />
+      <Button bg="primary" full m="12px 0" radius="8px" onClick={action}>
+        Done
+      </Button>
     </Container>
   );
 }

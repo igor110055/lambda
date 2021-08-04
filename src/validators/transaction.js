@@ -40,6 +40,10 @@ export const transactionSchema = yup.object().shape({
     is: "withdrawal",
     then: yup.string().required("Withdrawal method is required"),
   }),
+  address: yup.string().when("type", {
+    is: "withdrawal",
+    then: yup.string(),
+  }),
 
   profit: yup.number().label("Profit").min(0, "Invalid profit"),
   duration: yup
