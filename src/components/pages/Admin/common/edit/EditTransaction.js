@@ -48,17 +48,10 @@ const EditTransaction = () => {
   const { mutate: mutateTransactions } = useAdminTransactions();
   const { mutate: mutateUserTransactions } = useAdminUserTransactions(userId);
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    watch,
-    reset,
-    formState,
-    errors,
-  } = useForm({
-    resolver: yupResolver(transactionSchema),
-  });
+  const { register, control, handleSubmit, watch, reset, formState, errors } =
+    useForm({
+      resolver: yupResolver(transactionSchema),
+    });
 
   const { type } = watch();
   const { isSubmitting, isSubmitted, isDirty } = formState;
@@ -143,6 +136,11 @@ const EditTransaction = () => {
           <Entry m="0" title="User ID">
             {transaction.user?._id}
           </Entry>
+          {transaction.address && (
+            <Entry m="0" title="Wallet Address">
+              {transaction.address}
+            </Entry>
+          )}
         </Container>
       </Container>
 
