@@ -82,6 +82,7 @@ const TransactionSchema = new Schema({
   method: {
     type: Schema.Types.ObjectId,
   },
+  address: String,
 });
 
 TransactionSchema.pre("save", function (next) {
