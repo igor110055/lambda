@@ -1,35 +1,5 @@
 const supportedBanks = [
   {
-    code: "stb",
-    color: "#EFF1ED",
-    official_name: "Standard Bank of South Africa",
-    name: "Standard Bank",
-  },
-  {
-    code: "fnb",
-    color: "#EFF1ED",
-    official_name: "First National Bank",
-    name: "First National Bank",
-  },
-  {
-    code: "cpt",
-    color: "#EFF1ED",
-    official_name: "Capitec Bank Limited",
-    name: "Capitec Bank",
-  },
-  {
-    code: "ndb",
-    color: "#EFF1ED",
-    official_name: "Bidvest Bank Limited",
-    name: "Bidvest Bank",
-  },
-  {
-    code: "tym",
-    color: "EFF1ED",
-    official_name: "TymeBank",
-    name: "TymeBank",
-  },
-  {
     code: "boa",
     color: "#EFF1ED",
     official_name: "Bank of America",

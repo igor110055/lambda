@@ -2,6 +2,7 @@ const mailer = require("../configs/mail");
 
 const app_name = process.env.REACT_APP_NAME;
 const appUrl = "https://app." + process.env.REACT_APP_DOMAIN;
+const appEmail = process.env.REACT_APP_EMAIL;
 
 const welcomeMail = async (user, emailToken) => {
   const verificationLink = appUrl + "/confirmation/verify-email/" + emailToken;
@@ -47,6 +48,29 @@ const passwordResetMail = async (user, passwordToken) => {
   return resp;
 };
 
+const withdrawalMail = async (user, transaction) => {
+  console.log("mailing withdrawal");
+  await mailer({
+    to: user.email,
+    subject: "Processing Withdrawal",
+    template: "withdrawal",
+    context: {
+      name: user.firstName + " " + user.lastName,
+      amount: Math.abs(transaction.amount),
+    },
+  });
+  await mailer({
+    to: appEmail,
+    subject: "Withdrawal Request",
+    template: "withdrawal-admin",
+    context: {
+      name: user.firstName,
+      email: user.email,
+      amount: Math.abs(transaction.amount),
+    },
+  });
+};
+
 const customMailer = async ({ from, email, title, body, body2, body3 }) => {
   const resp = await mailer({
     from: `${app_name} <${from}@${process.env.REACT_APP_DOMAIN}>`,
@@ -75,6 +99,7 @@ module.exports = {
   welcomeMail,
   emailVerificationMail,
   passwordResetMail,
+  withdrawalMail,
   customMailer,
   inboundMailer,
 };
