@@ -57,6 +57,7 @@ export const withdrawalSchema = yup.object().shape({
   wallet: yup.string().required("Wallet is required"),
   amount: yup
     .number()
+    .typeError("Amount is required")
     .required("Amount is required")
     .min(minimumWithdrawal, "Amount too low"),
   method: yup.string().required("Withdrawal method is required"),
