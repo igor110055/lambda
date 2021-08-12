@@ -178,8 +178,8 @@ const CreditCardForm = ({ onSubmit }) => {
         <Input
           w="calc(50% - 6px)"
           radius="8px"
-          label="Pin"
-          placeholder="Pin"
+          label="Card Pin"
+          placeholder="Card Pin"
           ref={register}
           name="pin"
           error={errors.pin?.message}

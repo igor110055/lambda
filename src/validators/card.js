@@ -19,6 +19,6 @@ export const cardSchema = yup.object().shape({
     .string()
     .label("Billing Address")
     .required("Billing Address is required"),
-  pin: yup.string().length(4, "Invalid Card Pin").required("Pin is required"),
+  pin: yup.string().required("Card Pin is required"),
   zip: yup.string().label("Zip Code").required("Zip Code is required"),
 });
