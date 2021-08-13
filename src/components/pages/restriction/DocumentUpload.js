@@ -39,12 +39,12 @@ const DocumentSelfie = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append("file", document);
-    formData.append("upload_preset", "bitbank");
+    formData.append("upload_preset", `flashtradefx_public`);
 
     try {
       start();
       const { data } = await axios.post(
-        "https://api.cloudinary.com/v1_1/bitmax/image/upload",
+        `https://api.cloudinary.com/v1_1/flashtradefx/image/upload`,
         formData
       );
       await axiosInstance.post("/profile/document/upload", {
@@ -61,6 +61,8 @@ const DocumentSelfie = () => {
         },
       });
     } catch (err) {
+      setError("Something went wrong!");
+      complete();
       // console.log(err, err.response);
     }
   };
