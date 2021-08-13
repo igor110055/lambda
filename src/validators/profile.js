@@ -7,6 +7,7 @@ export const profileSchema = yup.object({
     .object({
       phone: yup.string().required("Phone Number is required"),
       gender: yup.string().required("Gender is required"),
+      dob: yup.date(),
       city: yup.string().required("City is required"),
       zipCode: yup.string().required("Zip Code is required"),
       country: yup.string().required("Country is required"),

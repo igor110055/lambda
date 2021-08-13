@@ -9,6 +9,8 @@ import Select from "../../atoms/Select";
 import Button from "../../atoms/Button";
 import Text from "../../atoms/Text";
 
+import ControlledDateInput from "../../molecules/ControlledDateInput";
+
 import ConfirmationModal from "../../organisms/ConfirmationModal";
 
 import { useToggle } from "../../../hooks/useToggle";
@@ -33,6 +35,7 @@ const PersonalInformation = () => {
     handleSubmit,
     formState,
     getValues,
+    watch,
     errors,
     setError,
   } = useForm({
@@ -42,6 +45,7 @@ const PersonalInformation = () => {
       profile: {
         phone: profile.profile?.phone,
         gender: profile.profile?.gender,
+        dob: profile.profile?.dob,
         city: profile.profile?.city,
         zipCode: profile.profile?.zipCode,
         country: profile.profile?.country,
@@ -172,6 +176,15 @@ const PersonalInformation = () => {
           <option value="female">Female</option>
           <option value="other">Other</option>
         </Select>
+        <ControlledDateInput
+          label="Date of Birth"
+          hint="Pick Date"
+          placeholder="Date of Birth"
+          radius="8px"
+          control={control}
+          name="profile.dob"
+          error={errors.profile?.dob?.message}
+        />
 
         <Button
           type="submit"

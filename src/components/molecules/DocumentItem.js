@@ -18,7 +18,7 @@ const Download = styled(FaDownload)`
 export const DocumentItem = ({ title, document, destroy: destroyAction }) => {
   const destroy = () => destroyAction(document.cloudId);
 
-  if (!document.url) return null;
+  if (!document?.url) return null;
   return (
     <Container
       p="12px"
