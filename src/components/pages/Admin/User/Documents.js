@@ -19,10 +19,8 @@ const Documents = () => {
 
   const [id, setId] = useState();
 
-  const {
-    show: showDeleteDocument,
-    toggle: toggleDeleteDocument,
-  } = useToggle();
+  const { show: showDeleteDocument, toggle: toggleDeleteDocument } =
+    useToggle();
 
   const destroyPrompt = (cloudId) => {
     setId(cloudId);
