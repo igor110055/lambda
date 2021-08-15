@@ -32,7 +32,7 @@ const KYC = () => {
     handleSubmit,
     errors,
     watch,
-    setError,
+    // setError,
     formState,
   } = useForm({
     defaultValues: {
