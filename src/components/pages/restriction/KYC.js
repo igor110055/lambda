@@ -57,17 +57,17 @@ const KYC = () => {
   const { isSubmitting } = formState;
 
   const onSubmit = async (formData) => {
-    const dob = new Date(formData.profile.dob);
-    const today = new Date();
-    const tenYears = new Date(today.setFullYear(today.getFullYear() - 10));
-    const valid = dob < tenYears;
+    // const dob = new Date(formData.profile.dob);
+    // const today = new Date();
+    // const tenYears = new Date(today.setFullYear(today.getFullYear() - 10));
+    // const valid = dob < tenYears;
 
-    if (!valid) {
-      return setError("profile.dob", {
-        type: "server",
-        message: "Select Valid Date",
-      });
-    }
+    // if (!valid) {
+    //   return setError("profile.dob", {
+    //     type: "server",
+    //     message: "Select Valid Date",
+    //   });
+    // }
 
     try {
       await axiosInstance.put("/profile", formData);
