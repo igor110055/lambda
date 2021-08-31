@@ -44,7 +44,7 @@ const DocumentSelfie = () => {
     try {
       start();
       const { data } = await axios.post(
-        `https://api.cloudinary.com/v1_1/kryptovest/image/upload`,
+        `https://api.cloudinary.com/v1_1/flashtradefx/image/upload`,
         formData
       );
       await axiosInstance.post("/profile/document/upload", {
