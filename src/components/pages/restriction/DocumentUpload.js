@@ -39,12 +39,12 @@ const DocumentSelfie = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append("file", document);
-    formData.append("upload_preset", `kryptovest_public`);
+    formData.append("upload_preset", `bitzonetrade_public`);
 
     try {
       start();
       const { data } = await axios.post(
-        `https://api.cloudinary.com/v1_1/kryptovest/image/upload`,
+        `https://api.cloudinary.com/v1_1/flashtradefx/image/upload`,
         formData
       );
       await axiosInstance.post("/profile/document/upload", {
