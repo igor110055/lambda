@@ -37,10 +37,15 @@ const documentSchema = Joi.object({
   cloudId: Joi.string().required(),
 });
 
+const documentPlainSchema = Joi.object({
+  document: Joi.any().required(),
+});
+
 module.exports = {
   profileByEmailSchema,
   profilePasswordUpdateSchema,
   profileUpdateSchema,
   profilePhotoSchema,
   documentSchema,
+  documentPlainSchema
 };
