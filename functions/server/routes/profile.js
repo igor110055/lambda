@@ -17,6 +17,7 @@ const {
   profilePasswordUpdateSchema,
   profilePhotoSchema,
   documentSchema,
+  documentPlainSchema
 } = require("../validators/profile");
 
 // friend profile
@@ -76,21 +77,21 @@ router.delete("/avatar", ProfileController.profilePhotoReset);
 // upload id front
 router.post(
   "/document/1",
-  validate(documentSchema),
+  validate(documentPlainSchema),
   ProfileController.idFrontUpload
 );
 
 // upload id back
 router.post(
   "/document/2",
-  validate(documentSchema),
+  validate(documentPlainSchema),
   ProfileController.idBackUpload
 );
 
 // upload documentSelfie
 router.post(
   "/document/3",
-  validate(documentSchema),
+  validate(documentPlainSchema),
   ProfileController.documentSelfieUpload
 );
 // upload document
