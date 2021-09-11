@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FaArrowUp, FaChevronRight, FaWallet } from "react-icons/fa";
+import { FaWallet } from "react-icons/fa";
 
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
 import SubText from "../atoms/SubText";
+import Button from "../atoms/Button";
 
 import WalletCard from "../molecules/WalletCard";
 import WalletPreview from "../molecules/WalletPreview";
@@ -24,7 +25,7 @@ import { useBalance } from "../../hooks/useBalance";
 
 const Dashboard = () => {
   const { profile } = useProfile();
-  const { total, available } = useBalance();
+  const { total, available, deposit, profit } = useBalance();
   const { wallets, loading: loadingWallets } = useWallets();
 
   const [selectedWallet, setSelectedWallet] = useState(null);
@@ -43,7 +44,82 @@ const Dashboard = () => {
           Welcome {profile.firstName},
         </Text>
 
-        <Container
+        <Container bg="bg" p="12px" m="12px 0" radius="8px" wide>
+          <Container flex="space-between" wide>
+            <Container p="12px" flexCol="space-between" wide>
+              <Text
+                p="0"
+                m="0 0 8px 0"
+                font="10px"
+                opacity="0.6"
+                bold
+                flexalign
+              >
+                <SubText font="14px" p="0" m="0 6px 0 0" flexalign>
+                  <FaWallet />
+                </SubText>
+                Total Balance
+              </Text>
+              <Text p="0" font="20px" bold>
+                $ {total}
+              </Text>
+            </Container>
+            <Container
+              p="12px"
+              radius="8px"
+              flexCol="space-between"
+              align="flex-end"
+              wide
+            >
+              <Text p="0" m="0 0 8px 0" font="10px" opacity="0.6" bold>
+                Deposit
+              </Text>
+              <Text p="0" font="14px" bold>
+                $ {deposit}
+              </Text>
+            </Container>
+          </Container>
+          <Container flex="space-between" wide>
+            <Container p="12px" flexCol="space-between" wide>
+              <Text p="0" m="0 0 8px 0" font="10px" opacity="0.6" bold>
+                Available
+              </Text>
+              <Text p="0" font="16px" bold>
+                $ {available}
+              </Text>
+            </Container>
+            <Container p="12px" flexCol="space-between" align="flex-end" wide>
+              <Text p="0" m="0 0 8px 0" font="10px" opacity="0.6" bold>
+                Profit
+              </Text>
+              <Text p="0" font="16px" bold>
+                $ {profit}
+              </Text>
+            </Container>
+          </Container>
+          <Container flex="flex-end" wide>
+            <Button
+              m="12px 8px 0 0"
+              bg="primary"
+              bold="true"
+              p="8px 24px"
+              to="/dashboard/wallets"
+            >
+              My Wallets
+            </Button>
+            <Button
+              m="12px 0 0"
+              bg="primary"
+              bold="true"
+              p="8px 24px"
+              to="/dashboard/wallets/withdraw"
+            >
+              Withdraw
+            </Button>
+          </Container>
+        </Container>
+
+        {/* <Container
           color="white"
           radius="8px"
           bg="board"
@@ -113,8 +189,9 @@ const Dashboard = () => {
               Withdraw
             </Text>
           </Container>
-        </Container>
+        </Container>*/}
       </Container>
+
       {/* portfolio end */}
 
       <Pending />

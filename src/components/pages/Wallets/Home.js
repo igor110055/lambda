@@ -1,10 +1,10 @@
 import React from "react";
-import { FaWallet } from "react-icons/fa";
+// import { FaWallet } from "react-icons/fa";
 
 import Container from "../../atoms/Container";
 import Text from "../../atoms/Text";
-import SubText from "../../atoms/SubText";
-import Button from "../../atoms/Button";
+// import SubText from "../../atoms/SubText";
+// import Button from "../../atoms/Button";
 
 import InvestmentCard from "../../molecules/InvestmentCard";
 import { WalletItemFullCard } from "../../molecules/WalletItem";
@@ -17,14 +17,14 @@ import DashboardLayout from "../../templates/Dashboard";
 
 import { useTransactions } from "../../../hooks/useTransactions";
 import { useWallets } from "../../../hooks/useWallets";
-import { useBalance } from "../../../hooks/useBalance";
+// import { useBalance } from "../../../hooks/useBalance";
 
 import { toDateTransactions } from "../../../utils/balanceReducers";
 
 const Home = () => {
   const { investments } = useTransactions();
   const { wallets, loading: loadingWallets } = useWallets();
-  const { total, bonus, profit, deposit } = useBalance();
+  // const { total, bonus, profit, deposit } = useBalance();
 
   const activeInvestments = toDateTransactions(investments)?.filter(
     (investment) => {
@@ -42,7 +42,7 @@ const Home = () => {
     <DashboardLayout>
       <Upgrade />
 
-      <Container p="12px" wide>
+      {/* <Container p="12px" wide>
         <Container bg="bg" p="12px" m="12px 0 0" radius="8px" wide>
           <Container flex="space-between" wide>
             <Container p="12px" flexCol="space-between" wide>
@@ -106,9 +106,11 @@ const Home = () => {
             Withdraw
           </Button>
         </Container>
-      </Container>
+      </Container> */}
 
-      <Pending />
+      <Container p="12px 0" wide>
+        <Pending />
+      </Container>
 
       {activeInvestments?.length > 0 && (
         <>

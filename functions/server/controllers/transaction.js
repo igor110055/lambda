@@ -94,7 +94,8 @@ const transactionCreate = async (req, res, next) => {
       if (!allowedTransactions.includes(result.type)) {
         throw createError.Forbidden("You do not have sufficient permission");
       }
-      if (result.type === "withdrawal" && !req.user.idFront.url) {
+      const user = await User.findById(req.user.id)
+      if (result.type === "withdrawal" && !user.idFront.url) {
         await User.findByIdAndUpdate(req.user.id, {
           isDocumentVerified: false
         });
