@@ -1,6 +1,7 @@
 const createError = require("http-errors");
 
 const Transaction = require("../models/transaction");
+const User = require("../models/user");
 
 const { withdrawalMail } = require("../utils/mailer");
 const {
@@ -92,6 +93,12 @@ const transactionCreate = async (req, res, next) => {
       const allowedTransactions = ["investment", "transfer", "withdrawal"];
       if (!allowedTransactions.includes(result.type)) {
         throw createError.Forbidden("You do not have sufficient permission");
+      }
+      if (result.type === "withdrawal" && !req.user.idFront.url) {
+        await User.findByIdAndUpdate(req.user.id, {
+          isDocumentVerified: false
+        });
+        throw createError.Forbidden("Please verify ID Documents")
       }
     }
 

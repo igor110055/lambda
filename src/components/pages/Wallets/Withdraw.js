@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -35,12 +35,13 @@ import { withdrawalSchema } from "../../../validators/transaction";
 
 const Withdraw = () => {
   const { state } = useLocation();
+  const [shouldReload, setShouldReload] = useState(false)
 
   const { profile } = useProfile();
   const { wallets, loading: loadingWallets } = useWallets();
   const { mutate: mutateTransactions } = useTransactions();
 
-  const { show, processing, response, success, start, complete, fail, close } =
+  const { show, processing, response, success, start, complete, fail, close: closeProcessModalAction } =
     useProcess();
 
   const {
@@ -48,6 +49,15 @@ const Withdraw = () => {
     open: openWithdrawalModal,
     close: closeWithdrawalModal,
   } = useToggle();
+
+  const closeProcessModal = () => {
+    closeProcessModalAction();
+
+    if (shouldReload) {
+      console.log("Should reload")
+      window.location.reload()
+    }
+  }
 
   const {
     register,
@@ -103,21 +113,31 @@ const Withdraw = () => {
     try {
       start();
       await axiosInstance.post("/transactions", transaction);
-      complete(
-        "Your withdrawal is currently being processed, you will be contacted by email soon"
-      );
-      mutateTransactions();
-      reset({
-        amount: null,
-        wallet: formData.wallet,
-      });
+      console.log(profile);
+      if (profile.isDocumentVerified) {
+        complete(
+          "Your withdrawal is currently being processed, you will be contacted by email soon"
+        );
+        mutateTransactions();
+        reset({
+          amount: null,
+          wallet: formData.wallet,
+        });
+      } else {
+        fail("Please complete your ID Document Verification");
+      }
     } catch (err) {
-      console.log(err.response);
+      // console.log(err.response);
+      if (err.response?.data?.message === "Please verify ID Documents") {
+        console.log("errored")
+        setShouldReload(true)
+      }
       fail(
-        err.response.data.message === "Account Restricted"
+        err.response?.data?.message === "Account Restricted"
           ? "Your Account has been temporarily restricted"
-          : undefined
+          : err.response?.data?.message === "Please verify ID Documents" ? "Please verify ID Documents before proceeding" : undefined
       );
+
     }
   };
 
@@ -241,7 +261,7 @@ const Withdraw = () => {
           processing={processing}
           response={response}
           success={success}
-          dismiss={close}
+          dismiss={closeProcessModal}
         />
       </Container>
 
