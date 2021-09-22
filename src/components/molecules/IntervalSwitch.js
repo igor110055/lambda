@@ -13,7 +13,7 @@ const IntervalButton = styled.p`
 
   font-size: 12px;
   font-weight: 600;
-  border-radius: ${({ radius }) => radius || "16px"};
+  border-radius: ${({ radius }) => radius || "2px"};
 
   color: ${({ theme, active }) =>
     active ? theme.colors.invertText : theme.colors.text};
@@ -34,7 +34,7 @@ const Cursor = styled.div`
   padding: 8px 16px;
   background-color: ${({ bg, theme }) =>
     theme.colors[bg] || bg || "darkseagreen"};
-  border-radius: ${({ radius }) => radius || "16px"};
+  border-radius: ${({ radius }) => radius || "2px"};
 
   position: absolute;
   top: 0;

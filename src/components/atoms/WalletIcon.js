@@ -5,7 +5,7 @@ import { ReactSVG } from "react-svg";
 import { ReactComponent as FallBackLogo } from "../../assets/icons/generic.svg";
 
 const Icon = styled(ReactSVG)`
-  --size: ${({ size }) => size || "36px"};
+  --size: ${({ size }) => size || "32px"};
   height: var(--size);
   width: var(--size);
   min-width: var(--size);

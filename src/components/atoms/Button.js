@@ -11,7 +11,7 @@ const Button = styled.button.attrs(({ to, scrollto }) => ({
   background-color: var(--bg);
   color: var(--color);
 
-  padding: 12px;
+  padding: 8px 12px;
   min-height: 24px;
   /* min-width: 48px; */
   font-size: 12px;
@@ -43,7 +43,7 @@ const Button = styled.button.attrs(({ to, scrollto }) => ({
   min-width: ${({ min }) => min && min};
   font-size: ${({ font }) => font && font};
   font-weight: ${({ bold, weight }) => (weight ? weight : bold && "600")};
-  border-radius: ${({ radius }) => radius || "4px"};
+  border-radius: ${({ radius }) => radius || "2px"};
 
   // customs
   ${({ full }) =>

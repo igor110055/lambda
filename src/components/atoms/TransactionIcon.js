@@ -8,12 +8,12 @@ import {
 } from "react-icons/fa";
 
 const Wrapper = styled.div`
-  width: ${({ size }) => (size ? size : "36px")};
-  height: ${({ size }) => (size ? size : "36px")};
+  width: ${({ size }) => (size ? size : "32px")};
+  height: ${({ size }) => (size ? size : "32px")};
 
-  min-width: ${({ size }) => size || "36px"};
+  min-width: ${({ size }) => size || "32px"};
 
-  border-radius: 6px;
+  border-radius: 2px;
 
   display: flex;
   justify-content: center;

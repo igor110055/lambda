@@ -102,7 +102,7 @@ const Dashboard = () => {
               m="12px 8px 0 0"
               bg="primary"
               bold="true"
-              p="8px 24px"
+              p="4px 24px"
               to="/dashboard/wallets"
             >
               My Wallets
@@ -111,7 +111,7 @@ const Dashboard = () => {
               m="12px 0 0"
               bg="primary"
               bold="true"
-              p="8px 24px"
+              p="4px 24px"
               to="/dashboard/wallets/withdraw"
             >
               Withdraw

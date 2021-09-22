@@ -61,7 +61,7 @@ const WalletActionTab = (props) => {
           bg: "bg",
           p: "12px 48px",
           m: "0 12px",
-          radius: "12px",
+          radius: "4px",
         }}
         {...props}
       >
@@ -170,7 +170,7 @@ function Invest({ action }) {
       </Text>
       <Input
         color="white"
-        radius="8px"
+        radius="4px"
         label="Amount"
         placeholder="Amount in USD"
         type="number"
@@ -182,7 +182,7 @@ function Invest({ action }) {
       />
       <Select
         color="white"
-        radius="8px"
+        radius="4px"
         label="Duration"
         ref={register({
           valueAsNumber: true,
@@ -205,7 +205,7 @@ function Invest({ action }) {
         full
         m="24px 0 0"
         p="14px"
-        radius="8px"
+        radius="2px"
         disabled={isSubmitting}
       >
         {isSubmitting ? <Spinner /> : "Invest"}
@@ -327,7 +327,7 @@ function Transfer({ action }) {
       </Text>
       <Input
         color="white"
-        radius="8px"
+        radius="4px"
         label="Amount"
         placeholder="Amount in USD"
         type="number"
@@ -339,7 +339,7 @@ function Transfer({ action }) {
       />
       <Input
         color="white"
-        radius="8px"
+        radius="4px"
         type="email"
         label="Recipient Email"
         placeholder="Recipient Email Address"
@@ -358,7 +358,7 @@ function Transfer({ action }) {
         full
         m="24px 0 0"
         p="14px"
-        radius="8px"
+        radius="2px"
         disabled={isSubmitting}
       >
         {isSubmitting ? <Spinner /> : "Transfer"}

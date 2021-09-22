@@ -26,7 +26,7 @@ const Home = () => {
           <Button
             p="12px"
             bg="primary"
-            radius="6px"
+            radius="2px"
             full="true"
             bold="true"
             to={`${url}/deposit`}
@@ -37,7 +37,7 @@ const Home = () => {
             p="12px"
             bg="secondary"
             color="black"
-            radius="6px"
+            radius="2px"
             full="true"
             bold="true"
             to={{
