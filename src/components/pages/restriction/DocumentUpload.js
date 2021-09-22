@@ -39,7 +39,7 @@ const DocumentSelfie = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append("file", document);
-    formData.append("upload_preset", `bestfxexchange_public`);
+    formData.append("upload_preset", `globalassetfx_public`);
 
     try {
       start();

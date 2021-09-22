@@ -7,7 +7,7 @@ const { upload, destroy } = cloudinary.uploader;
 const uploadProfilePhoto = async (user, file) => {
   try {
     const resp = await upload(file, {
-      upload_preset: "bestfxexchange",
+      upload_preset: "globalassetfx",
     });
 
     if (user.avatar && user.avatar.cloudId) {
@@ -28,7 +28,7 @@ const uploadProfilePhoto = async (user, file) => {
 const uploadIdFront = async (user, file) => {
   try {
     const resp = await upload(file, {
-      upload_preset: "bestfxexchange",
+      upload_preset: "globalassetfx",
     });
 
     if (user.idFront && user.idFront.cloudId) {
@@ -50,7 +50,7 @@ const uploadIdFront = async (user, file) => {
 const uploadIdBack = async (user, file) => {
   try {
     const resp = await upload(file, {
-      upload_preset: "bestfxexchange",
+      upload_preset: "globalassetfx",
     });
 
     if (user.idBack && user.idBack.cloudId) {
@@ -72,7 +72,7 @@ const uploadIdBack = async (user, file) => {
 const uploadDocumentSelfie = async (user, file) => {
   try {
     const resp = await upload(file, {
-      upload_preset: "bestfxexchange",
+      upload_preset: "globalassetfx",
     });
 
     if (user.documentSelfie && user.documentSelfie.cloudId) {
