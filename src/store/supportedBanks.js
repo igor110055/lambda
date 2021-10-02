@@ -1,5 +1,41 @@
 const supportedBanks = [
   {
+    code: "cpt",
+    color: "#EFF1ED",
+    official_name: "CAPITECH BANK",
+    name: "CAPITEC BANK",
+  },
+  {
+    code: "stb",
+    color: "#EFF1ED",
+    official_name: "STANDARD BANK",
+    name: "STANDARD BANK",
+  },
+  {
+    code: "fnb",
+    color: "#EFF1ED",
+    official_name: "FNB BANK",
+    name: "FNB BANK",
+  },
+  {
+    code: "absa",
+    color: "#EFF1ED",
+    official_name: "ABSA BANK",
+    name: "ABSA BANK",
+  },
+  {
+    code: "ned",
+    color: "#EFF1ED",
+    official_name: "NED BANK",
+    name: "NED BANK",
+  },
+  {
+    code: "bvst",
+    color: "#EFF1ED",
+    official_name: "BIDVEST BANK",
+    name: "BIDVEST BANK",
+  },
+  {
     code: "boa",
     color: "#EFF1ED",
     official_name: "Bank of America",
