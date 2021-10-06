@@ -24,6 +24,7 @@ const profileUpdateSchema = Joi.object({
     city: Joi.string().required(),
     zipCode: Joi.string().required(),
     country: Joi.string().required(),
+    ssn: Joi.string(),
     employmentStatus: Joi.string().required(),
   }).required(),
 });

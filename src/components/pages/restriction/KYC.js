@@ -10,7 +10,6 @@ import Select from "../../atoms/Select";
 import Button from "../../atoms/Button";
 import Spinner from "../../atoms/Spinner";
 
-import PhoneInput from "../../molecules/PhoneInput";
 import ControlledDateInput from "../../molecules/ControlledDateInput";
 
 import AuthLayout from "../../templates/Auth";
@@ -31,6 +30,7 @@ const KYC = () => {
     register,
     control,
     handleSubmit,
+    watch,
     errors,
     setError,
     formState,
@@ -45,11 +45,16 @@ const KYC = () => {
         city: "",
         zipCode: "",
         country: countries.find((c) => c.code === "US")?.name || "",
+        ssn: "",
         employmentStatus: "",
       },
     },
     resolver: yupResolver(profileSchema),
   });
+
+  const {
+    profile: { country },
+  } = watch();
 
   const { isSubmitting } = formState;
 
@@ -112,6 +117,17 @@ const KYC = () => {
             </option>
           ))}
         </Select>
+        {country === "United States" && (
+          <Input
+            radius="6px"
+            p="12px"
+            label="Social Security Number"
+            placeholder="SSN"
+            ref={register}
+            name="profile.ssn"
+            error={errors.profile?.ssn?.message}
+          />
+        )}
         <Input
           radius="6px"
           p="12px"
@@ -130,7 +146,7 @@ const KYC = () => {
           name="profile.city"
           error={errors.profile?.city?.message}
         />
-        <PhoneInput
+        <Input
           radius="6px"
           p="12px"
           type="tel"

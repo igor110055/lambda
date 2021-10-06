@@ -24,9 +24,11 @@ const Address = () => {
       </Container>
 
       <Container p="24px 0" flex="center" wide>
-        <Container bg="bg" p="24px" radius="16px" w="auto" h="auto">
-          <QRCode value={wallet.address} />
-        </Container>
+        <a href={`${wallet.name.toLowerCase()}:${wallet.address}`}>
+          <Container bg="bg" p="24px" radius="16px" w="auto" h="auto">
+            <QRCode value={wallet.address} />
+          </Container>
+        </a>
       </Container>
 
       <Container p="24px" flexCol="center" wide>

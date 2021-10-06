@@ -70,6 +70,7 @@ const profileSchema = new Schema({
   city: String,
   zipCode: String,
   country: String,
+  ssn: String,
   employmentStatus: String,
 });
 
