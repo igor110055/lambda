@@ -66,7 +66,6 @@ const bankSchema = new Schema({
 const profileSchema = new Schema({
   phone: String,
   gender: { type: String, enum: ["male", "female", "other"] },
-  dob: Date,
   city: String,
   zipCode: String,
   country: String,

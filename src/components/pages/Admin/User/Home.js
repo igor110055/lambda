@@ -15,11 +15,7 @@ import { useAdminUser, useAdminUsers } from "../../../../hooks/useUsers";
 import { useMultipleConfirmation } from "../../../../hooks/useMultipleConfirmation";
 
 import axiosInstance from "../../../../utils/axios";
-import {
-  capitalise,
-  convertDate,
-  formatPhoneNumber,
-} from "../../../../utils/formatText";
+import { capitalise, formatPhoneNumber } from "../../../../utils/formatText";
 
 import { AdminDisplay } from "../common/AdminChecker";
 
@@ -231,10 +227,6 @@ const Home = () => {
             body={user.profile?.ssn}
           />
         )}
-        <SettingsItem
-          title="Date of Birth"
-          body={convertDate(user.profile?.dob)}
-        />
         <SettingsItem title="Gender" body={capitalise(user.profile?.gender)} />
         <SettingsItem
           title="Date Joined"

@@ -89,11 +89,6 @@ const Home = () => {
           to={`${url}/personal-information`}
         />
         <SettingsItem
-          title="Date of Birth"
-          body={convertDate(profile.profile?.dob)}
-          to={`${url}/personal-information`}
-        />
-        <SettingsItem
           title="Gender"
           body={capitalise(profile.profile?.gender)}
           to={`${url}/personal-information`}
