@@ -13,7 +13,6 @@ import { useProfile } from "../../../hooks/useProfile";
 
 import {
   capitalise,
-  convertDate,
   formatPhoneNumber,
 } from "../../../utils/formatText";
 import { getMembership } from "../../../utils/profileUtils";
