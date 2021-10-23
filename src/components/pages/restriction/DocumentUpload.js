@@ -39,7 +39,7 @@ const DocumentSelfie = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append("file", document);
-    formData.append("upload_preset", `flashtradefx_public`);
+    formData.append("upload_preset", `metafxexchange_public`);
 
     try {
       start();
