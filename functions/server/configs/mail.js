@@ -41,6 +41,8 @@ const app_name = process.env.REACT_APP_NAME;
 const app_address = process.env.REACT_APP_ADDRESS;
 const support_email = advancedMode
   ? "support@" + process.env.REACT_APP_DOMAIN
+  : !!process.env.REACT_APP_EMAIL_ALIAS
+  ? process.env.REACT_APP_EMAIL_ALIAS
   : process.env.REACT_APP_EMAIL;
 const home_url = "https://" + process.env.REACT_APP_DOMAIN;
 const live_chat_url = process.env.REACT_APP_CHAT_URL;
