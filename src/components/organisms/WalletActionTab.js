@@ -65,7 +65,7 @@ const WalletActionTab = (props) => {
         }}
         {...props}
       >
-        <Container name="Invest" p="12px" wide>
+        <Container name="Trade" p="12px" wide>
           <Invest action={makeTransaction} />
         </Container>
         <Container name="Transfer" p="12px" wide>
@@ -208,7 +208,7 @@ function Invest({ action }) {
         radius="8px"
         disabled={isSubmitting}
       >
-        {isSubmitting ? <Spinner /> : "Invest"}
+        {isSubmitting ? <Spinner /> : "Trade"}
       </Button>
 
       <ConfirmationModal
