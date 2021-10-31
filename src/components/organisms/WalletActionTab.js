@@ -56,6 +56,10 @@ const WalletActionTab = (props) => {
         p="24px 0 12px"
         m="12px 0"
         bg="actionBg"
+        style={{
+          backgroundImage:
+            "-webkit-linear-gradient(left, #ff67cb 0%,#ffcc67 99%)",
+        }}
         center
         textStyle={{
           bg: "bg",

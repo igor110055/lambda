@@ -60,7 +60,7 @@ const Heading = styled.h3`
   justify-content: center;
 
   svg {
-    width: 20px;
+    min-width: 20px;
     display: inline-block;
     margin-right: 8px;
   }

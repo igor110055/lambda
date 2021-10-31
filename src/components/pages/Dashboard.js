@@ -50,6 +50,10 @@ const Dashboard = () => {
           display="grid"
           gap="12px"
           wide
+          style={{
+            backgroundImage:
+              "-webkit-linear-gradient(left, #ff67cb 0%,#ffcc67 99%)",
+          }}
         >
           <Container
             p="16px"

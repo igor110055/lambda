@@ -21,7 +21,17 @@ const Referral = () => {
 
   return (
     <Container p="12px" wide>
-      <Container p="12px" bg="actionBg" color="white" radius="8px" wide>
+      <Container
+        p="12px"
+        bg="actionBg"
+        color="white"
+        radius="8px"
+        wide
+        style={{
+          backgroundImage:
+            "-webkit-linear-gradient(left, #ff67cb 0%,#ffcc67 99%)",
+        }}
+      >
         <Text p="8px 0" font="12px" multiline>
           Refer someone and you both earn{" "}
           <SubText font="inherit" p="0" bold>
@@ -62,13 +72,7 @@ const Referral = () => {
           </Text>
         </Container>
         <CopyToClipboard text={ref} onCopy={copy}>
-          <Button
-            font="12px"
-            bg="primary"
-            p="8px 24px"
-            m="4px 0"
-            bold
-          >
+          <Button font="12px" bg="primary" p="8px 24px" m="4px 0" bold>
             {copied ? "Copied" : "Copy Referral Link"}
           </Button>
         </CopyToClipboard>
