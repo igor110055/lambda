@@ -173,6 +173,7 @@ const AddTransaction = () => {
           <option value="withdrawal">Withdrawal</option>
           <option value="transfer">Transfer</option>
           <option value="income">Income</option>
+          <option value="referral">Bonus</option>
         </Select>
 
         {type === "income" && (

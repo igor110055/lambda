@@ -52,7 +52,11 @@ export const TransactionItem = ({ transaction, ...props }) => {
               : transaction.description ||
                 transaction.wallet.toUpperCase() +
                   " " +
-                  capitalise(transaction.type)}
+                  capitalise(
+                    transaction.type === "investment"
+                      ? "investment"
+                      : transaction.type
+                  )}
           </Text>
           <Text font="10px" p="0" opacity="0.8">
             {new Date(transaction.date).toDateString()}
@@ -82,9 +86,10 @@ export const AdminTransactionItem = ({
   ...props
 }) => {
   const to =
-    transaction.type === "referral"
-      ? null
-      : `/dashboard/admin/users/${transaction.user._id}/transactions/${transaction._id}`;
+    // transaction.type === "referral"
+    //   ? null
+    //   :
+    `/dashboard/admin/users/${transaction.user._id}/transactions/${transaction._id}`;
 
   const { amount } = useCoinValue(transaction.wallet, transaction.amount);
 
@@ -110,7 +115,9 @@ export const AdminTransactionItem = ({
             {showUsername
               ? transaction.user?.fullName
               : `${transaction.wallet.toUpperCase()} ${capitalise(
-                  transaction.type
+                  transaction.type === "investment"
+                    ? "investment"
+                    : transaction.type
                 )}`}
           </Text>
           <Text font="10px" p="0" opacity="0.8">

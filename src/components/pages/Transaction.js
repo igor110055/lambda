@@ -38,7 +38,9 @@ const Transaction = () => {
           {transaction.description ||
             transaction.wallet.toUpperCase() +
               " " +
-              capitalise(transaction.type)}
+              capitalise(
+                transaction.type === "investment" ? "trade" : transaction.type
+              )}
         </Text>
         <Text font="12px" opacity="0.6" align="center" bold>
           {new Date(transaction.date).toDateString()}
@@ -47,7 +49,11 @@ const Transaction = () => {
 
       <Container p="12px" flex="center" wide>
         <Container bg="bg" p="12px" radius="8px" wide>
-          <Entry title="Type">{capitalise(transaction.type)}</Entry>
+          <Entry title="Type">
+            {capitalise(
+              transaction.type === "investment" ? "trade" : transaction.type
+            )}
+          </Entry>
           <Entry title="Block ID">{transaction._id}</Entry>
           <Entry title="Amount">
             {transaction.amount.toLocaleString()} USD
