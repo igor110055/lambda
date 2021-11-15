@@ -9,7 +9,7 @@ export const transactionSchema = yup.object().shape({
     .required("Type is required")
     .lowercase()
     .oneOf(
-      ["investment", "deposit", "withdrawal", "transfer", "income"],
+      ["investment", "deposit", "withdrawal", "transfer", "income", "referral"],
       "Invalid transaction type"
     ),
 
