@@ -25,6 +25,13 @@ const Bank = () => {
       </Container>
 
       <Container p="6px 12px" wide>
+        <Text opacity="0.6">Recipient Name</Text>
+        <Text bg="bg" p="12px" font="12px" align="center" radius="16px" bold>
+          {bank?.accountName}
+        </Text>
+      </Container>
+
+      <Container p="6px 12px" wide>
         <Text opacity="0.6">Bank Name</Text>
         <Text bg="bg" p="12px" font="12px" align="center" radius="16px" bold>
           {bank?.bankName?.toUpperCase()}
@@ -32,34 +39,38 @@ const Bank = () => {
       </Container>
 
       <Container p="6px 12px" wide>
-        <Text opacity="0.6">Account Name</Text>
+        <Text opacity="0.6">Account Number</Text>
         <Text bg="bg" p="12px" font="12px" align="center" radius="16px" bold>
-          {bank?.accountName}
+          {bank?.accountNumber}
         </Text>
       </Container>
 
       <Container p="6px 12px" wide>
-        <Text opacity="0.6">Account Number</Text>
-        <CopyToClipboard text={bank?.accountNumber} onCopy={copy}>
-          <Text
-            bg="bg"
-            p="24px"
-            font="14px"
-            align="center"
-            radius="24px"
-            breakword
-            multiline
-            bold
-          >
-            {bank?.accountNumber}
+        <Text opacity="0.6">Branch</Text>
+        <Text bg="bg" p="12px" font="12px" align="center" radius="16px" bold>
+          {bank?.branch}
+        </Text>
+      </Container>
+      <Container p="6px 12px" wide>
+        <Text opacity="0.6">Type</Text>
+        <Text bg="bg" p="12px" font="12px" align="center" radius="16px" bold>
+          {bank?.type}
+        </Text>
+      </Container>
+
+      <Container p="6px 12px" wide>
+        <Text opacity="0.6">Reference</Text>
+        <CopyToClipboard text={bank?.reference} onCopy={copy}>
+          <Text bg="bg" p="12px" font="12px" align="center" radius="16px" bold>
+            {bank?.reference}
           </Text>
         </CopyToClipboard>
       </Container>
 
       <Container p="12px" m="24px 0 0 0" flexCol="center" wide>
-        <CopyToClipboard text={bank?.accountNumber} onCopy={copy}>
+        <CopyToClipboard text={bank?.reference} onCopy={copy}>
           <Button bg="primary" p="16px" radius="24px" max="480px" bold full>
-            {copied ? "Copied" : "Copy Account Number"}
+            {copied ? "Copied" : "Copy Reference"}
           </Button>
         </CopyToClipboard>
       </Container>

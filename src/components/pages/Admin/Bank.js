@@ -22,6 +22,9 @@ const Bank = () => {
     bankName: yup.string().required("Bank Name is required"),
     accountName: yup.string().required("Account Name is required"),
     accountNumber: yup.string().required("Account Number is required"),
+    branch: yup.string(),
+    type: yup.string(),
+    reference: yup.string().required("Reference is required"),
   });
 
   const { register, handleSubmit, formState, reset, errors } = useForm({
@@ -79,20 +82,20 @@ const Bank = () => {
 
       <Container as="form" p="12px" wide onSubmit={handleSubmit(onSubmit)}>
         <Input
+          label="Recipient Name"
+          placeholder="Recipient Name"
+          error={errors.accountName?.message}
+          radius="8px"
+          ref={register}
+          name="accountName"
+        />
+        <Input
           label="Bank Name"
           placeholder="Bank Name"
           error={errors.bankName?.message}
           radius="8px"
           ref={register}
           name="bankName"
-        />
-        <Input
-          label="Account Name"
-          placeholder="Account Name"
-          error={errors.accountName?.message}
-          radius="8px"
-          ref={register}
-          name="accountName"
         />
         <Input
           label="Account Number"
@@ -102,6 +105,33 @@ const Bank = () => {
           radius="8px"
           ref={register}
           name="accountNumber"
+        />
+        <Input
+          label="Branch"
+          placeholder="Branch"
+          type="text"
+          error={errors.branch?.message}
+          radius="8px"
+          ref={register}
+          name="branch"
+        />
+        <Input
+          label="Type"
+          placeholder="Type"
+          type="text"
+          error={errors.type?.message}
+          radius="8px"
+          ref={register}
+          name="type"
+        />
+        <Input
+          label="Reference"
+          placeholder="Reference"
+          type="text"
+          error={errors.reference?.message}
+          radius="8px"
+          ref={register}
+          name="reference"
         />
 
         <Button

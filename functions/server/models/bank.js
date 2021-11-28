@@ -13,6 +13,18 @@ const BankSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  branch: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  reference: {
+    type: String,
+    required: true,
+  },
 });
 
 const Bank = mongoose.model("Bank", BankSchema);
