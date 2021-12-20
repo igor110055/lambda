@@ -1,37 +1,30 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import PreLoader from "../../atoms/PreLoader";
-import Container from "../../atoms/Container";
-import Text from "../../atoms/Text";
-import SubText from "../../atoms/SubText";
-import Input from "../../atoms/Input";
-import Button from "../../atoms/Button";
-import Spinner from "../../atoms/Spinner";
-
-import WalletBalance from "../../molecules/WalletBalance";
-import ControlledWalletInput from "../../molecules/ControlledWalletInput";
-import ControlledWithdrawalInput from "../../molecules/ControlledWithdrawalInput";
-
-import RecentWithdrawals from "../../organisms/RecentWithdrawals";
-import ConfirmationModal from "../../organisms/ConfirmationModal";
-import ProcessModal from "../../organisms/ProcessModal";
-
-import DashboardLayout from "../../templates/Dashboard";
-
-import { useProfile } from "../../../hooks/useProfile";
-import { useWallets } from "../../../hooks/useWallets";
-import { useTransactions } from "../../../hooks/useTransactions";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 import { useWalletBalance } from "../../../hooks/useBalance";
-import { useToggle } from "../../../hooks/useToggle";
 import { useProcess } from "../../../hooks/useProcess";
-
+import { useProfile } from "../../../hooks/useProfile";
+import { useToggle } from "../../../hooks/useToggle";
+import { useTransactions } from "../../../hooks/useTransactions";
+import { useWallets } from "../../../hooks/useWallets";
 import axiosInstance from "../../../utils/axios";
 import { rawBalance } from "../../../utils/parseBalance";
-
 import { withdrawalSchema } from "../../../validators/transaction";
+import Button from "../../atoms/Button";
+import Container from "../../atoms/Container";
+import Input from "../../atoms/Input";
+import PreLoader from "../../atoms/PreLoader";
+import Spinner from "../../atoms/Spinner";
+import SubText from "../../atoms/SubText";
+import Text from "../../atoms/Text";
+import ControlledWalletInput from "../../molecules/ControlledWalletInput";
+import ControlledWithdrawalInput from "../../molecules/ControlledWithdrawalInput";
+import WalletBalance from "../../molecules/WalletBalance";
+import ConfirmationModal from "../../organisms/ConfirmationModal";
+import ProcessModal from "../../organisms/ProcessModal";
+import RecentWithdrawals from "../../organisms/RecentWithdrawals";
+import DashboardLayout from "../../templates/Dashboard";
 
 const Withdraw = () => {
   const { state } = useLocation();
@@ -142,7 +135,6 @@ const Withdraw = () => {
             </Button>
             <Button
               bg="secondary"
-              color="black"
               p="12px"
               radius="6px"
               bold="true"

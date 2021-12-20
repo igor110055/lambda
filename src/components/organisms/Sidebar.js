@@ -1,18 +1,15 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import { IoExitOutline } from "react-icons/io5";
 import { BiSupport } from "react-icons/bi";
-
-import Container from "../atoms/Container";
+import { IoExitOutline } from "react-icons/io5";
+import styled, { css } from "styled-components";
+import { useProfile } from "../../hooks/useProfile";
+import { useTheme } from "../../hooks/useTheme";
+import { useToggle } from "../../hooks/useToggle";
 import Backdrop from "../atoms/Backdrop";
+import Container from "../atoms/Container";
 import SidebarItem from "../atoms/SidebarItem";
 import Toggle from "../atoms/Toggle";
-
 import ConfirmationModal from "./ConfirmationModal";
-
-import { useProfile } from "../../hooks/useProfile";
-import { useToggle } from "../../hooks/useToggle";
-import { useTheme } from "../../hooks/useTheme";
 
 const Wrapper = styled.div`
   grid-area: sidebar;
@@ -33,7 +30,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  border-radius: 6px;
+  /* border-radius: 6px; */
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     border-radius: 0;
@@ -79,7 +76,7 @@ const Sidebar = ({ open, toggle }) => {
     <Container
       as="aside"
       z="10"
-      radius="4px"
+      // radius="4px"
       wide
       media={{ breakpoint: "lg", overflowY: "hidden" }}
     >

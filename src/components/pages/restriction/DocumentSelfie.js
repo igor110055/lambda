@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
-import Container from "../../atoms/Container";
-import Text from "../../atoms/Text";
-import Button from "../../atoms/Button";
-import Spinner from "../../atoms/Spinner";
-
-import Upload from "../../molecules/Upload";
-
-import AuthLayout from "../../templates/Auth";
-
 import { useProcess } from "../../../hooks/useProcess";
-
 import axiosInstance from "../../../utils/axios";
 import { compressImageDataURL } from "../../../utils/compress";
+import Button from "../../atoms/Button";
+import Container from "../../atoms/Container";
+import Spinner from "../../atoms/Spinner";
+import Text from "../../atoms/Text";
+import Upload from "../../molecules/Upload";
+import AuthLayout from "../../templates/Auth";
 
 const DocumentSelfie = () => {
   const history = useHistory();
@@ -45,8 +40,8 @@ const DocumentSelfie = () => {
       history.push("/confirmation/documents/completed");
     } catch (err) {
       setError(true);
-      fail(err.response.message);
-      console.log(err, err.response);
+      fail(err?.response?.message);
+      console.log(err, err?.response);
     }
   };
 
@@ -54,7 +49,7 @@ const DocumentSelfie = () => {
     <AuthLayout>
       <Container p="12px 0" wide>
         <Text font="16px" p="0" align="center" bold>
-          Step 3
+          Upload Selfie
         </Text>
         <Text
           font="11px"

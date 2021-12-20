@@ -1,17 +1,13 @@
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
-
-import Container from "../atoms/Container";
-import Text from "../atoms/Text";
-import SubText from "../atoms/SubText";
-import Button from "../atoms/Button";
-
-import PaymentItem from "../molecules/PaymentItem";
-import { PaymentsLoader } from "../molecules/Loader/PaymentsLoader";
-
-import DashboardLayout from "../templates/Dashboard";
-
 import { usePayments } from "../../hooks/usePayments";
+import Button from "../atoms/Button";
+import Container from "../atoms/Container";
+import SubText from "../atoms/SubText";
+import Text from "../atoms/Text";
+import { PaymentsLoader } from "../molecules/Loader/PaymentsLoader";
+import PaymentItem from "../molecules/PaymentItem";
+import DashboardLayout from "../templates/Dashboard";
 
 const Payments = () => {
   const { payments, loading } = usePayments();
@@ -43,7 +39,6 @@ const Payments = () => {
             m="0 0 0 12px"
             radius="6px"
             bg="secondary"
-            color="black"
             flexalign="true"
             to="/dashboard"
           >

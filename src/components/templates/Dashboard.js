@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-
 import NavBar from "../organisms/NavBar";
 import Sidebar from "../organisms/Sidebar";
 import Userbar from "../organisms/Userbar";
@@ -12,7 +11,7 @@ const Wrapper = styled.div`
   height: 100vh;
   overflow: hidden;
 
-  background-color: ${({ theme }) => theme.colors.bg};
+  background: ${({ theme }) => theme.colors.bgImage};
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     height: 100%;
@@ -57,7 +56,7 @@ const Content = styled.main`
   }
 
   height: 100%;
-  border-radius: 6px;
+  /* border-radius: 6px; */
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     min-height: calc(100vh - 48px);

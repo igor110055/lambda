@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import {
   FaArrowDown,
   FaArrowUp,
@@ -6,6 +5,7 @@ import {
   FaShieldAlt,
   FaUserCheck,
 } from "react-icons/fa";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   width: ${({ size }) => (size ? size : "36px")};
@@ -21,9 +21,9 @@ const Wrapper = styled.div`
 
   background-color: ${({ theme, type }) =>
     ["deposit", "investment"].includes(type)
-      ? theme.colors.success
+      ? theme.colors.primary
       : ["withdrawal", "transfer"].includes(type)
-      ? theme.colors.danger
+      ? theme.colors.secondary
       : theme.colors.actionBg};
   color: white;
 `;

@@ -7,11 +7,12 @@ const Container = styled.div.attrs(({ to, scrollto }) => ({
 }))`
   width: ${({ w }) => (w ? w : "100%")};
   height: ${({ h }) => (h ? h : "100%")};
-  background-color: ${({ bg, theme }) => theme.colors[bg] || (bg && bg)};
+  background: ${({ bg, theme }) => theme.colors[bg] || (bg && bg)};
   color: ${({ color, theme }) => theme.colors[color] || (color && color)};
   padding: ${({ p }) => p && p};
   border-radius: ${({ radius }) => radius && radius};
   margin: ${({ m }) => m && m};
+  transition: ${({ ease }) => ease && `${ease} 1s ease-in-out`};
 
   cursor: ${({ pointer }) => pointer && "pointer"};
 
@@ -57,6 +58,9 @@ const Container = styled.div.attrs(({ to, scrollto }) => ({
       align-items: ${({ flexCol }) => flexCol};
       justify-content: center;
     `}
+
+  // flex properties
+  flex-grow: ${({ flexGrow }) => flexGrow && "1"};
 
   // flex overrides
   align-items: ${({ align }) => align && align};

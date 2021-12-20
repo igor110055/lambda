@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
-import Container from "../atoms/Container";
-import Text from "../atoms/Text";
-import Button from "../atoms/Button";
-import Select from "../atoms/Select";
-
-import { TransactionItem } from "../molecules/TransactionItem";
-import { TransactionsLoader } from "../molecules/Loader";
-
-import DashboardLayout from "../templates/Dashboard";
-
 import { useTransactions } from "../../hooks/useTransactions";
 import { useWallets } from "../../hooks/useWallets";
-
 import { toDateTransactions } from "../../utils/balanceReducers";
+import Button from "../atoms/Button";
+import Container from "../atoms/Container";
+import Select from "../atoms/Select";
+import Text from "../atoms/Text";
+import { TransactionsLoader } from "../molecules/Loader";
+import { TransactionItem } from "../molecules/TransactionItem";
+import DashboardLayout from "../templates/Dashboard";
 
 const Transactions = () => {
   const { state } = useLocation();
@@ -70,7 +65,6 @@ const Transactions = () => {
               m="0 0 0 12px"
               radius="6px"
               bg="secondary"
-              color="black"
               bold="true"
               flexalign="true"
               to="/dashboard/wallets/withdraw"

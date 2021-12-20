@@ -1,18 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useBalance } from "../../hooks/useBalance";
+import { useProfile } from "../../hooks/useProfile";
+import { useWallets } from "../../hooks/useWallets";
+import { capitalise } from "../../utils/formatText";
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
-
-import { WalletItem } from "../molecules/WalletItem";
 import { WalletItemLoader } from "../molecules/Loader";
 import ProfilePic from "../molecules/ProfilePic";
-
-import { useBalance } from "../../hooks/useBalance";
-import { useWallets } from "../../hooks/useWallets";
-import { useProfile } from "../../hooks/useProfile";
-
-import { capitalise } from "../../utils/formatText";
+import { WalletItem } from "../molecules/WalletItem";
 
 const Wrapper = styled.div`
   grid-area: userbar;
@@ -27,7 +23,7 @@ const Wrapper = styled.div`
     display: none;
   }
 
-  border-radius: 6px;
+  /* border-radius: 6px; */
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
@@ -42,7 +38,7 @@ const Userbar = () => {
   return (
     <Container as="aside" z="1" wide o="hidden">
       <Wrapper open>
-        <Container bg="bgContrast" p="12px" radius="6px" wide>
+        <Container bg="bgContrast" p="12px" radius="0px" wide>
           {/* profile start */}
           <Container p="12px" flexCol="center" wide>
             <ProfilePic size="48px" />
@@ -96,7 +92,7 @@ const Userbar = () => {
           p="12px"
           m="12px 0 0"
           maxH="calc(100% - 230px - 12px)"
-          radius="6px"
+          radius="0px"
           scroll
           wide
         >
