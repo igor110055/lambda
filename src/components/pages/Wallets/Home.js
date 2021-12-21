@@ -1,25 +1,19 @@
 import React from "react";
 import { FaWallet } from "react-icons/fa";
-
-import Container from "../../atoms/Container";
-import Text from "../../atoms/Text";
-import SubText from "../../atoms/SubText";
-import Button from "../../atoms/Button";
-
-import InvestmentCard from "../../molecules/InvestmentCard";
-import { WalletItemFullCard } from "../../molecules/WalletItem";
-import { WalletItemFullCardLoader } from "../../molecules/Loader";
-
-import Upgrade from "../../organisms/Upgrade";
-import Pending from "../../organisms/Pending";
-
-import DashboardLayout from "../../templates/Dashboard";
-
+import { useBalance } from "../../../hooks/useBalance";
 import { useTransactions } from "../../../hooks/useTransactions";
 import { useWallets } from "../../../hooks/useWallets";
-import { useBalance } from "../../../hooks/useBalance";
-
 import { toDateTransactions } from "../../../utils/balanceReducers";
+import Button from "../../atoms/Button";
+import Container from "../../atoms/Container";
+import SubText from "../../atoms/SubText";
+import Text from "../../atoms/Text";
+import InvestmentCard from "../../molecules/InvestmentCard";
+import { WalletItemFullCardLoader } from "../../molecules/Loader";
+import { WalletItemFullCard } from "../../molecules/WalletItem";
+import Pending from "../../organisms/Pending";
+import Upgrade from "../../organisms/Upgrade";
+import DashboardLayout from "../../templates/Dashboard";
 
 const Home = () => {
   const { investments } = useTransactions();
@@ -114,6 +108,9 @@ const Home = () => {
         <>
           <Text font="16px" p="12px" bold>
             Active Investments
+          </Text>
+          <Text font="12px" opacity="0.6" p="12px" bold>
+            Click to view investment
           </Text>
           <Container
             p="12px"

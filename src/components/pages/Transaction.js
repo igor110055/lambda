@@ -47,13 +47,7 @@ const Transaction = () => {
           <Entry title="Amount">
             {Math.abs(transaction.amount).toLocaleString()} USD
           </Entry>
-          {transaction.type === "investment" && (
-            <Entry title="Profit">+{transaction.profit} USD</Entry>
-          )}
           <Entry title="Status">Approved</Entry>
-          <Entry title="Total Amount">
-            {transaction.amount + (transaction.profit || 0)} USD
-          </Entry>
           <Container flex="center" wide>
             <Button
               bg="primary"
