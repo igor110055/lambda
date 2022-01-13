@@ -25,24 +25,18 @@ const Register = () => {
 
   const { mutate } = useProfile();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    errors,
-    setError,
-    formState,
-  } = useForm({
-    defaultValues: {
-      email: "",
-      firstName: "",
-      lastName: "",
-      password: "",
-      pass: "",
-      showPassword: false,
-    },
-    resolver: yupResolver(registrationSchema),
-  });
+  const { register, handleSubmit, watch, errors, setError, formState } =
+    useForm({
+      defaultValues: {
+        email: "",
+        firstName: "",
+        lastName: "",
+        password: "",
+        pass: "",
+        showPassword: false,
+      },
+      resolver: yupResolver(registrationSchema),
+    });
 
   const { isSubmitting } = formState;
   const { showPassword } = watch();
@@ -52,7 +46,11 @@ const Register = () => {
       formData.referrer = state.referrer;
     }
     try {
-      const { data } = await axios.post("/api/auth/register", formData);
+      const { data } = await axios.post("/api/auth/register", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       axiosInstance.defaults.headers["Authorization"] =
         "Bearer " + data.accessToken;
@@ -63,8 +61,14 @@ const Register = () => {
       await mutate();
       history.push(state?.from || "/dashboard");
     } catch (err) {
-      console.log(err, err.response);
-      if (err.response.data.status === 409) {
+      // console.log(err, err.response);
+      if (err.response?.data?.message === "Referral revoked") {
+        setError("email", {
+          type: "server",
+          message: "Sorry your referral has been revoked",
+        });
+      }
+      if (err.response?.data?.status === 409) {
         setError("email", {
           type: "server",
           message: "Email Address already taken",

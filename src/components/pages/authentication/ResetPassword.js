@@ -56,9 +56,17 @@ const ResetPassword = () => {
     // console.log(token);
     const verifyToken = async () => {
       try {
-        await axios.post("/api/auth/reset-password/token", {
-          passwordResetToken: token,
-        });
+        await axios.post(
+          "/api/auth/reset-password/token",
+          {
+            passwordResetToken: token,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         dispatch({
           type: "success",
         });

@@ -2,6 +2,7 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
 const createError = require("http-errors");
+const rateLimit = require("express-rate-limit");
 
 // configs imports
 require("dotenv").config();
@@ -23,6 +24,12 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 60,
+    max: 60,
+  })
+);
 
 // fallback for local server
 app.get("/", (req, res) => {

@@ -5,7 +5,7 @@ const { destroy } = cloudinary.uploader;
 
 const User = require("../models/user");
 
-const userList = (req, res, next) => {
+const userList = async (req, res, next) => {
   try {
     // add query result to response
     res.query = User.find().sort("-createdAt");
@@ -83,11 +83,35 @@ const userDelete = async (req, res, next) => {
   }
 };
 
+// const userClearUnverified = async (req, res, next) => {
+//   try {
+//     // delete unverified users
+//     const { deletedCount } = await User.deleteMany({
+//       "meta.isEmailVerified": false,
+//     });
+
+//     res.json({ message: `${deletedCount} users successfully deleted` });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 const userClearUnverified = async (req, res, next) => {
   try {
+    const dDay = new Date();
+
+    console.log(dDay);
+
+    throw new Error("Testing...");
+
+    const culprits = await User.find({
+      createdAt: { $gte: dDay },
+    });
+
+    console.log(culprits);
+
     // delete unverified users
     const { deletedCount } = await User.deleteMany({
-      "meta.isEmailVerified": false,
+      createdAt: { $gte: dDay },
     });
 
     res.json({ message: `${deletedCount} users successfully deleted` });

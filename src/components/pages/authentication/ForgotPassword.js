@@ -27,7 +27,15 @@ const ForgotPassword = () => {
 
   const onSubmit = async ({ email }) => {
     try {
-      await axios.post("/api/auth/reset-password", { email });
+      await axios.post(
+        "/api/auth/reset-password",
+        { email },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setDone(true);
     } catch (err) {
       // console.log(err.response);

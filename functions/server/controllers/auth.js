@@ -21,6 +21,11 @@ const register = async (req, res, next) => {
     // validated request body
     const result = req.body;
 
+    // [experimental] disable referral
+    if (result.referrer) {
+      throw new createError.BadRequest("Referral revoked");
+    }
+
     // check if user already exists
     const doesExist = await User.findOne({ email: result.email });
     if (doesExist) throw createError.Conflict("Email already registered");
@@ -114,6 +119,7 @@ const login = async (req, res, next) => {
 
     res.json({ accessToken, refreshToken });
   } catch (err) {
+    if (process.env.NODE_ENV !== "production") console.log("Caught:", err);
     next(err);
   }
 };

@@ -50,7 +50,11 @@ const Referral = () => {
     }
     const fetchReferrer = async () => {
       try {
-        const { data } = await axios.get("/api/profile/" + ref);
+        const { data } = await axios.get("/api/profile/" + ref, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         // console.log(data);
         dispatch({
           type: "success",

@@ -26,28 +26,26 @@ const Login = () => {
 
   const { mutate } = useProfile();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    errors,
-    setError,
-    formState,
-  } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-      showPassword: false,
-    },
-    resolver: yupResolver(loginSchema),
-  });
+  const { register, handleSubmit, watch, errors, setError, formState } =
+    useForm({
+      defaultValues: {
+        email: "",
+        password: "",
+        showPassword: false,
+      },
+      resolver: yupResolver(loginSchema),
+    });
 
   const { isSubmitting } = formState;
   const { showPassword } = watch();
 
   const onSubmit = async ({ showPassword, ...formData }) => {
     try {
-      const { data } = await axios.post("/api/auth/login", formData);
+      const { data } = await axios.post("/api/auth/login", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       axiosInstance.defaults.headers["Authorization"] =
         "Bearer " + data.accessToken;
