@@ -26,21 +26,15 @@ const Login = () => {
 
   const { mutate } = useProfile();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    errors,
-    setError,
-    formState,
-  } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-      showPassword: false,
-    },
-    resolver: yupResolver(loginSchema),
-  });
+  const { register, handleSubmit, watch, errors, setError, formState } =
+    useForm({
+      defaultValues: {
+        email: "",
+        password: "",
+        showPassword: false,
+      },
+      resolver: yupResolver(loginSchema),
+    });
 
   const { isSubmitting } = formState;
   const { showPassword } = watch();
