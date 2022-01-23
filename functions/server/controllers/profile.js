@@ -34,7 +34,7 @@ const profileFriend = async (req, res, next) => {
     const id = req.params.id;
 
     const user = await User.findById(id).select(
-      "email firstName lastName avatar"
+      "email firstName lastName avatar meta"
     );
     if (!user) return next(createError.NotFound("User not found"));
 
@@ -49,7 +49,7 @@ const profileByEmail = async (req, res, next) => {
     const { email } = req.body;
 
     const user = await User.findOne({ email }).select(
-      "email firstName lastName avatar"
+      "email firstName lastName avatar meta"
     );
     if (!user) return next(createError.NotFound("User not found"));
 
