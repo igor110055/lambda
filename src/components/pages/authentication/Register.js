@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import storage from "local-storage-fallback";
 import { useHistory, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -46,11 +45,7 @@ const Register = () => {
       formData.referrer = state.referrer;
     }
     try {
-      const { data } = await axios.post("/api/auth/register", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const { data } = await axiosInstance.post("/auth/register", formData);
 
       axiosInstance.defaults.headers["Authorization"] =
         "Bearer " + data.accessToken;

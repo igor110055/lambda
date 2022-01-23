@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer } from "react";
-import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,6 +15,8 @@ import PreLoader from "../../atoms/PreLoader";
 import AuthLayout from "../../templates/Auth";
 
 import { resetPasswordSchema } from "../../../validators/password";
+
+import axiosInstance from "../../../utils/axios";
 
 const initialState = {
   loading: true,
@@ -56,17 +57,9 @@ const ResetPassword = () => {
     // console.log(token);
     const verifyToken = async () => {
       try {
-        await axios.post(
-          "/api/auth/reset-password/token",
-          {
-            passwordResetToken: token,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        await axiosInstance.post("/auth/reset-password/token", {
+          passwordResetToken: token,
+        });
         dispatch({
           type: "success",
         });
@@ -95,7 +88,7 @@ const ResetPassword = () => {
   const resetPassword = async ({ showPassword, ...formData }) => {
     formData.passwordResetToken = token;
     try {
-      await axios.post("/api/auth/reset-password/change", formData);
+      await axiosInstance.post("/api/auth/reset-password/change", formData);
       history.push("/account/login");
     } catch (err) {
       // console.log(err.response);
