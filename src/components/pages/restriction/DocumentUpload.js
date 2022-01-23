@@ -88,7 +88,13 @@ const DocumentSelfie = () => {
         </Text>
       </Container>
       <Container wide>
-        <input ref={inputRef} type="file" onChange={handleDocument} hidden />
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleDocument}
+          hidden
+        />
 
         <Container p="48px 0" flex="space-between" wide>
           <Text>{document?.name || "No file chosen"}</Text>
