@@ -94,11 +94,19 @@ router.post(
   validate(documentPlainSchema),
   ProfileController.documentSelfieUpload
 );
+
 // upload document
 router.post(
   "/document/upload",
   validate(documentSchema),
   ProfileController.documentUpload
+);
+
+// upload receipt
+router.post(
+  "/receipt/upload",
+  validate(documentSchema),
+  ProfileController.receiptUpload
 );
 
 module.exports = router;

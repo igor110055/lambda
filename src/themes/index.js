@@ -7,9 +7,9 @@ const base = {
 };
 
 const colors = {
-  primary: "#f15f6e" || process.env.REACT_APP_PRIMARY_COLOR,
-  board: "#f15f6e" || process.env.REACT_APP_BOARD_COLOR,
-  chart: "#477fc1" || process.env.REACT_APP_CHART_COLOR || "#68CA6D",
+  primary: process.env.REACT_APP_PRIMARY_COLOR,
+  board: process.env.REACT_APP_BOARD_COLOR,
+  chart: process.env.REACT_APP_CHART_COLOR || "#68CA6D",
   actionBg: process.env.REACT_APP_ACTION_BG,
   danger: "#FF4747",
   success: "#68CA6D",

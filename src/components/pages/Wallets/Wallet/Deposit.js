@@ -8,6 +8,7 @@ import Text from "../../../atoms/Text";
 import Button from "../../../atoms/Button";
 
 import { List, ListItem } from "../../../molecules/List";
+import ReceiptUpload from "../../../molecules/ReceiptUpload";
 
 import { useProfile } from "../../../../hooks/useProfile";
 import { useWallet } from "../../../../hooks/useWallets";
@@ -69,6 +70,10 @@ const Deposit = () => {
             {address}
           </Text>
         </CopyToClipboard>
+      </Container>
+
+      <Container p="12px" wide>
+        <ReceiptUpload />
       </Container>
 
       <Container p="12px" wide>

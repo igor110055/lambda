@@ -123,6 +123,11 @@ function RequestDocuments({ user, mutate }) {
         body="View all documents uploaded by this user"
         to={"./documents"}
       />
+      <SettingsItem
+        title="View Uploaded Receipts"
+        body="View all receipts uploaded by this user"
+        to={"./receipts"}
+      />
 
       <ConfirmationModal
         open={show}

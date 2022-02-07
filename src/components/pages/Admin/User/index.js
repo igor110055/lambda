@@ -31,6 +31,7 @@ import SendUserEmail from "../common/email/SendUserEmail";
 
 import Documents from "./Documents";
 import DocumentRequest from "./DocumentRequest";
+import Receipts from "./Receipts";
 
 import { useAdminUser } from "../../../../hooks/useUsers";
 
@@ -109,6 +110,9 @@ const User = () => {
       </Route>
       <Route path={`${path}/document-request`}>
         <DocumentRequest />
+      </Route>
+      <Route path={`${path}/receipts`}>
+        <Receipts />
       </Route>
 
       <Route>

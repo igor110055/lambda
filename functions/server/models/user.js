@@ -183,6 +183,10 @@ const UserSchema = new Schema(
       type: [documentSchema],
       default: () => [],
     },
+    receipts: {
+      type: [documentSchema],
+      default: () => [],
+    },
   },
   {
     timestamps: true,

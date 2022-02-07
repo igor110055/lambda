@@ -355,6 +355,27 @@ const documentUpload = async (req, res, next) => {
   }
 };
 
+const receiptUpload = async (req, res, next) => {
+  try {
+    // client cloudinary upload response
+    const result = req.body;
+
+    const userId = req.user.id;
+
+    const user = await User.findById(userId);
+    if (!user) return next(createError.NotFound("User not found"));
+
+    user.receipts.unshift({ ...result, date: Date.now(), name: "Deposit Receipt" });
+    await user.save();
+
+    const savedReceipt = user.receipts[0];
+
+    res.json(savedReceipt);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   profileUser,
   profileFriend,
@@ -372,4 +393,5 @@ module.exports = {
   idBackUpload,
   documentSelfieUpload,
   documentUpload,
+  receiptUpload
 };

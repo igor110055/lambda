@@ -40,7 +40,7 @@ export const DocumentItem = ({ title, document, destroy: destroyAction }) => {
         )}
       </Container>
       <Container w="52px" flex="space-between" align="baseline">
-        <Trash onClick={destroy} />
+        {destroyAction && <Trash onClick={destroy} />}
         <a href={document.url} download>
           <Download />
         </a>
