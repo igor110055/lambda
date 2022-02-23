@@ -74,8 +74,7 @@ const Withdraw = () => {
     defaultValues: {
       amount: null,
       wallet: state?.wallet || "BTC",
-      method: "",
-      address: "",
+      method: null,
     },
     resolver: yupResolver(withdrawalSchema),
   });
@@ -97,11 +96,6 @@ const Withdraw = () => {
 
   const makeWithdrawal = async () => {
     const formData = getValues();
-    const isAddress = formData.method?.startsWith("address://");
-    if (isAddress) {
-      formData.address = formData.method?.slice("address://".length);
-      delete formData.method;
-    }
     if (formData.amount > balance) {
       setError("amount", {
         type: "server",

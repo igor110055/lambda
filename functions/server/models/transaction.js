@@ -80,9 +80,16 @@ const TransactionSchema = new Schema({
 
   // withdrawal meta
   method: {
-    type: Schema.Types.ObjectId,
+    type: new Schema({
+      type: String,
+      address: Object
+    }, {
+      _id: false,
+    }),
+    required: function () {
+      return this.type === "withdrawal"
+    }
   },
-  address: String,
 });
 
 TransactionSchema.pre("save", function (next) {
