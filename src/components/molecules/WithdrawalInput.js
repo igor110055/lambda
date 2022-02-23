@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { FaCreditCard, FaUniversity } from "react-icons/fa";
 
 import Container from "../atoms/Container";
@@ -30,17 +30,25 @@ const WithdrawalInput = ({
   const change = ({ selected, type }) => {
     return onChange({
       target: {
-        name: name,
+        name,
         type,
-        value: type === "address" ? selected : selected._id,
+        value: selected,
         rawValue: selected,
       },
     });
   };
 
-  const card = cards.find((c) => c._id === method);
-  const bank = banks.find((b) => b._id === method);
-  const address = method?.startsWith("address://");
+  const isMatch = useCallback((type) => typeof method === "object" ? method?.type === type : null, [method])
+  const isFallbackMatch = useCallback((checker) => typeof method === "string" ? checker(method) : null, [method])
+
+  // for backwards compatibility method might still be stored in db as a string
+  // so check if method type matches criteria then fallback to previous checks
+  const card = isMatch("card") ? method.address : isFallbackMatch((m) => cards.find((c) => c._id === m));
+  const bank = isMatch("bank") ? method.address : isFallbackMatch((m) => banks.some((b) => b._id === m));
+  const address = isMatch("address") ? method.address : isFallbackMatch((m) => m?.startsWith("address://") ? ({value: m?.replace("address://", "")}) : null);
+  // for newer api since method might still be stored as a string in db
+  // only check if method type matches criteria otherwise return null, example below
+  // const match = isMatch("match") ? method.address : null
 
   return (
     <Container
@@ -73,7 +81,7 @@ const WithdrawalInput = ({
             : bank
             ? `${bank.bank.toUpperCase()} - ${bank.userId}`
             : address
-            ? method?.slice("address://".length)
+            ? address.value
             : placeholder}
         </SubText>
 

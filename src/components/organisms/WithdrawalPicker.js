@@ -10,6 +10,9 @@ import Button from "../atoms/Button";
 import { CreditCardItem, AddCreditCardItem } from "../molecules/CreditCard";
 import { BankItem, AddBankItem } from "../molecules/Bank";
 import Modal from "../molecules/Modal";
+import WalletInput from "../molecules/WalletInput";
+
+import supportedWallets from "../../store/supportedWallets";
 
 const ViewButton = ({ title, icon, ...props }) => (
   <Container
@@ -160,17 +163,21 @@ function Banks({ banks, action: parentAction, noadd }) {
 }
 
 function Address({ action: parentAction }) {
-  const [address, setAddress] = useState("");
-  const [error, setError] = useState("");
+  const [address, setAddress] = useState({value: "", error: null});
+  const [wallet, setWallet] = useState({value: "BTC", error: null});
 
-  const handleChange = (e) => {
-    setError(null);
-    setAddress(e.target.value);
+  const handleAddressChange = (e) => {
+    setAddress({error: null, value: e.target.value});
+  };
+
+  const handleWalletChange = (e) => {
+    setWallet({error: null, value: e.target.value});
   };
 
   const action = () => {
-    if (!address) return setError("Please Enter Wallet Address");
-    parentAction("address://" + address, "address");
+    if (!address.value) return setAddress(a => ({...a, error: "Please Enter Wallet Address"}));
+    if (!wallet.value) return setWallet(w => ({...w, error: "Please Select Wallet"}));
+    parentAction({value: address.value, wallet: wallet.value}, "address");
   };
 
   return (
@@ -179,10 +186,11 @@ function Address({ action: parentAction }) {
         radius="8px"
         label="Wallet Address"
         placeholder="Enter wallet address"
-        onChange={handleChange}
-        value={address}
-        error={error}
+        onChange={handleAddressChange}
+        value={address.value}
+        error={address.error}
       />
+      <WalletInput label="Select wallet" onChange={handleWalletChange} wallet={wallet.value} wallets={supportedWallets} error={wallet.error} />
       <Button bg="primary" full m="12px 0" radius="8px" onClick={action}>
         Done
       </Button>

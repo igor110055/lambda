@@ -14,7 +14,7 @@ const ControlledWithdrawalInput = ({ name: fieldName, control, ...props }) => {
           {...props}
           name={name}
           method={value}
-          onChange={({ target }) => onChange(target.value)}
+          onChange={({ target }) => onChange({type: target.type, address: target.value})}
         />
       )}
     />
