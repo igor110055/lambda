@@ -142,6 +142,34 @@ const Withdrawal = ({ withdrawal }) => {
               </Container>
             )}
         </>
+      ) : withdrawal.method.type === "paypal" ? (
+        <>
+          <Method
+            title={withdrawal.method.address.value}
+            desc="Paypal"
+            action={toggle}
+            />
+            {show && (
+              <Container bg="bg" p="12px" radius="12px" wide>
+                <Text align="center" bold>Paypal</Text>
+                <Entry title="Email">{withdrawal.method.address.value}</Entry>
+              </Container>
+            )}
+        </>
+      ) : withdrawal.method.type === "skrill" ? (
+        <>
+          <Method
+            title={withdrawal.method.address.value}
+            desc="Skrill"
+            action={toggle}
+            />
+            {show && (
+              <Container bg="bg" p="12px" radius="12px" wide>
+                <Text align="center" bold>Skrill</Text>
+                <Entry title="Email">{withdrawal.method.address.value}</Entry>
+              </Container>
+            )}
+        </>
       ) : null}
     </Container>
   );
