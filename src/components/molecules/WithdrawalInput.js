@@ -49,6 +49,8 @@ const WithdrawalInput = ({
   // for newer api since method might still be stored as a string in db
   // only check if method type matches criteria otherwise return null, example below
   // const match = isMatch("match") ? method.address : null
+  const paypal = isMatch("paypal") ? method.address : null
+  const skrill = isMatch("skrill") ? method.address : null
 
   return (
     <Container
@@ -82,6 +84,10 @@ const WithdrawalInput = ({
             ? `${bank.bank.toUpperCase()} - ${bank.userId}`
             : address
             ? address.value
+            : paypal
+            ? "Paypal - "+ paypal.value
+            : skrill
+            ? "Skrill - "+ skrill.value
             : placeholder}
         </SubText>
 
