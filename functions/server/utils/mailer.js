@@ -48,27 +48,32 @@ const passwordResetMail = async (user, passwordToken) => {
   return resp;
 };
 
-const withdrawalMail = async (user, transaction) => {
-  console.log("mailing withdrawal");
-  await mailer({
-    to: user.email,
-    subject: "Processing Withdrawal",
-    template: "withdrawal",
-    context: {
-      name: user.firstName,
-      amount: Math.abs(transaction.amount),
-    },
-  });
-  await mailer({
-    to: appEmail,
-    subject: "Withdrawal Request",
-    template: "withdrawal-admin",
-    context: {
-      name: user.firstName + " " + user.lastName,
-      email: user.email,
-      amount: Math.abs(transaction.amount),
-    },
-  });
+const withdrawalMail = async (user, transaction, to) => {
+  if (to === "admin") {
+    await mailer({
+      to: appEmail,
+      subject: "Withdrawal Request",
+      template: "withdrawal-admin",
+      context: {
+        name: user.firstName + " " + user.lastName,
+        email: user.email,
+        amount: Math.abs(transaction.amount),
+      },
+    });
+  }
+
+  if (to === "user") {
+    await mailer({
+      to: user.email,
+      subject: "Processing Withdrawal",
+      template: "withdrawal",
+      context: {
+        name: user.firstName,
+        amount: Math.abs(transaction.amount),
+      },
+    })
+  }
+
 };
 
 const customMailer = async ({ from, email, title, body }) => {

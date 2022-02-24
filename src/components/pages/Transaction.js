@@ -55,7 +55,7 @@ const Transaction = () => {
           {transaction.type === "investment" && (
             <Entry title="Profit">+{transaction.profit} USD</Entry>
           )}
-          <Entry title="Status">Approved</Entry>
+          <Entry title="Status">{capitalise(transaction.status) || "Approved"}</Entry>
           <Entry title="Total Amount">
             {transaction.amount + (transaction.profit || 0)} USD
           </Entry>
