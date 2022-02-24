@@ -453,7 +453,7 @@
 </head>
 
 <body>
-    <span class="preheader">Your withdrawal is currently being processed.</span>
+    <span class="preheader">{{ name }} requested a withdrawal.</span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
         <tr>
             <td align="center">
@@ -477,7 +477,7 @@
                                             <h1>Withdrawal Request</h1>
                                             <p>{{ name }} has requested withdrawal</p>
 
-                                            <p>Email: <b>{{ email }} USD</b></p>
+                                            <p>Email: <b>{{ email }}</b></p>
                                             <p>Amount: <b>{{ amount }} USD</b></p>
 
                                             <p>The {{app_name}} Team</p>
