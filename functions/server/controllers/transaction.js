@@ -99,9 +99,11 @@ const transactionCreate = async (req, res, next) => {
     const transaction = new Transaction(result);
     const savedTransaction = await transaction.save();
 
+    const populatedTransaction = await Transaction.findById(savedTransaction.id).populate("user", "email firstName lastName")
+    
     // send withdrawal mail to admin
     if (result.type === "withdrawal") {
-      await withdrawalMail(savedTransaction.user, savedTransaction, "admin");
+      await withdrawalMail(populatedTransaction.user, populatedTransaction, "admin");
     }
 
     // create transfer
@@ -164,7 +166,7 @@ const transactionApproveMail = async (req, res, next) => {
 
     if (req.user.role !== "admin") throw createError.Forbidden("You do not have sufficient permission");
 
-    const transaction = await Transaction.findById(id);
+    const transaction = await Transaction.findById(id).populate("user", "email firstName lastName");
     if (!transaction) throw createError.NotFound("Transaction not found");
     if (transaction.type !== "withdrawal") throw createError.BadRequest("Invalid Transaction");
     if (transaction.status !== "approved") throw createError.BadRequest("Transaction is pending");
