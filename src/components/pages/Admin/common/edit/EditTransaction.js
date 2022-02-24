@@ -242,7 +242,7 @@ const EditTransaction = () => {
   };
 
   
-  const [approveRequest, setApproveRequest] = useState({message:"null", error:null, loading: false})
+  const [approveRequest, setApproveRequest] = useState({message: null, error: null, loading: false})
 
   const sendApproveMail = async () => {
     try {
@@ -257,6 +257,7 @@ const EditTransaction = () => {
       })
       else throw new Error()
     } catch (err) {
+      console.log(err.response)
       setApproveRequest({
         message: null,
         error: err?.response?.data?.message || "Something went wrong",
@@ -315,7 +316,7 @@ const EditTransaction = () => {
         <>
           <Withdrawal withdrawal={transaction} />
 
-          {!transaction.mailApproved && (
+          {(transaction.status === "approved" && !transaction.mailApproved) && (
             <Container p="12px" wide>
               <Button
                 bg="primary"
