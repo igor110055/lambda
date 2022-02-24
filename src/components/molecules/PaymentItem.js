@@ -4,10 +4,11 @@ import Container from "../atoms/Container";
 import Text from "../atoms/Text";
 import Entry from "./Entry";
 
-const PaymentItem = ({ payment, to, ...props }) => {
+const PaymentItem = ({ payment, ...props }) => {
   return (
     <Container
-      p="0 12px"
+      p="0 12px 12px"
+      m="0 0 12px"
       radius="8px"
       bg="bg"
       display="block"
