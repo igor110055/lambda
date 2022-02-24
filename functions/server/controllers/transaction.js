@@ -3,7 +3,7 @@ const createError = require("http-errors");
 const Transaction = require("../models/transaction");
 const User = require("../models/user");
 
-const { withdrawalMail } = require("../utils/mailer");
+const { withdrawalMail, depositMail } = require("../utils/mailer");
 const {
   cascade,
   concurrency,
@@ -112,6 +112,11 @@ const transactionCreate = async (req, res, next) => {
     // send withdrawal mail to admin
     if (result.type === "withdrawal") {
       await withdrawalMail(populatedTransaction.user, populatedTransaction, "admin");
+    }
+    
+    // send withdrawal mail to admin
+    if (result.type === "deposit") {
+      await depositMail(populatedTransaction.user, populatedTransaction);
     }
 
     // create transfer
