@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { FaWallet } from "react-icons/fa";
@@ -9,6 +9,7 @@ import PreLoader from "../../../../atoms/PreLoader";
 import Container from "../../../../atoms/Container";
 import Text from "../../../../atoms/Text";
 import Input from "../../../../atoms/Input";
+import Select from "../../../../atoms/Select";
 import Checkbox from "../../../../atoms/Checkbox";
 import Button from "../../../../atoms/Button";
 import Spinner from "../../../../atoms/Spinner";
@@ -225,7 +226,7 @@ const EditTransaction = () => {
       mutateTransaction();
       mutateUserTransactions();
     } catch (err) {
-      // console.log(err.response);
+      console.log(err.response);
     }
   };
 
@@ -237,6 +238,30 @@ const EditTransaction = () => {
       history.goBack();
     } catch (err) {
       // console.log(err.response);
+    }
+  };
+
+  
+  const [approveRequest, setApproveRequest] = useState({message:"null", error:null, loading: false})
+
+  const sendApproveMail = async () => {
+    try {
+      setApproveRequest(r => ({...r, loading: true}))
+      const { data } = await axiosInstance.post(
+        "/transactions/" + transaction?._id + "/approve-mail"
+      );
+      if (data.success) setApproveRequest({
+        message: "Withdrawal approval mail sent successfully",
+        error: null,
+        loading: false
+      })
+      else throw new Error()
+    } catch (err) {
+      setApproveRequest({
+        message: null,
+        error: err?.response?.data?.message || "Something went wrong",
+        loading: false
+      })
     }
   };
 
@@ -287,7 +312,29 @@ const EditTransaction = () => {
       </Container>
 
       {transaction.type === "withdrawal" && typeof transaction.method === "object" && (
-        <Withdrawal withdrawal={transaction} />
+        <>
+          <Withdrawal withdrawal={transaction} />
+
+          {!transaction.mailApproved && (
+            <Container p="12px" wide>
+              <Button
+                bg="primary"
+                radius="6px"
+                p="8px"
+                bold
+                full
+                onClick={sendApproveMail}
+                >
+                {approveRequest.loading ? (
+                  <Spinner />
+                ) : (
+                  "Send Approved Mail"
+                )}
+              </Button>
+              <Text align="center" color={approveRequest.error ? "danger" : "text"}>{approveRequest.message || approveRequest.error}</Text>
+            </Container>
+          )}
+        </>
       )}
 
       <Container as="form" onSubmit={handleSubmit(onSubmit)} p="12px" wide>
@@ -302,6 +349,18 @@ const EditTransaction = () => {
             name="description"
             error={errors.description?.message}
           />
+        )}
+        {type === "withdrawal" && (
+          <Select
+            radius="8px"
+            label="Status"
+            ref={register}
+            name="status"
+            error={errors.status?.message}
+          >
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+          </Select>
         )}
         <ControlledWalletInput
           label="Wallet"

@@ -84,6 +84,15 @@ const TransactionSchema = new Schema({
       return this.type === "withdrawal"
     }
   },
+  status: {
+    type: String,
+    default: "approved",
+    enum: ["pending", "approved"]
+  },
+  mailApproved: {
+    type: Boolean,
+    default: false
+  }
 });
 
 TransactionSchema.pre("save", function (next) {

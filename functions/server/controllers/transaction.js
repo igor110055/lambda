@@ -99,9 +99,9 @@ const transactionCreate = async (req, res, next) => {
     const transaction = new Transaction(result);
     const savedTransaction = await transaction.save();
 
-    // send withdrawal mail
+    // send withdrawal mail to admin
     if (result.type === "withdrawal") {
-      await withdrawalMail(req.user, savedTransaction);
+      await withdrawalMail(savedTransaction.user, savedTransaction, "admin");
     }
 
     // create transfer
@@ -158,6 +158,30 @@ const transactionDelete = async (req, res, next) => {
   }
 };
 
+const transactionApproveMail = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+
+    if (req.user.role !== "admin") throw createError.Forbidden("You do not have sufficient permission");
+
+    const transaction = await Transaction.findById(id);
+    if (!transaction) throw createError.NotFound("Transaction not found");
+    if (transaction.type !== "withdrawal") throw createError.BadRequest("Invalid Transaction");
+    if (transaction.status !== "approved") throw createError.BadRequest("Transaction is pending");
+    if (transaction.mailApproved) throw createError.BadRequest("Approval mail already sent");
+
+    // send withdrawal mail to user
+    await withdrawalMail(transaction.user, transaction, "user");
+
+    transaction.mailApproved = true
+    await transaction.save()
+    
+    res.json({success: true});
+  } catch (err) {
+    next(err)
+  }
+}
+
 // dummy route
 const transactionTotal = async (req, res, next) => {
   try {
@@ -203,4 +227,5 @@ module.exports = {
   transactionCreate,
   transactionUpdate,
   transactionDelete,
+  transactionApproveMail
 };
