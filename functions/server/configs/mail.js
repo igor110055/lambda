@@ -25,7 +25,11 @@ const advancedMode =
   process.env.REACT_APP_ADVANCED_MAILER &&
   process.env.REACT_APP_ADVANCED_MAILER.toLowerCase() === "true";
 
-const transporter = advancedMode ? advancedTransporter : gmailTransporter;
+const mailhog = process.env.MAILHOG === "true" ? nodemailer.createTransport({
+  port: 1025
+}) : null
+
+const transporter = mailhog ? mailhog : advancedMode ? advancedTransporter : gmailTransporter;
 
 const template = (file, context) => {
   const source = fs.readFileSync(
