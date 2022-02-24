@@ -61,6 +61,7 @@ const transactionSchema = Joi.object({
     }).required(),
     otherwise: Joi.forbidden(),
   }),
+  status: Joi.string().lowercase()
 });
 
 const transactionUpdateSchema = Joi.object({
@@ -74,6 +75,9 @@ const transactionUpdateSchema = Joi.object({
   extra: Joi.number(),
   duration: Joi.number().min(1),
   autoIncrement: Joi.boolean(),
+
+  // withdrawal meta
+  status: Joi.string().lowercase()
 });
 
 module.exports = {

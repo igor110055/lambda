@@ -71,4 +71,12 @@ router.delete(
   TransactionController.transactionDelete
 );
 
+// approve transaction mail
+router.post(
+  "/:id/approve-mail",
+  permissions(["admin"]),
+  matchId,
+  TransactionController.transactionApproveMail
+);
+
 module.exports = router;

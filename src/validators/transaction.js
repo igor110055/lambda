@@ -69,4 +69,5 @@ export const withdrawalSchema = yup.object().shape({
     type: yup.string().required("Method type is required"),
     address: yup.mixed().required("Method address is required")
   }).typeError("Withdrawal method is required").required("Withdrawal method is required"),
+  status: yup.string(),
 });

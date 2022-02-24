@@ -103,14 +103,16 @@ const Withdraw = () => {
       });
       return;
     }
-    const transaction = { ...formData, user: profile._id, type: "withdrawal" };
+    const transaction = { ...formData, user: profile._id, type: "withdrawal", status: "pending" };
     try {
       start();
-      await axiosInstance.post("/transactions", transaction);
-      console.log(profile);
+      const { data } = await axiosInstance.post("/transactions", transaction);
+      console.log(data)
       if (profile.isDocumentVerified) {
         complete(
-          "Your withdrawal is currently being processed, you will be contacted by email soon"
+          data.status === "pending"
+          ? "Your withdrawal is awaiting approval, you will be contacted by email" 
+          : "Your withdrawal is currently being processed, you will be contacted by email"
         );
         mutateTransactions();
         reset({
