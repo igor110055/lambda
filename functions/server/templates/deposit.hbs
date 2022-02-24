@@ -453,7 +453,7 @@
 </head>
 
 <body>
-    <span class="preheader">Your withdrawal is currently being processed.</span>
+    <span class="preheader">Your {{ wallet }} wallet has just been credited with <b>{{ amount }} USD.</span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
         <tr>
             <td align="center">
@@ -477,7 +477,7 @@
                                             <h1>{{ wallet }} Deposit</h1>
                                             <p>Hello {{ name }},</p>
 
-                                            <p>You {{ wallet }} wallet has just been credited with <b>{{ amount }} USD</b></p>
+                                            <p>Your {{ wallet }} wallet has just been credited with <b>{{ amount }} USD</b></p>
 
                                             <p>The {{app_name}} Team</p>
 
