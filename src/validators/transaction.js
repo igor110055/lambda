@@ -46,6 +46,7 @@ export const transactionSchema = yup.object().shape({
   }),
 
   profit: yup.number().label("Profit").min(0, "Invalid profit"),
+  extra: yup.number().label("Extra").min(0, "Invalid amount"),
   duration: yup
     .number()
     .label("Duration")

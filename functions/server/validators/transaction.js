@@ -25,6 +25,11 @@ const transactionSchema = Joi.object({
     then: Joi.number().default(0),
     otherwise: Joi.forbidden(),
   }),
+  extra: Joi.when("type", {
+    is: "investment",
+    then: Joi.number().default(0),
+    otherwise: Joi.forbidden(),
+  }),
   duration: Joi.when("type", {
     is: "investment",
     then: Joi.number().min(1).required(),
@@ -67,6 +72,7 @@ const transactionUpdateSchema = Joi.object({
 
   // investment meta
   profit: Joi.number(),
+  extra: Joi.number(),
   duration: Joi.number().min(1),
   autoIncrement: Joi.boolean(),
 
