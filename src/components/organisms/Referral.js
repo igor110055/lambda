@@ -19,7 +19,7 @@ const Referral = () => {
 
   const ref = window.location.origin + "/account/referral/" + profile.id;
 
-  if (!process.env.REACT_APP_REFERRAL_BONUS) return null
+  if (!parseInt(process.env.REACT_APP_REFERRAL_BONUS)) return null
 
   return (
     <Container wide>
