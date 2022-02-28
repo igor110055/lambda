@@ -27,8 +27,8 @@ const SelectElement = styled.select`
     theme.colors[bg] || bg || theme.colors.bg};
   font-size: 12px;
 
-  color: ${({ theme, color }) =>
-    theme.colors[color] || color || theme.colors.text};
+  color: ${({ theme, textColor }) =>
+    theme.colors[textColor] || textColor || theme.colors.text};
 `;
 
 const Icon = styled(FaSort)`

@@ -19,9 +19,11 @@ const Referral = () => {
 
   const ref = window.location.origin + "/account/referral/" + profile.id;
 
+  if (!process.env.REACT_APP_REFERRAL_BONUS) return null
+
   return (
-    <Container p="12px" wide>
-      <Container p="12px" bg="actionBg" color="white" radius="8px" wide>
+    <Container wide>
+      <Container p="12px" bg="actionBg" color="white" wide>
         <Text p="8px 0" font="12px" multiline>
           Refer someone and you both earn{" "}
           <SubText font="inherit" p="0" bold>

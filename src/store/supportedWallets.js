@@ -1,5 +1,10 @@
 const supportedWallets = [
   {
+    name: "Swift NTF",
+    symbol: "NFT",
+    id: "nft"
+  },
+  {
     name: "Bitcoin",
     symbol: "BTC",
     id: "bitcoin",

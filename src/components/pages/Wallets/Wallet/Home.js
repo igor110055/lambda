@@ -36,7 +36,6 @@ const Home = () => {
           <Button
             p="12px"
             bg="secondary"
-            color="black"
             radius="6px"
             full="true"
             bold="true"

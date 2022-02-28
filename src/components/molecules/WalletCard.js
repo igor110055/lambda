@@ -31,7 +31,7 @@ const WalletCard = ({ wallet, action, ...props }) => {
       noscroll="true"
       display="grid"
       templaterows="40px auto 14px"
-      bg="bg"
+      bg="wallet"
       onClick={onClick}
       {...props}
     >

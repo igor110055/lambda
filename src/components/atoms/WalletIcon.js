@@ -16,7 +16,7 @@ const Icon = styled(ReactSVG)`
 
     min-width: var(--size);
 
-    border-radius: 50%;
+    /* border-radius: 50%; */
   }
 `;
 

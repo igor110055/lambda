@@ -56,9 +56,10 @@ const WalletActionTab = (props) => {
         p="24px 0 12px"
         m="12px 0"
         bg="actionBg"
+        color="#000"
         center
         textStyle={{
-          bg: "bg",
+          bg: "white",
           p: "12px 48px",
           m: "0 12px",
           radius: "12px",
@@ -155,8 +156,8 @@ function Invest({ action }) {
       <Text color="white" p="12px 8px 0" bold flexalign justify="flex-end">
         {available} USD
         <SubText
-          bg="bg"
-          color="text"
+          bg="white"
+          color="#000"
           font="11px"
           p="6px 8px"
           m="0 0 0 12px"
@@ -170,6 +171,8 @@ function Invest({ action }) {
       </Text>
       <Input
         color="white"
+        textColor="#000"
+        bg="white"
         radius="8px"
         label="Amount"
         placeholder="Amount in USD"
@@ -182,6 +185,8 @@ function Invest({ action }) {
       />
       <Select
         color="white"
+        textColor="#000"
+        bg="white"
         radius="8px"
         label="Duration"
         ref={register({
@@ -312,8 +317,8 @@ function Transfer({ action }) {
       <Text color="white" p="12px 8px 0" bold flexalign justify="flex-end">
         {available} USD
         <SubText
-          bg="bg"
-          color="text"
+          bg="white"
+          color="#000"
           font="11px"
           p="6px 8px"
           m="0 0 0 12px"
@@ -327,6 +332,8 @@ function Transfer({ action }) {
       </Text>
       <Input
         color="white"
+        textColor="#000"
+        bg="white"
         radius="8px"
         label="Amount"
         placeholder="Amount in USD"
@@ -339,6 +346,8 @@ function Transfer({ action }) {
       />
       <Input
         color="white"
+        textColor="#000"
+        bg="white"
         radius="8px"
         type="email"
         label="Recipient Email"

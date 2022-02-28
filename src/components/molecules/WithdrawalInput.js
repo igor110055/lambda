@@ -25,7 +25,7 @@ const WithdrawalInput = ({
 }) => {
   const { show, toggle } = useToggle();
 
-  const { w, m, weight, display, color, ...styleProps } = props;
+  const { w, m, weight, display, color, textColor, ...styleProps } = props;
 
   const change = ({ selected, type }) => {
     return onChange({
@@ -75,6 +75,7 @@ const WithdrawalInput = ({
         radius="4px"
         onClick={toggle}
         flexalign
+        color={textColor || undefined}
         {...styleProps}
       >
         <SubText p="12px 0" font="inherit">

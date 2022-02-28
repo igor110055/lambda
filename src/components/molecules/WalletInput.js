@@ -22,7 +22,7 @@ const WalletInput = ({
 }) => {
   const { show, toggle } = useToggle();
 
-  const { w, m, weight, display, color, ...styleProps } = props;
+  const { w, m, weight, display, color, textColor, ...styleProps } = props;
 
   const change = (selectedWallet) => {
     return onChange({
@@ -61,6 +61,7 @@ const WalletInput = ({
         radius="4px"
         onClick={toggle}
         flexalign
+        color={textColor || undefined}
         {...styleProps}
       >
         {walletName?.name || placeholder}

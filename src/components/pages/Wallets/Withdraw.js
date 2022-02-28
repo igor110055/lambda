@@ -139,7 +139,6 @@ const Withdraw = () => {
             </Button>
             <Button
               bg="secondary"
-              color="black"
               p="12px"
               radius="6px"
               bold="true"
@@ -162,8 +161,8 @@ const Withdraw = () => {
         <Text color="white" p="24px 8px 0" bold flexalign justify="flex-end">
           {available} USD
           <SubText
-            bg="bg"
-            color="text"
+            bg="white"
+            color="#000"
             font="11px"
             p="6px 8px"
             m="0 0 0 12px"
@@ -177,6 +176,8 @@ const Withdraw = () => {
         </Text>
         <ControlledWalletInput
           color="white"
+          textColor="#000"
+          bg="white"
           radius="8px"
           label="Select Wallet"
           placeholder="Select Wallet"
@@ -187,6 +188,8 @@ const Withdraw = () => {
         />
         <Input
           color="white"
+          textColor="#000"
+          bg="white"
           radius="8px"
           label="Amount"
           placeholder="Amount"
@@ -200,6 +203,8 @@ const Withdraw = () => {
         />
         <ControlledWithdrawalInput
           color="white"
+          textColor="#000"
+          bg="white"
           radius="8px"
           label="Withdrawal Method"
           placeholder="Withdrawal Method"

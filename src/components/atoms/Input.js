@@ -23,8 +23,8 @@ const InputElement = styled.input`
   background-color: ${({ bg, theme }) =>
     theme.colors[bg] || bg || theme.colors.bg};
 
-  color: ${({ theme, color }) =>
-    theme.colors[color] || color || theme.colors.text};
+  color: ${({ theme, textColor }) =>
+    theme.colors[textColor] || textColor || theme.colors.text};
 
   border-radius: ${({ radius }) => radius || "4px"};
 
