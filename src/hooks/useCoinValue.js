@@ -17,6 +17,8 @@ const fetchCoinGecko = (ids) => {
 };
 
 export const useCoinValue = (symbol, usd = 1) => {
+  if (symbol === "nft") symbol = "tether"
+  
   const { wallets } = useWallets();
   const ids = wallets?.map((w) => getWalletId(w.symbol)).join(",");
 

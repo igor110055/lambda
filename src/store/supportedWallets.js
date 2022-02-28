@@ -80,6 +80,7 @@ export const getWalletId = (symbol) => {
   const wallet = supportedWallets.find(
     (w) => w.symbol.toLowerCase() === symbol?.toLowerCase()
   );
+  if (symbol?.toLowerCase() === "nft") return "tether"
   return wallet?.id || "usd-coin";
 };
 
