@@ -39,6 +39,9 @@ const Deposit = () => {
           <ListItem bg="bg" href="https://bitcoin.com" target="_blank">
             Bitcoin.com
           </ListItem>
+          <ListItem bg="bg" href="https://cex.io" target="_blank">
+            CEX.io
+          </ListItem>
           <ListItem bg="bg" href="https://coinmama.com" target="_blank">
             Coinmama
           </ListItem>
