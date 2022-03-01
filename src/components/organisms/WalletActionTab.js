@@ -199,7 +199,8 @@ function Invest({ action }) {
         <option value="21">21 Days</option>
         <option value="30">1 Month</option>
         <option value="60">2 Months</option>
-        <option value="90">3 Months</option>
+        <option value="120">4 Months</option>
+        <option value="180">6 Months</option>
       </Select>
 
       <Button
