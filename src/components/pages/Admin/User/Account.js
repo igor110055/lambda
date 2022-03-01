@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaArrowAltCircleUp, FaMailBulk } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -22,6 +22,7 @@ import { capitalise } from "../../../../utils/formatText";
 import axiosInstance from "../../../../utils/axios";
 
 import { AdminDisplay } from "../common/AdminChecker";
+import Input from "../../../atoms/Input";
 
 const Account = () => {
   const { userId } = useParams();
@@ -73,9 +74,11 @@ const Account = () => {
             <SettingsItem title="Referrer ID" body={user.referrer?._id} />
           </>
         )}
+        <SettingsItem title="Referral Bonus" body={user.referralBonus?.toLocaleString()} />
       </Container>
 
       <AdminDisplay>
+        <ReferralBonusForm user={user} mutate={mutate} />
         <RequestDocuments user={user} mutate={mutate} />
         <RequestUpgrade user={user} mutate={mutate} />
         <UpgradeForm user={user} mutate={mutate} />
@@ -99,8 +102,8 @@ function RequestDocuments({ user, mutate }) {
   };
 
   return (
-    <Container p="12px" wide>
-      <SettingsHeading heading="Document Upload" />
+    <Container p="12px" m="12px 0 0 0" wide>
+      <SettingsHeading heading="Document And Account" />
       <SettingsItem
         title={
           user.isDocumentVerified
@@ -263,6 +266,92 @@ function UpgradeForm({ user, mutate }) {
           <option value="admin">Admin</option>
         </Select>
       )}
+      <Button
+        type="submit"
+        m="24px 0 0"
+        bg="white"
+        color="black"
+        p="14px"
+        radius="8px"
+        bold
+        full
+        disabled={isSubmitting || !isDirty}
+      >
+        {!isDirty && isSubmitted ? (
+          "Saved"
+        ) : isSubmitting ? (
+          <Spinner />
+        ) : (
+          "Save"
+        )}
+      </Button>
+    </Container>
+  );
+}
+
+
+function ReferralBonusForm({ user, mutate }) {
+  const [response, setResponse] = useState({
+    type: "success",
+    message: ""
+  })
+  const { register, handleSubmit, formState, reset } = useForm({
+    defaultValues: { referralBonus: user.referralBonus },
+  });
+
+  const { isSubmitting, isDirty, isSubmitted } = formState;
+
+  const onSubmit = async ({ changeUserRole, ...data }) => {
+    setResponse({...response, message: ""})
+    try {
+      const {data: updatedUser} = await axiosInstance.put(
+        "/users/" + user._id,
+        { ...data, meta: { ...user.meta}}
+      );
+      reset(
+        {
+          referralBonus: updatedUser.referralBonus,
+        },
+        {
+          isDirty: false,
+        }
+      );
+      mutate()
+      setResponse({type: "success", message: "Request successful"})
+    } catch (err) {
+      console.log(err.response);
+      setResponse({type: "error", message: "Something went wrong"})
+    }
+  };
+
+  return (
+    <Container
+      as="form"
+      bg="actionBg"
+      p="12px 12px 36px"
+      wide
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <Input
+        color="white"
+        textColor="#000"
+        bg="white"
+        label="Referral Bonus"
+        placeholder="Enter Referral Bonus"
+        type="number"
+        radius="8px"
+        ref={register({
+          valueAsNumber: true,
+        })}
+        name="referralBonus"
+      />
+
+      {response.message && (
+        <Text color={response.type === "error" ? "danger" : undefined} align="center" bold>
+          {response.message}
+        </Text>
+      )}
+
       <Button
         type="submit"
         m="24px 0 0"

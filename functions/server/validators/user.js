@@ -23,6 +23,7 @@ const userUpdateSchema = Joi.object({
     isEmailVerified: Joi.boolean(),
   }),
   isDocumentVerified: Joi.boolean(),
+  referralBonus: Joi.number()
 });
 
 const userWalletSchema = Joi.object({

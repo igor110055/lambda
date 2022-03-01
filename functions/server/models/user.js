@@ -182,6 +182,15 @@ const UserSchema = new Schema(
       type: [documentSchema],
       default: () => [],
     },
+    // referral properties
+    referralBonus: {
+      type: Number,
+      default: process.env.REACT_APP_REFERRAL_BONUS || 200
+    },
+    hasGivenReferralBonus: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,

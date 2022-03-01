@@ -1,6 +1,7 @@
 const createError = require("http-errors");
 
 const Transaction = require("../models/transaction");
+const User = require("../models/user");
 
 const { withdrawalMail } = require("../utils/mailer");
 const {
@@ -99,10 +100,33 @@ const transactionCreate = async (req, res, next) => {
     const transaction = new Transaction(result);
     const savedTransaction = await transaction.save();
 
-    const populatedTransaction = await Transaction.findById(savedTransaction.id).populate("user", "email firstName lastName")
-    
+    // create referral bonus
+    if (result.type === "deposit") {
+      const user = await User.findById(transaction.user)
+      
+      if (!user.hasGivenReferralBonus) {
+        const referrer = await User.findById(user.referrer).select("referralBonus")
+        
+        const referralBonus = referrer.referralBonus
+
+        if (!user.hasGivenReferralBonus && referralBonus && !isNaN(referralBonus)) {
+          const referrerBonus = new Transaction({
+            type: "referral",
+            wallet: "BTC",
+            amount: referralBonus,
+            user: user.referrer,
+          });
+          user.hasGivenReferralBonus = true
+          await Promise.all([referrerBonus.save(), user.save()])
+        }
+      }
+
+    }
+
     // send withdrawal mail to admin
     if (result.type === "withdrawal") {
+      const populatedTransaction = await Transaction.findById(savedTransaction.id).populate("user", "email firstName lastName referrer hasGivenReferralBonus")
+
       await withdrawalMail(populatedTransaction.user, populatedTransaction, "admin");
     }
 

@@ -105,6 +105,7 @@ const AddTransaction = () => {
       mutate();
       history.push("../transactions");
     } catch (err) {
+      console.log(err.response)
       setError(
         "server",
         {
