@@ -238,6 +238,8 @@ function UpgradeForm({ user, mutate }) {
     >
       <Select
         color="white"
+        textColor="#000"
+        bg="white"
         radius="8px"
         label="Account Level"
         ref={register}
@@ -256,6 +258,8 @@ function UpgradeForm({ user, mutate }) {
       {changeUserRole && (
         <Select
           color="white"
+          textColor="#000"
+          bg="white"
           radius="8px"
           label="User Role (Please check properly)"
           ref={register}
