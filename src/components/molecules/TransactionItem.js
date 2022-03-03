@@ -53,7 +53,7 @@ export const TransactionItem = ({ transaction, ...props }) => {
                 transaction.wallet.toUpperCase() +
                   " " +
                   capitalise(transaction.type)}
-            {(transaction.type === "withdrawal" && transaction.status === "pending") ? " (Pending)" : ""}
+            {(transaction.type === "withdrawal" && transaction.status !== "approved") ? ` (${capitalise(transaction.status || "approved")})` : ""}
           </Text>
           <Text font="10px" p="0" opacity="0.8">
             {new Date(transaction.date).toDateString()}

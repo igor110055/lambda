@@ -361,6 +361,7 @@ const EditTransaction = () => {
           >
             <option value="pending">Pending</option>
             <option value="approved">Approved</option>
+            <option value="declined">Declined</option>
           </Select>
         )}
         <ControlledWalletInput

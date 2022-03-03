@@ -93,7 +93,7 @@ const TransactionSchema = new Schema({
   status: {
     type: String,
     default: "approved",
-    enum: ["pending", "approved"]
+    enum: ["pending", "approved", "declined"]
   },
   mailApproved: {
     type: Boolean,
