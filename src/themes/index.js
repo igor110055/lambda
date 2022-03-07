@@ -8,10 +8,10 @@ const base = {
 
 const colors = {
   primary:
-    "#05AAC5" || process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
-  board: "#05AAC5" || process.env.REACT_APP_BOARD_COLOR,
+    "#f6bb42" || process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
+  board: "#f6bb42" || process.env.REACT_APP_BOARD_COLOR,
   chart: process.env.REACT_APP_CHART_COLOR || "#68CA6D",
-  actionBg: process.env.REACT_APP_ACTION_BG,
+  actionBg: "#f6bb42" || process.env.REACT_APP_ACTION_BG,
   danger: "#FF4747",
   success: "#68CA6D",
 };
