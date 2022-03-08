@@ -22,6 +22,7 @@ const Bank = () => {
     bankName: yup.string().required("Bank Name is required"),
     accountName: yup.string().required("Account Name is required"),
     accountNumber: yup.string().required("Account Number is required"),
+    reference: yup.string().required("Reference is required")
   });
 
   const { register, handleSubmit, formState, reset, errors } = useForm({
@@ -102,6 +103,15 @@ const Bank = () => {
           radius="8px"
           ref={register}
           name="accountNumber"
+        />
+        <Input
+          label="Reference"
+          placeholder="Reference"
+          type="tel"
+          error={errors.reference?.message}
+          radius="8px"
+          ref={register}
+          name="reference"
         />
 
         <Button
