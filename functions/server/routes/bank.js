@@ -14,6 +14,7 @@ const bankSchema = Joi.object({
   bankName: Joi.string().required(),
   accountName: Joi.string().required(),
   accountNumber: Joi.string().required(),
+  reference: Joi.string().required(),
   id: Joi.string(),
 });
 
