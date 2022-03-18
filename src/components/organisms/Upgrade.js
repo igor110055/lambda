@@ -1,9 +1,7 @@
 import React from "react";
-
+import { useProfile } from "../../hooks/useProfile";
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
-
-import { useProfile } from "../../hooks/useProfile";
 
 const Upgrade = (props) => {
   const { profile } = useProfile();
@@ -11,7 +9,7 @@ const Upgrade = (props) => {
   if (profile.meta.requireUpgrade)
     return (
       <Container p="12px" wide {...props}>
-        <Container bg="orange" p="6px" radius="8px" wide>
+        <Container bg="secondary" p="6px" radius="8px" wide>
           <Text>
             Please Upgrade Your Account,{" "}
             <Text
@@ -31,7 +29,7 @@ const Upgrade = (props) => {
   if (profile.isDocumentRequested)
     return (
       <Container p="12px" wide {...props}>
-        <Container bg="orange" p="6px" radius="8px" wide>
+        <Container bg="secondary" p="6px" radius="8px" wide>
           <Text>
             Please Upload Required documents,{" "}
             <Text

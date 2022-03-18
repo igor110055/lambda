@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowUp, FaChevronRight, FaWallet } from "react-icons/fa";
-
-import Container from "../atoms/Container";
-import Text from "../atoms/Text";
-import SubText from "../atoms/SubText";
-
-import WalletCard from "../molecules/WalletCard";
-import WalletPreview from "../molecules/WalletPreview";
-import Loader, { WalletPreviewLoader } from "../molecules/Loader";
-
-import Upgrade from "../organisms/Upgrade";
-import Pending from "../organisms/Pending";
-import WalletChart from "../organisms/WalletChart";
-import MyWallets from "../organisms/MyWallets";
-import RecentTransactions from "../organisms/RecentTransactions";
-import Referral from "../organisms/Referral";
-
-import DashboardLayout from "../templates/Dashboard";
-
+import { useBalance } from "../../hooks/useBalance";
 import { useProfile } from "../../hooks/useProfile";
 import { useWallets } from "../../hooks/useWallets";
-import { useBalance } from "../../hooks/useBalance";
+import Container from "../atoms/Container";
+import SubText from "../atoms/SubText";
+import Text from "../atoms/Text";
+import Loader, { WalletPreviewLoader } from "../molecules/Loader";
+import WalletCard from "../molecules/WalletCard";
+import WalletPreview from "../molecules/WalletPreview";
+import MyWallets from "../organisms/MyWallets";
+import Pending from "../organisms/Pending";
+import RecentTransactions from "../organisms/RecentTransactions";
+import Referral from "../organisms/Referral";
+import Upgrade from "../organisms/Upgrade";
+import WalletChart from "../organisms/WalletChart";
+import DashboardLayout from "../templates/Dashboard";
 
 const Dashboard = () => {
   const { profile } = useProfile();
@@ -86,7 +81,12 @@ const Dashboard = () => {
               </SubText>
             </Text>
           </Container>
-          <Container p="16px" flex="flex-start" bordertop="1px solid" wide>
+          <Container
+            p="16px"
+            flex="flex-start"
+            bordertop="1px solid"
+            wide
+          >
             <Text
               font="12px"
               p="0"

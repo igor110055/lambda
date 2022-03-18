@@ -1,19 +1,14 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-
-import PreLoader from "../atoms/PreLoader";
-import Container from "../atoms/Container";
-import Text from "../atoms/Text";
-import Button from "../atoms/Button";
-import WalletIcon from "../atoms/WalletIcon";
-
-import Entry from "../molecules/Entry";
-
-import DashboardLayout from "../templates/Dashboard";
-
 import { useTransaction } from "../../hooks/useTransactions";
-
 import { capitalise } from "../../utils/formatText";
+import Button from "../atoms/Button";
+import Container from "../atoms/Container";
+import PreLoader from "../atoms/PreLoader";
+import Text from "../atoms/Text";
+import WalletIcon from "../atoms/WalletIcon";
+import Entry from "../molecules/Entry";
+import DashboardLayout from "../templates/Dashboard";
 
 const Transaction = () => {
   const { id } = useParams();
@@ -50,15 +45,9 @@ const Transaction = () => {
           <Entry title="Type">{capitalise(transaction.type)}</Entry>
           <Entry title="Block ID">{transaction._id}</Entry>
           <Entry title="Amount">
-            {transaction.amount.toLocaleString()} USD
+            {Math.abs(transaction.amount).toLocaleString()} USD
           </Entry>
-          {transaction.type === "investment" && (
-            <Entry title="Profit">+{transaction.profit} USD</Entry>
-          )}
           <Entry title="Status">Approved</Entry>
-          <Entry title="Total Amount">
-            {transaction.amount + (transaction.profit || 0)} USD
-          </Entry>
           <Container flex="center" wide>
             <Button
               bg="primary"

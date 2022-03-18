@@ -1,18 +1,14 @@
-import React, { useState, useRef } from "react";
-import { Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
-
-import Container from "../../atoms/Container";
-import Text from "../../atoms/Text";
-import Button from "../../atoms/Button";
-import Spinner from "../../atoms/Spinner";
-
-import AuthLayout from "../../templates/Auth";
-
-import { useProfile } from "../../../hooks/useProfile";
+import React, { useRef, useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import { useProcess } from "../../../hooks/useProcess";
-
+import { useProfile } from "../../../hooks/useProfile";
 import axiosInstance from "../../../utils/axios";
+import Button from "../../atoms/Button";
+import Container from "../../atoms/Container";
+import Spinner from "../../atoms/Spinner";
+import Text from "../../atoms/Text";
+import AuthLayout from "../../templates/Auth";
 
 const DocumentSelfie = () => {
   const history = useHistory();
@@ -39,7 +35,7 @@ const DocumentSelfie = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append("file", document);
-    formData.append("upload_preset", `flashtradefx_public`);
+    formData.append("upload_preset", `ameritradehub_public`);
 
     try {
       start();

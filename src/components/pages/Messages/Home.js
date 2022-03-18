@@ -1,15 +1,12 @@
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
-
-import Container from "../../atoms/Container";
-import Text from "../../atoms/Text";
-import SubText from "../../atoms/SubText";
-import Button from "../../atoms/Button";
-
-import MessageItem from "../../molecules/MessageItem";
-import { MessagesLoader } from "../../molecules/Loader";
-
 import { useMessages } from "../../../hooks/useMessages";
+import Button from "../../atoms/Button";
+import Container from "../../atoms/Container";
+import SubText from "../../atoms/SubText";
+import Text from "../../atoms/Text";
+import { MessagesLoader } from "../../molecules/Loader";
+import MessageItem from "../../molecules/MessageItem";
 
 const Home = () => {
   const { messages, loading } = useMessages();
@@ -41,7 +38,6 @@ const Home = () => {
             m="0 0 0 12px"
             radius="6px"
             bg="secondary"
-            color="black"
             flexalign="true"
             to="/dashboard"
           >

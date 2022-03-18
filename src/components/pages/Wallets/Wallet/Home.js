@@ -1,16 +1,12 @@
 import React from "react";
 import { useParams, useRouteMatch } from "react-router-dom";
-
-import Container from "../../../atoms/Container";
-import Button from "../../../atoms/Button";
-
-import WalletBalance from "../../../molecules/WalletBalance";
-
-import WalletChart from "../../../organisms/WalletChart";
-import WalletActionTab from "../../../organisms/WalletActionTab";
-import RecentTransactions from "../../../organisms/RecentTransactions";
-
 import { useWallet } from "../../../../hooks/useWallets";
+import Button from "../../../atoms/Button";
+import Container from "../../../atoms/Container";
+import WalletBalance from "../../../molecules/WalletBalance";
+import RecentTransactions from "../../../organisms/RecentTransactions";
+import WalletActionTab from "../../../organisms/WalletActionTab";
+import WalletChart from "../../../organisms/WalletChart";
 
 const Home = () => {
   const { url } = useRouteMatch();
@@ -36,7 +32,6 @@ const Home = () => {
           <Button
             p="12px"
             bg="secondary"
-            color="black"
             radius="6px"
             full="true"
             bold="true"

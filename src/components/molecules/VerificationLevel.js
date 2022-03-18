@@ -1,20 +1,17 @@
 import React from "react";
-import { useRouteMatch } from "react-router-dom";
-import { FaCheck, FaLock } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
-
-import Container from "../atoms/Container";
-import Text from "../atoms/Text";
-import SubText from "../atoms/SubText";
-import Badge from "../atoms/Badge";
-import Progress from "../atoms/Progress";
-import Button from "../atoms/Button";
-
-import { useProfile } from "../../hooks/useProfile";
+import { FaCheck, FaLock } from "react-icons/fa";
+import { useRouteMatch } from "react-router-dom";
 import { useBalance } from "../../hooks/useBalance";
-
-import { getUserLevel } from "../../utils/userUtils";
+import { useProfile } from "../../hooks/useProfile";
 import { rawBalance } from "../../utils/parseBalance";
+import { getUserLevel } from "../../utils/userUtils";
+import Badge from "../atoms/Badge";
+import Button from "../atoms/Button";
+import Container from "../atoms/Container";
+import Progress from "../atoms/Progress";
+import SubText from "../atoms/SubText";
+import Text from "../atoms/Text";
 
 const VerificationLevel = ({
   level,
@@ -124,15 +121,7 @@ const VerificationLevel = ({
           </Text>
         </Button>
       ) : !profile.meta.requireUpgrade ? (
-        <Button
-          bg="secondary"
-          color="black"
-          m="12px 0"
-          radius="4px"
-          bold
-          full
-          disabled
-        >
+        <Button bg="secondary" m="12px 0" radius="4px" bold full disabled>
           <Text p="0" flexalign bold>
             Level {level}
             <SubText p="0" m="0 0 0 8px" flexalign>

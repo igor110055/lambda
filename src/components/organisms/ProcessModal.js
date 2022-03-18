@@ -83,7 +83,7 @@ const ProcessModal = ({
         {processing ? (
           <Button
             bg="secondary"
-            color="black"
+            color="text"
             p="12px"
             m="12px 0"
             full

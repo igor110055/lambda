@@ -1,35 +1,63 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-
-import PreLoader from "../atoms/PreLoader";
-import Container from "../atoms/Container";
+import TradingViewWidget, { Themes } from "react-tradingview-widget";
+import { useCoinValue } from "../../hooks/useCoinValue";
+import { useTransaction } from "../../hooks/useTransactions";
+import { parseBalance } from "../../utils/parseBalance";
+import { useTheme } from "../../hooks/useTheme";
+import { getCurrentProfit, getProgress } from "../../utils/transactionUtils";
 import Button from "../atoms/Button";
-import WalletIcon from "../atoms/WalletIcon";
-
-import Entry from "../molecules/Entry";
-
-import WalletChart from "../organisms/WalletChart";
-
+import Container from "../atoms/Container";
+import PreLoader from "../atoms/PreLoader";
+import Text from "../atoms/Text";
 import DashboardLayout from "../templates/Dashboard";
 
-import { useTransaction } from "../../hooks/useTransactions";
-import { useWallets } from "../../hooks/useWallets";
-
-import { getCurrentProfit } from "../../utils/transactionUtils";
-import { parseBalance } from "../../utils/parseBalance";
+const Detail = ({ title, children }) => {
+  return (
+    <Container
+      p="6px 10px"
+      h="48px"
+      w="100%"
+      radius="6px"
+      bg="bg"
+      o="hidden"
+      display="flex"
+      direction="column"
+      justify="space-between"
+    >
+      <Text p="0" font="10px" opacity="0.6">
+        {title}:
+      </Text>
+      <Text font="12px" bold p="0" opacity="0.9">
+        {children}
+      </Text>
+    </Container>
+  );
+};
 
 const Investment = () => {
   const { id } = useParams();
   const history = useHistory();
+  const { theme } = useTheme()
 
   const { transaction, loading, error } = useTransaction(id);
 
-  const { wallets } = useWallets();
-  const selectedWallet = wallets?.find(
-    (wallet) => wallet.symbol === transaction?.wallet
-  );
-
   if (error) history.goBack();
+
+  const { progress: transactionProgress } = useMemo(
+    () => getProgress(transaction),
+    [transaction]
+  );
+  const { rate, change } = useCoinValue(transaction?.wallet);
+
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log(transactionProgress);
+      setProgress(transactionProgress * 100);
+    }, 500);
+  }, [transactionProgress]);
 
   return loading ? (
     <DashboardLayout>
@@ -37,42 +65,65 @@ const Investment = () => {
     </DashboardLayout>
   ) : (
     <DashboardLayout>
-      <Container p="24px" flex="center" wide>
-        <WalletIcon symbol={transaction.wallet} size="64px" />
-      </Container>
+      <Container h="100%" display="flex" direction="column">
+        <Container h="70%" w="100%">
+          <TradingViewWidget
+            symbol={`BITSTAMP:${transaction?.wallet.toUpperCase()}USD`}
+            theme={theme === "dark" ? Themes.DARK : Themes.LIGHT}
+            locale="en"
+            autosize
+          />
+        </Container>
 
-      <Container p="12px 0" wide>
-        <WalletChart
-          wallet={selectedWallet}
-          h="280px"
-          media={{
-            breakpoint: "md",
-            h: "360px",
-          }}
-        />
-      </Container>
+        <Container p="8px 12px" wide flexGrow>
+          <Text align="center" opacity="0.8" p="0 0 12px" font="14px" bold>
+            Trade Information
+          </Text>
 
-      <Container p="12px" m="12px 0" flex="center" wide>
-        <Container bg="bg" p="12px" radius="8px" maxW="480px" wide>
-          <Entry title="Amount">
-            {transaction.amount.toLocaleString()} USD
-          </Entry>
-          <Entry title="Profit">
-            +{parseBalance(getCurrentProfit(transaction))} USD
-          </Entry>
-          <Entry title="Duration">
-            {transaction.duration} Day{transaction.duration > 1 ? "s" : ""}
-          </Entry>
+          <Container
+            radius="12px"
+            m="0 0 12px 0"
+            bg="bg"
+            h="20px"
+            o="hidden"
+            w="100%"
+          >
+            <Container
+              bg="primary"
+              flex="center"
+              w={progress + "%"}
+              ease="width"
+            >
+              <Text color="white" bold>
+                {parseBalance(progress)}%
+              </Text>
+            </Container>
+          </Container>
+
+          <Container display="grid" gap="10px" templatecolumns="1fr 1fr" wide>
+            <Detail title="Duration">7 Days</Detail>
+            <Detail title="Profit">
+              +{parseBalance(getCurrentProfit(transaction))} USD
+            </Detail>
+            <Detail title="Amount">
+              {parseBalance(Math.abs(transaction?.amount))} USD
+            </Detail>
+            <Detail title="Market">{transaction?.wallet}USD</Detail>
+            <Detail title="Current Value">{rate} USD</Detail>
+            <Detail title="24hr Change">{change} USD</Detail>
+          </Container>
+
           <Container flex="center" wide>
             <Button
-              bg="primary"
-              p="8px"
+              bg="secondary"
+              p="12px"
               m="12px 0 0"
-              radius="4px"
+              radius="24px"
               full="full"
+              bold="true"
               to={`/dashboard/transactions/${id}`}
             >
-              View Details
+              View Transaction Details
             </Button>
           </Container>
         </Container>

@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
-
-import Container from "../../atoms/Container";
+import { useHistory, useLocation } from "react-router-dom";
+import { useProcess } from "../../../hooks/useProcess";
+import { useProfile } from "../../../hooks/useProfile";
+import { useToggle } from "../../../hooks/useToggle";
+import { useTransactions } from "../../../hooks/useTransactions";
+import axiosInstance from "../../../utils/axios";
 import Button from "../../atoms/Button";
-import Text from "../../atoms/Text";
+import Container from "../../atoms/Container";
 import SubText from "../../atoms/SubText";
-
-import Section from "../../molecules/Section";
+import Text from "../../atoms/Text";
 import { Bank, NoBank } from "../../molecules/Bank";
 import Entry from "../../molecules/Entry";
-import { TransactionItem } from "../../molecules/TransactionItem";
 import { TransactionsLoader } from "../../molecules/Loader";
-
+import Section from "../../molecules/Section";
+import { TransactionItem } from "../../molecules/TransactionItem";
 import BankForm from "../../organisms/BankForm";
 import ConfirmationModal from "../../organisms/ConfirmationModal";
 import ProcessModal from "../../organisms/ProcessModal";
-
-import { useProfile } from "../../../hooks/useProfile";
-import { useTransactions } from "../../../hooks/useTransactions";
-import { useToggle } from "../../../hooks/useToggle";
-import { useProcess } from "../../../hooks/useProcess";
-
-import axiosInstance from "../../../utils/axios";
 
 const Banks = () => {
   const { state } = useLocation();
@@ -54,16 +49,8 @@ const Banks = () => {
     }
   }, [profile]);
 
-  const {
-    show,
-    processing,
-    response,
-    success,
-    start,
-    complete,
-    fail,
-    close,
-  } = useProcess();
+  const { show, processing, response, success, start, complete, fail, close } =
+    useProcess();
 
   const closeProcess = () => {
     close();
@@ -124,7 +111,6 @@ const Banks = () => {
             m="0 0 0 12px"
             radius="6px"
             bg="secondary"
-            color="black"
             bold="true"
             to="/dashboard/wallets/withdraw"
           >

@@ -1,25 +1,21 @@
 import React from "react";
 import {
-  Switch,
-  Route,
   Redirect,
-  useRouteMatch,
+  Route,
+  Switch,
   useLocation,
+  useRouteMatch,
 } from "react-router-dom";
-
 import PreLoader from "../components/atoms/PreLoader";
-
-import KYC from "../components/pages/restriction/KYC";
-import EmailVerification from "../components/pages/restriction/EmailVerification";
-import VerifyEmail from "../components/pages/restriction/VerifyEmail";
 import Deactivated from "../components/pages/restriction/Deactivated";
-import DocumentStart from "../components/pages/restriction/DocumentStart";
-import IdFront from "../components/pages/restriction/IdFront";
-import IdBack from "../components/pages/restriction/IdBack";
-import DocumentSelfie from "../components/pages/restriction/DocumentSelfie";
-import DocumentUpload from "../components/pages/restriction/DocumentUpload";
 import DocumentCompleted from "../components/pages/restriction/DocumentCompleted";
-
+import DocumentSelfie from "../components/pages/restriction/DocumentSelfie";
+import DocumentStart from "../components/pages/restriction/DocumentStart";
+import DocumentUpload from "../components/pages/restriction/DocumentUpload";
+import EmailVerification from "../components/pages/restriction/EmailVerification";
+import IdUpload from "../components/pages/restriction/IdUpload";
+import KYC from "../components/pages/restriction/KYC";
+import VerifyEmail from "../components/pages/restriction/VerifyEmail";
 import { useProfile } from "../hooks/useProfile";
 
 const AuthChecker = ({ children }) => {
@@ -62,12 +58,9 @@ export default function RestrictionRoute() {
           <DocumentStart />
         </Route>
         <Route exact path={`${path}/documents/1`}>
-          <IdFront />
+          <IdUpload />
         </Route>
         <Route exact path={`${path}/documents/2`}>
-          <IdBack />
-        </Route>
-        <Route exact path={`${path}/documents/3`}>
           <DocumentSelfie />
         </Route>
         <Route exact path={`${path}/documents/upload`}>

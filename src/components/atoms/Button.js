@@ -6,7 +6,7 @@ const Button = styled.button.attrs(({ to, scrollto }) => ({
   as: to && (scrollto ? ScrollLink : RouterLink),
 }))`
   --bg: ${({ bg, theme }) => theme.colors[bg] || bg || "grey"};
-  --color: ${({ color, theme }) => theme.colors[color] || color || "white"};
+  --color: ${({ color, bg, theme }) => theme.colors[color] || bg === "primary" ? "white" : null || color};
 
   background-color: var(--bg);
   color: var(--color);

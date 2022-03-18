@@ -1,18 +1,14 @@
 import React from "react";
 import { useTheme as useStyledTheme } from "styled-components";
-
-import Container from "../atoms/Container";
-import Text from "../atoms/Text";
-import WalletIcon from "../atoms/WalletIcon";
-import SubText from "../atoms/SubText";
-
-import Chart from "../atoms/Chart";
-
 import { useKlines } from "../../hooks/useKlines";
 import { useWallets } from "../../hooks/useWallets";
-
-import { getCurrentProfit } from "../../utils/transactionUtils";
 import { parseBalance } from "../../utils/parseBalance";
+import { getCurrentProfit } from "../../utils/transactionUtils";
+import Chart from "../atoms/Chart";
+import Container from "../atoms/Container";
+import SubText from "../atoms/SubText";
+import Text from "../atoms/Text";
+import WalletIcon from "../atoms/WalletIcon";
 
 const InvestmentCard = ({ investment, ...props }) => {
   const theme = useStyledTheme();
@@ -34,6 +30,7 @@ const InvestmentCard = ({ investment, ...props }) => {
       display="grid"
       templaterows="40px auto 14px"
       bg="bg"
+      o="hidden"
       to={`/dashboard/investment/${investment._id}`}
       {...props}
     >

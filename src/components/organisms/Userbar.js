@@ -1,18 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useBalance } from "../../hooks/useBalance";
+import { useProfile } from "../../hooks/useProfile";
+import { useWallets } from "../../hooks/useWallets";
+import { capitalise } from "../../utils/formatText";
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
-
-import { WalletItem } from "../molecules/WalletItem";
 import { WalletItemLoader } from "../molecules/Loader";
 import ProfilePic from "../molecules/ProfilePic";
-
-import { useBalance } from "../../hooks/useBalance";
-import { useWallets } from "../../hooks/useWallets";
-import { useProfile } from "../../hooks/useProfile";
-
-import { capitalise } from "../../utils/formatText";
+import { WalletItem } from "../molecules/WalletItem";
 
 const Wrapper = styled.div`
   grid-area: userbar;
