@@ -6,7 +6,7 @@ const Auth = ({ children }) => {
   return (
     <Container
       flex="center"
-      bg="bgImage"
+      bg="bg"
       m="48px 0 0 0"
       h="calc(100% - 48px)"
       minH="calc(100vh - 48px)"

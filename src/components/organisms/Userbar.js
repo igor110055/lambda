@@ -38,7 +38,7 @@ const Userbar = () => {
   return (
     <Container as="aside" z="1" wide o="hidden">
       <Wrapper open>
-        <Container bg="bgContrast" p="12px" radius="0px" wide>
+        <Container bg="bgContrast" p="12px" radius="6px" wide>
           {/* profile start */}
           <Container p="12px" flexCol="center" wide>
             <ProfilePic size="48px" />

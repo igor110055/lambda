@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   height: 100vh;
   overflow: hidden;
 
-  background: ${({ theme }) => theme.colors.bgImage};
+  background: ${({ theme }) => theme.colors.bg};
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     height: 100%;
@@ -56,7 +56,7 @@ const Content = styled.main`
   }
 
   height: 100%;
-  /* border-radius: 6px; */
+  border-radius: 6px;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     min-height: calc(100vh - 48px);

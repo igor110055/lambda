@@ -85,7 +85,6 @@ const Dashboard = () => {
             p="16px"
             flex="flex-start"
             bordertop="1px solid"
-            bordercolor="#f97373"
             wide
           >
             <Text

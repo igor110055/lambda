@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import TradingViewWidget, { Themes } from "react-tradingview-widget";
 import { useCoinValue } from "../../hooks/useCoinValue";
 import { useTransaction } from "../../hooks/useTransactions";
+import { useTheme } from "../../hooks/useTheme";
 import { parseBalance } from "../../utils/parseBalance";
 import { getCurrentProfit, getProgress } from "../../utils/transactionUtils";
 import Button from "../atoms/Button";
@@ -57,6 +58,8 @@ const Investment = () => {
     }, 500);
   }, [transactionProgress]);
 
+  const { theme } = useTheme()
+
   return loading ? (
     <DashboardLayout>
       <PreLoader page />
@@ -67,7 +70,7 @@ const Investment = () => {
         <Container h="70%" w="100%">
           <TradingViewWidget
             symbol={`BITSTAMP:${transaction?.wallet.toUpperCase()}USD`}
-            theme={Themes.LIGHT}
+            theme={theme === "dark" ? Themes.DARK : Themes.LIGHT}
             locale="en"
             autosize
           />
@@ -114,6 +117,7 @@ const Investment = () => {
           <Container flex="center" wide>
             <Button
               bg="secondary"
+              color="text"
               p="12px"
               m="12px 0 0"
               radius="24px"

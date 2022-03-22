@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  /* border-radius: 6px; */
+  border-radius: 6px;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     border-radius: 0;
