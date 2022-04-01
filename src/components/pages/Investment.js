@@ -101,7 +101,7 @@ const Investment = () => {
           </Container>
 
           <Container display="grid" gap="10px" templatecolumns="1fr 1fr" wide>
-            <Detail title="Duration">7 Days</Detail>
+            <Detail title="Duration">{transaction.duration} Days</Detail>
             <Detail title="Profit">
               +{parseBalance(getCurrentProfit(transaction))} USD
             </Detail>
