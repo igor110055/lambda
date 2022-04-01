@@ -22,7 +22,7 @@ const Circle = styled.div`
   height: var(--size);
   border-radius: 50%;
 
-  background-color: ${({ theme }) => theme.colors.primary || "grey"};
+  background: ${({ theme }) => theme.colors.actionBg || "grey"};
 
   position: absolute;
   left: -20px;

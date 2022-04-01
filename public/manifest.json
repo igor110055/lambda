@@ -1,18 +1,30 @@
 {
-  "short_name": "SuperCoin Trade",
-  "name": "Trade and invest in Bitcoin and other Cryptos from the SuperCoin Trade Web App",
+  "short_name": "SC Trade",
+  "name": "SuperCoin Trade",
   "icons": [
     {
-      "src": "assets/manifest-icon-192.png",
+      "src": "assets/manifest-icon-192.maskable.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
-      "src": "assets/manifest-icon-512.png",
+      "src": "assets/manifest-icon-192.maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/manifest-icon-512.maskable.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
+    },
+    {
+      "src": "assets/manifest-icon-512.maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "assets/icon/favicon.png",

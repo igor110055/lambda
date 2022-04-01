@@ -7,10 +7,10 @@ const base = {
 };
 
 const colors = {
-  primary: process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
-  board: process.env.REACT_APP_BOARD_COLOR,
+  primary: "#3469f0" || process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
+  board: "linear-gradient(to right, rgba(57,100,208,1) 0%, rgba(45,193,201,1) 100%)" || process.env.REACT_APP_BOARD_COLOR,
   chart: process.env.REACT_APP_CHART_COLOR || "#68CA6D",
-  actionBg: process.env.REACT_APP_ACTION_BG,
+  actionBg: "linear-gradient(to right, rgba(57,100,208,1) 0%, rgba(45,193,201,1) 100%)" || process.env.REACT_APP_ACTION_BG,
   danger: "#FF4747",
   success: "#68CA6D",
 };
@@ -37,8 +37,8 @@ export const dark = {
     ...colors,
     text: "#fff",
     invertText: "#000",
-    bg: "#242526",
-    bgContrast: "#2F3137",
+    bg: "rgb(8, 9, 27)",
+    bgContrast: "rgb(16, 18, 45)",
     skeleton: "linear-gradient(-90deg, #2f3137 0%, #242526 50%, #2f3137 100%)",
 
     //computed

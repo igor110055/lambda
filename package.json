@@ -44,7 +44,7 @@
   },
   "scripts": {
     "local": "nodemon functions/server/local.js",
-    "pwa-gen": "pwa-asset-generator ./public/logo.svg ./public/assets -i ./public/index.html -m ./public/manifest.json",
+    "pwa-gen": "pwa-asset-generator ./public/logo.png ./public/assets -i ./public/index.html -m ./public/manifest.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
