@@ -39,7 +39,7 @@ export const dark = {
     invertText: "#000",
     bg: "rgb(8, 9, 27)",
     bgContrast: "rgb(16, 18, 45)",
-    skeleton: "linear-gradient(-90deg, #2f3137 0%, #242526 50%, #2f3137 100%)",
+    skeleton: "linear-gradient(-90deg, rgb(8, 9, 27) 0%, rgb(9, 18, 45) 50%, rgb(8, 9, 27) 100%)",
 
     //computed
     actionBg: colors.actionBg || "#335C67",
