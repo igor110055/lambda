@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaArrowUp, FaChevronRight, FaWallet } from "react-icons/fa";
+import { FaArrowUp, FaChevronRight, FaWallet, FaMoneyBillAlt } from "react-icons/fa";
 
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
@@ -21,6 +21,8 @@ import DashboardLayout from "../templates/Dashboard";
 import { useProfile } from "../../hooks/useProfile";
 import { useWallets } from "../../hooks/useWallets";
 import { useBalance } from "../../hooks/useBalance";
+
+import { fiatWallets } from "../../store/supportedWallets";
 
 const Dashboard = () => {
   const { profile } = useProfile();
@@ -86,7 +88,8 @@ const Dashboard = () => {
               </SubText>
             </Text>
           </Container>
-          <Container p="16px" flex="flex-start" bordertop="1px solid" wide>
+          <Container p="16px" flex="flex-between" bordertop="1px solid" wide>
+          <Container flex="flex-start" wide>
             <Text
               font="12px"
               p="0"
@@ -112,6 +115,19 @@ const Dashboard = () => {
               </SubText>
               Withdraw
             </Text>
+          </Container>
+          <Text
+              font="12px"
+              p="0"
+              flexalign="true"
+              bold="true"
+              to={`/dashboard/wallets/fiat/${fiatWallets.find(w => true).id}`}
+            >
+              Cash
+              <SubText font="20px" p="0" m="0 0 0 6px" flexalign>
+                <FaMoneyBillAlt />
+              </SubText>
+          </Text>
           </Container>
         </Container>
       </Container>

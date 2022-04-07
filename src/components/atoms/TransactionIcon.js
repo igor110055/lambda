@@ -20,9 +20,9 @@ const Wrapper = styled.div`
   align-items: center;
 
   background-color: ${({ theme, type }) =>
-    ["deposit", "investment"].includes(type)
+    ["deposit", "investment", "buy"].includes(type)
       ? theme.colors.success
-      : ["withdrawal", "transfer"].includes(type)
+      : ["withdrawal", "transfer", "sell"].includes(type)
       ? theme.colors.danger
       : theme.colors.actionBg};
   color: white;
@@ -48,6 +48,12 @@ const TransactionIcon = ({ type, ...props }) => {
       break;
     case "referral":
       icon = <FaUserCheck />;
+      break;
+    case "buy":
+      icon = <FaArrowDown />;
+      break;
+    case "sell":
+      icon = <FaArrowUp />;
       break;
     default:
       break;

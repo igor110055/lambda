@@ -130,6 +130,10 @@ const UserSchema = new Schema(
         type: Boolean,
         default: false,
       },
+      fiatEnabled: {
+        type: Boolean,
+        default: false,
+      },
     },
     referrer: {
       type: Schema.Types.ObjectId,

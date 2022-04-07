@@ -15,6 +15,7 @@ import { useTransactions } from "../../hooks/useTransactions";
 import { useWallets } from "../../hooks/useWallets";
 
 import { toDateTransactions } from "../../utils/balanceReducers";
+import { fiatWallets } from "../../store/supportedWallets";
 
 const Transactions = () => {
   const { state } = useLocation();
@@ -32,7 +33,7 @@ const Transactions = () => {
         return tx.wallet.toLowerCase() === wallet.toLowerCase();
       } else return true;
     }
-  );
+  ).filter(tx => !fiatWallets.some(w => w.id.toLowerCase() === tx.wallet.toLowerCase()));
 
   useEffect(() => {
     if (wallets && stateWallet) {

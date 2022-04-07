@@ -7,7 +7,7 @@ import SubText from "../../atoms/SubText";
 import Button from "../../atoms/Button";
 
 import InvestmentCard from "../../molecules/InvestmentCard";
-import { WalletItemFullCard } from "../../molecules/WalletItem";
+import { WalletItemFullCard, FiatItemFullCard } from "../../molecules/WalletItem";
 import { WalletItemFullCardLoader } from "../../molecules/Loader";
 
 import Upgrade from "../../organisms/Upgrade";
@@ -18,13 +18,16 @@ import DashboardLayout from "../../templates/Dashboard";
 import { useTransactions } from "../../../hooks/useTransactions";
 import { useWallets } from "../../../hooks/useWallets";
 import { useBalance } from "../../../hooks/useBalance";
+import { useProfile } from "../../../hooks/useProfile";
 
 import { toDateTransactions } from "../../../utils/balanceReducers";
+import { fiatWallets } from "../../../store/supportedWallets"
 
 const Home = () => {
   const { investments } = useTransactions();
   const { wallets, loading: loadingWallets } = useWallets();
   const { total, bonus, profit, deposit } = useBalance();
+  const { profile } = useProfile();
 
   const activeInvestments = toDateTransactions(investments)?.filter(
     (investment) => {
@@ -126,6 +129,22 @@ const Home = () => {
             {activeInvestments.map((investment) => (
               <InvestmentCard key={investment._id} investment={investment} />
             ))}
+          </Container>
+        </>
+      )}
+
+      {fiatWallets.some((wallet) => wallet.visible(profile)) && (
+        <>
+          <Text font="16px" p="12px" bold>
+            Fiat Accounts
+          </Text>
+          <Container p="12px" wide>
+            {fiatWallets.map(
+              (wallet) =>
+                wallet.visible(profile) && (
+                  <FiatItemFullCard key={wallet.symbol} wallet={wallet} />
+                )
+            )}
           </Container>
         </>
       )}

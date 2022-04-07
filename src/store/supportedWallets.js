@@ -71,6 +71,17 @@ const supportedWallets = [
   },
 ];
 
+export const fiatWallets = [
+  {
+    name: "US Dollar",
+    symbol: "USDC",
+    id: "usd",
+    visible: (user) => user?.profile?.country === "United States"
+  }
+];
+
+export const getFiat = (id) => fiatWallets.find((w) => w.id.toLowerCase() === id?.toLowerCase())
+
 export const getWalletId = (symbol) => {
   const wallet = supportedWallets.find(
     (w) => w.symbol.toLowerCase() === symbol?.toLowerCase()

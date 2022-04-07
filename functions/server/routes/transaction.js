@@ -13,6 +13,7 @@ const paginate = require("../middlewares/paginate");
 const {
   transactionSchema,
   transactionUpdateSchema,
+  transactionTradeSchema,
 } = require("../validators/transaction");
 
 // all transactions
@@ -52,6 +53,13 @@ router.post(
   "/",
   validate(transactionSchema),
   TransactionController.transactionCreate
+);
+
+// new trade transaction
+router.post(
+  "/trade",
+  validate(transactionTradeSchema),
+  TransactionController.transactionCreateTrade
 );
 
 // update transaction

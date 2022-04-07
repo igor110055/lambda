@@ -252,3 +252,73 @@ export const WalletItemFullCard = ({ wallet, ...props }) => {
     </Container>
   );
 };
+
+export const FiatItemFullCard = ({ wallet, ...props }) => {
+  const { total } = useWalletBalance(wallet.id);
+
+  return (
+    <Container
+      m="0 0 12px 0"
+      radius="8px"
+      bg="bg"
+      display="grid"
+      gap="12px"
+      wide="wide"
+      {...props}
+    >
+      <Container
+        p="16px"
+        flex="flex-start"
+        wide="true"
+        to={`/dashboard/wallets/fiat/${wallet.id}`}
+      >
+        <WalletIcon symbol={wallet.symbol} size="32px" />
+        <Text m="0 0 0 12px" p="0" bold>
+          {wallet.name} Account
+        </Text>
+      </Container>
+      <Container p="0 16px" flexCol="flex-start" wide>
+        <Text font="13px" p="2px 0" bold>
+          <SubText font="10px" p="0" m="0 4px 0 0">
+            Avaliable balance
+          </SubText>
+          {total}
+          <SubText font="inherit" p="0" m="0 0 0 4px">
+            USD
+          </SubText>
+        </Text>
+      </Container>
+      <Container p="16px" flex="flex-start" bordertop="1px solid" wide>
+        <Text
+          font="12px"
+          p="0"
+          m="0 24px 0 0"
+          flexalign="true"
+          to={`/dashboard/wallets/fiat/${wallet.id}/fund`}
+        >
+          <SubText font="11px" p="0" m="0 4px 0 0" flexalign>
+            <FaPlus />
+          </SubText>
+          Fund
+        </Text>
+        <Text
+          font="12px"
+          p="0"
+          flexalign="true"
+          to={{
+            pathname: "/dashboard/wallets/withdraw",
+            state: {
+              wallet: wallet.id,
+              fiat: true,
+            },
+          }}
+        >
+          <SubText font="11px" p="0" m="0 4px 0 0" flexalign>
+            <FaArrowUp />
+          </SubText>
+          Withdraw
+        </Text>
+      </Container>
+    </Container>
+  );
+};

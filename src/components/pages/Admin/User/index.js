@@ -19,6 +19,7 @@ import Payments from "./Payments";
 import Account from "./Account";
 
 import AddTransaction from "../common/add/AddTransaction";
+import AddFiatTransaction from "../common/add/AddFiatTransaction";
 import AddMessage from "../common/add/AddMessage";
 import AddPayment from "../common/add/AddPayment";
 
@@ -72,6 +73,9 @@ const User = () => {
       </Route>
 
       {/* add routes */}
+      <Route path={`${path}/transactions/fiat/add`}>
+        <AddFiatTransaction />
+      </Route>
       <Route path={`${path}/transactions/add`}>
         <AddTransaction />
       </Route>

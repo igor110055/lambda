@@ -15,6 +15,7 @@ import {
 import { capitalise } from "../../utils/formatText";
 import { getCurrentProfit } from "../../utils/transactionUtils";
 import { parseBalance, rawBalance } from "../../utils/parseBalance";
+import { getFiat } from "../../store/supportedWallets";
 
 const Wrapper = styled(Container)`
   :last-child {
@@ -32,6 +33,8 @@ export const TransactionItem = ({ transaction, ...props }) => {
 
   const { amount } = useCoinValue(transaction.wallet, transaction.amount);
   const { total: pending } = usePendingPayment();
+
+  const fiatWallet = getFiat(transaction.wallet)
 
   return (
     <Wrapper
@@ -65,7 +68,7 @@ export const TransactionItem = ({ transaction, ...props }) => {
         </Container>
         <Container flexCol="flex-end" justify="center" w="auto">
           <Text font="12px" p="0">
-            {Math.abs(amount) + " " + transaction.wallet.toUpperCase()}
+            {Math.abs(fiatWallet ? transaction.amount : amount) + " " + transaction.wallet.toUpperCase()}
           </Text>
           <Text font="11px" p="0">
             {transaction.type === "investment" ? (

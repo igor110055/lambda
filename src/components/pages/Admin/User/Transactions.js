@@ -31,7 +31,10 @@ const Transactions = () => {
       </Container>
 
       <AdminDisplay>
-        <AddButton title="Add Transaction" to="./transactions/add" />
+        <Container flex wide justify="flex-end">
+          <AddButton title="Add Fiat Deposit" to="./transactions/fiat/add" />
+          <AddButton title="Add Transaction" to="./transactions/add" />
+        </Container>
       </AdminDisplay>
 
       <Container p="12px" wide>

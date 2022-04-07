@@ -13,6 +13,8 @@ const TransactionSchema = new Schema({
       "transfer",
       "income",
       "referral",
+      "buy",
+      "sell"
     ],
   },
   wallet: {
@@ -99,6 +101,12 @@ TransactionSchema.pre("save", function (next) {
         this.amount = this.amount * -1;
       }
       break;
+    case "buy":
+      // don't tamper with amount
+      break
+    case "sell":
+      // don't tamper with amount
+      break
 
     default:
       this.amount = Math.abs(this.amount);

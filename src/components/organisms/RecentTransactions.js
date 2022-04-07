@@ -10,6 +10,7 @@ import { TransactionsLoader } from "../molecules/Loader";
 import { useTransactions } from "../../hooks/useTransactions";
 
 import { toDateTransactions } from "../../utils/balanceReducers";
+import { fiatWallets } from "../../store/supportedWallets";
 
 const RecentTransactions = ({ wallet }) => {
   const { transactions, loading } = useTransactions();
@@ -18,7 +19,7 @@ const RecentTransactions = ({ wallet }) => {
       if (wallet) {
         return tx.wallet.toLowerCase() === wallet.toLowerCase();
       } else {
-        return true;
+        return !fiatWallets.some(w => w.id.toLowerCase() === tx.wallet.toLowerCase());
       }
     })
     .slice(0, 5);

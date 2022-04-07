@@ -75,7 +75,26 @@ const transactionUpdateSchema = Joi.object({
   completed: Joi.boolean(),
 });
 
+const transactionTradeSchema = Joi.object({
+  type: Joi.string()
+    .lowercase()
+    .required()
+    .valid("buy", "sell"),
+  wallet: Joi.string().uppercase().required(),
+  walletName: Joi.string().required(),
+  crypto_wallet: Joi.string().uppercase().required(),
+  amount: Joi.number().positive().required(),
+  charges: Joi.number().positive().required(),
+  date: Joi.string().isoDate(),
+  user: Joi.string()
+    .pattern(/^[0-9a-fA-F]{24}$/, {
+      name: "user id",
+    })
+    .required(),
+});
+
 module.exports = {
   transactionSchema,
   transactionUpdateSchema,
+  transactionTradeSchema
 };

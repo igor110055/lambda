@@ -12,6 +12,7 @@ import Button from "../../atoms/Button";
 import Spinner from "../../atoms/Spinner";
 
 import WalletBalance from "../../molecules/WalletBalance";
+import FiatBalance from "../../molecules/FiatBalance";
 import ControlledWalletInput from "../../molecules/ControlledWalletInput";
 import ControlledWithdrawalInput from "../../molecules/ControlledWithdrawalInput";
 
@@ -32,6 +33,7 @@ import axiosInstance from "../../../utils/axios";
 import { rawBalance } from "../../../utils/parseBalance";
 
 import { withdrawalSchema } from "../../../validators/transaction";
+import { getFiat } from "../../../store/supportedWallets";
 
 const Withdraw = () => {
   const { state } = useLocation();
@@ -40,16 +42,8 @@ const Withdraw = () => {
   const { wallets, loading: loadingWallets } = useWallets();
   const { mutate: mutateTransactions } = useTransactions();
 
-  const {
-    show,
-    processing,
-    response,
-    success,
-    start,
-    complete,
-    fail,
-    close,
-  } = useProcess();
+  const { show, processing, response, success, start, complete, fail, close } =
+    useProcess();
 
   const {
     show: showWithdrawalModal,
@@ -70,7 +64,7 @@ const Withdraw = () => {
     errors,
   } = useForm({
     defaultValues: {
-      amount: 0,
+      amount: null,
       wallet: state?.wallet || "BTC",
       method: "",
     },
@@ -80,9 +74,9 @@ const Withdraw = () => {
   const { amount, wallet } = watch();
   const { isSubmitting } = formState;
 
-  const selectedWallet = wallets?.find(
-    (w) => w?.symbol.toLowerCase() === wallet?.toLowerCase()
-  );
+  const selectedWallet =
+    wallets?.find((w) => w?.symbol.toLowerCase() === wallet?.toLowerCase()) ||
+    getFiat(wallet);
 
   const { available } = useWalletBalance(wallet);
   const balance = rawBalance(available);
@@ -134,7 +128,11 @@ const Withdraw = () => {
     <DashboardLayout>
       {selectedWallet && (
         <Container p="24px 12px 12px" wide>
-          <WalletBalance wallet={selectedWallet} />
+          {state.fiat ? (
+            <FiatBalance id={wallet} />
+          ) : (
+            <WalletBalance wallet={selectedWallet} />
+          )}
           <Container m="12px 0 0" display="grid" gap="12px" flow="column" wide>
             <Button
               bg="primary"
@@ -183,16 +181,21 @@ const Withdraw = () => {
             MAX
           </SubText>
         </Text>
-        <ControlledWalletInput
-          color="white"
-          radius="8px"
-          label="Select Wallet"
-          placeholder="Select Wallet"
-          wallets={wallets}
-          control={control}
-          name="wallet"
-          error={errors.wallet?.message}
-        />
+        {state.fiat ? (
+          <input hidden ref={register} name="wallet" />
+        ) : (
+          <ControlledWalletInput
+            color="white"
+            radius="8px"
+            label="Select Wallet"
+            placeholder="Select Wallet"
+            wallets={wallets}
+            control={control}
+            name="wallet"
+            error={errors.wallet?.message}
+          />
+        )}
+
         <Input
           color="white"
           radius="8px"

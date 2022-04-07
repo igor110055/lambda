@@ -7,7 +7,7 @@ import SubText from "../atoms/SubText";
 
 const AddButton = ({ title, to }) => {
   return (
-    <Container p="12px" flex="flex-end" wide>
+    <Container p="12px" flex="flex-end" w="auto">
       <Text
         p="6px 12px"
         radius="4px"

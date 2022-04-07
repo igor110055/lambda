@@ -107,6 +107,65 @@ const transactionCreate = async (req, res, next) => {
   }
 };
 
+const transactionCreateTrade = async (req, res, next) => {
+  try {
+    // validated request body
+    let result = req.body;
+
+    if (req.user.role !== "admin") {
+      if (req.user.meta.isRestricted)
+        throw createError.Forbidden("Account Restricted");
+      if (!req.user.meta.fiatEnabled)
+        throw createError.Forbidden("Fiat Accounts are currently not active on your account");
+
+      result = { ...result, user: req.user.id };
+    }
+
+    const crypto_wallet = result.crypto_wallet;
+    const charges = result.charges;
+    delete result.crypto_wallet;
+    delete result.charges;
+
+    if (result.type === "buy") {
+      result.description = `Buy ${crypto_wallet} from ${result.walletName} Account`
+
+      const fiatTransaction = Transaction.create({
+        ...result,
+        amount: -result.amount,
+      });
+
+      const cryptoTransaction = Transaction.create({
+        ...result,
+        wallet: crypto_wallet,
+        amount: result.amount - charges
+      });
+
+      await Promise.all([fiatTransaction, cryptoTransaction]);
+    }
+
+    if (result.type === "sell") {
+      result.description = `Sell ${crypto_wallet} to ${result.walletName} Account`
+      
+      const fiatTransaction = Transaction.create({
+        ...result,
+        amount: result.amount - charges
+      });
+
+      const cryptoTransaction = Transaction.create({
+        ...result,
+        wallet: crypto_wallet,
+        amount: -result.amount,
+      });
+
+      await Promise.all([fiatTransaction, cryptoTransaction]);
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const transactionUpdate = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -195,6 +254,7 @@ module.exports = {
   transactionDetail,
   transactionReqUserDetail,
   transactionCreate,
+  transactionCreateTrade,
   transactionUpdate,
   transactionDelete,
 };

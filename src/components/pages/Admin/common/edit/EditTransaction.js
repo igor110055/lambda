@@ -14,6 +14,7 @@ import Spinner from "../../../../atoms/Spinner";
 import Entry from "../../../../molecules/Entry";
 import ControlledDateInput from "../../../../molecules/ControlledDateInput";
 import ControlledWalletInput from "../../../../molecules/ControlledWalletInput";
+import DummyInput from "../../../../molecules/DummyInput";
 
 import ConfirmationModal from "../../../../organisms/ConfirmationModal";
 
@@ -33,6 +34,7 @@ import { getCurrentProfit } from "../../../../../utils/transactionUtils";
 import { parseBalance } from "../../../../../utils/parseBalance";
 
 import { AdminDisplay } from "../AdminChecker";
+import { fiatWallets } from "../../../../../store/supportedWallets";
 
 const EditTransaction = () => {
   const history = useHistory();
@@ -48,20 +50,17 @@ const EditTransaction = () => {
   const { mutate: mutateTransactions } = useAdminTransactions();
   const { mutate: mutateUserTransactions } = useAdminUserTransactions(userId);
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    watch,
-    reset,
-    formState,
-    errors,
-  } = useForm({
-    resolver: yupResolver(transactionSchema),
-  });
+  const { register, control, handleSubmit, watch, reset, formState, errors } =
+    useForm({
+      resolver: yupResolver(transactionSchema),
+    });
 
   const { type } = watch();
   const { isSubmitting, isSubmitted, isDirty } = formState;
+
+  const fiatWallet = fiatWallets.find(
+    (w) => w.id.toLowerCase() === transaction?.wallet.toLowerCase()
+  );
 
   useEffect(() => {
     if (transaction && !isSubmitted) {
@@ -163,15 +162,27 @@ const EditTransaction = () => {
             error={errors.description?.message}
           />
         )}
-        <ControlledWalletInput
-          label="Wallet"
-          placeholder="Select Wallet"
-          radius="8px"
-          wallets={wallets}
-          control={control}
-          name="wallet"
-          error={errors.wallet?.message}
-        />
+        {fiatWallet ? (
+          <>
+            <input hidden ref={register} name="wallet" />
+            <DummyInput
+              label="Wallet"
+              value={fiatWallet.name + " Account"}
+              radius="8px"
+            />
+          </>
+        ) : (
+          <ControlledWalletInput
+            label="Wallet"
+            placeholder="Select Wallet"
+            radius="8px"
+            wallets={wallets}
+            control={control}
+            name="wallet"
+            error={errors.wallet?.message}
+          />
+        )}
+
         <Input
           label="Amount"
           placeholder="Enter Amount"

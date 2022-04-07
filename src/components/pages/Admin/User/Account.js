@@ -197,23 +197,24 @@ function RequestUpgrade({ user, mutate }) {
 
 function UpgradeForm({ user, mutate }) {
   const { register, handleSubmit, watch, formState, reset } = useForm({
-    defaultValues: { plan: user.plan, role: user.role, changeUserRole: false },
+    defaultValues: { plan: user.plan, role: user.role, changeUserRole: false, fiatEnabled: user.meta.fiatEnabled },
   });
 
   const { changeUserRole } = watch();
   const { isSubmitting, isDirty, isSubmitted } = formState;
 
-  const onSubmit = async ({ changeUserRole, ...data }) => {
+  const onSubmit = async ({ changeUserRole, fiatEnabled, ...data }) => {
     try {
       const { data: updatedUser } = await axiosInstance.put(
         "/users/" + user._id,
-        { ...data, meta: { ...user.meta, requireUpgrade: false } }
+        { ...data, meta: { ...user.meta, requireUpgrade: false, fiatEnabled } }
       );
       reset(
         {
           plan: updatedUser.plan,
           role: updatedUser.role,
           changeUserRole: false,
+          fiatEnabled: updatedUser.meta.fiatEnabled
         },
         {
           isDirty: false,
@@ -221,7 +222,7 @@ function UpgradeForm({ user, mutate }) {
       );
       mutate();
     } catch (err) {
-      // console.log(err.response);
+      console.log(err.response);
     }
   };
 
@@ -263,6 +264,12 @@ function UpgradeForm({ user, mutate }) {
           <option value="admin">Admin</option>
         </Select>
       )}
+      <Checkbox
+        color="white"
+        label="Enable Fiat Transactions"
+        ref={register}
+        name="fiatEnabled"
+      />
       <Button
         type="submit"
         m="24px 0 0"
