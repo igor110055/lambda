@@ -25,7 +25,7 @@ const Pending = () => {
       {pendingMessage > 0 && (
         <Text flexalign p="0 12px" m="12px 0 12px" font="13px" opacity="0.8">
           You have a new message
-          <Badge m="0 0 0 12px" bg="orangered" size="18px" font="10px" bold>
+          <Badge m="0 0 0 12px" bg="primary" size="18px" font="10px" bold>
             {pendingMessage}
           </Badge>
           <Button
@@ -45,7 +45,7 @@ const Pending = () => {
       {pendingPayment > 0 && (
         <Text flexalign p="0 12px" m="12px 0 12px" font="13px" opacity="0.8">
           You have a pending payment
-          <Badge m="0 0 0 12px" bg="orangered" size="18px" font="10px" bold>
+          <Badge m="0 0 0 12px" bg="primary" size="18px" font="10px" bold>
             {pendingPayment}
           </Badge>
           <Button

@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { FaBars } from "react-icons/fa";
 
-import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
-
 import Backdrop from "../atoms/Backdrop";
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
@@ -56,7 +54,7 @@ const Heading = styled.h3`
   align-items: center;
   justify-content: center;
 
-  svg {
+  img {
     width: 20px;
     display: inline-block;
     margin-right: 8px;
@@ -99,7 +97,7 @@ const AuthNavBar = () => {
       <Menu onClick={toggleDropdown} />
       <Link to="/dashboard">
         <Heading>
-          <Logo />
+          <img src="/logo.png" alt="logo" />
           {process.env.REACT_APP_NAME}
         </Heading>
       </Link>

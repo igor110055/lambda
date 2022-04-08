@@ -7,7 +7,7 @@ const Container = styled.div.attrs(({ to, scrollto }) => ({
 }))`
   width: ${({ w }) => (w ? w : "100%")};
   height: ${({ h }) => (h ? h : "100%")};
-  background-color: ${({ bg, theme }) => theme.colors[bg] || (bg && bg)};
+  background: ${({ bg, theme }) => theme.colors[bg] || (bg && bg)};
   color: ${({ color, theme }) => theme.colors[color] || (color && color)};
   padding: ${({ p }) => p && p};
   border-radius: ${({ radius }) => radius && radius};
