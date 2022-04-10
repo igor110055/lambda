@@ -22,6 +22,7 @@ const Bank = () => {
     bankName: yup.string().required("Bank Name is required"),
     accountName: yup.string().required("Account Name is required"),
     accountNumber: yup.string().required("Account Number is required"),
+    accountType: yup.string(),
     routingNumber: yup.string(),
   });
 
@@ -105,9 +106,16 @@ const Bank = () => {
           name="accountNumber"
         />
         <Input
+          label="Account Type"
+          placeholder="Account Type"
+          error={errors.accountType?.message}
+          radius="8px"
+          ref={register}
+          name="accountType"
+        />
+        <Input
           label="Routing Number"
           placeholder="Routing Number"
-          type="tel"
           error={errors.routingNumber?.message}
           radius="8px"
           ref={register}
