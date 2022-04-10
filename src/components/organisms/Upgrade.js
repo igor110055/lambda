@@ -11,7 +11,7 @@ const Upgrade = (props) => {
   if (profile.meta.requireUpgrade)
     return (
       <Container p="12px" wide {...props}>
-        <Container bg="orange" p="6px" radius="8px" wide>
+        <Container bg="primary" p="6px" radius="8px" wide>
           <Text>
             Please Upgrade Your Account,{" "}
             <Text
@@ -31,7 +31,7 @@ const Upgrade = (props) => {
   if (profile.isDocumentRequested)
     return (
       <Container p="12px" wide {...props}>
-        <Container bg="orange" p="6px" radius="8px" wide>
+        <Container bg="primary" p="6px" radius="8px" wide>
           <Text>
             Please Upload Required documents,{" "}
             <Text
