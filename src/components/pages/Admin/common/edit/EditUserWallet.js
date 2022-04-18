@@ -176,7 +176,7 @@ const EditUserWallet = () => {
           <Container p="12px" wide>
             <Button
               bg="secondary"
-              color="black"
+              // color="black"
               radius="4px"
               bold
               full

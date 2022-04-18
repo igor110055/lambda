@@ -41,7 +41,7 @@ const Home = () => {
             m="0 0 0 12px"
             radius="6px"
             bg="secondary"
-            color="black"
+            // color="black"
             flexalign="true"
             to="/dashboard"
           >

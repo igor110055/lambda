@@ -120,7 +120,7 @@ const EditWallet = () => {
             {/* delete wallet */}
             <Button
               bg="secondary"
-              color="black"
+              // color="black"
               m="24px 0"
               radius="6px"
               bold

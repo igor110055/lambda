@@ -136,7 +136,7 @@ const EditPayment = () => {
             {/* delete payment */}
             <Button
               bg="secondary"
-              color="black"
+              // color="black"
               radius="6px"
               bold
               full

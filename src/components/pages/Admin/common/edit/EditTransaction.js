@@ -436,7 +436,7 @@ const EditTransaction = () => {
             {/* delete transaction */}
             <Button
               bg="secondary"
-              color="black"
+              // color="black"
               radius="6px"
               bold
               full

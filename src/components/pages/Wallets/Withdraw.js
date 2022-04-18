@@ -139,7 +139,7 @@ const Withdraw = () => {
             </Button>
             <Button
               bg="secondary"
-              color="black"
+              // color="black"
               p="12px"
               radius="6px"
               bold="true"

@@ -31,7 +31,7 @@ const Deactivated = () => {
         <Button
           type="submit"
           bg="secondary"
-          color="black"
+          // color="black"
           radius="2px"
           m="12px 0"
           full

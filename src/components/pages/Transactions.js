@@ -70,7 +70,7 @@ const Transactions = () => {
               m="0 0 0 12px"
               radius="6px"
               bg="secondary"
-              color="black"
+              // color="black"
               bold="true"
               flexalign="true"
               to="/dashboard/wallets/withdraw"

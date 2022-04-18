@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 
-import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
-
 import ProfilePic from "../molecules/ProfilePic";
 
 const Wrapper = styled.aside`
@@ -59,7 +57,7 @@ const Heading = styled.h3`
   align-items: center;
   justify-content: center;
 
-  svg {
+  img {
     width: 20px;
     display: inline-block;
     margin-right: 8px;
@@ -72,7 +70,7 @@ const NavBar = ({ action }) => {
       <Menu onClick={action} />
       <Link to="/dashboard">
         <Heading>
-          <Logo />
+          <img src="/assets/icon/favicon.png" atl="logo" />
           {process.env.REACT_APP_NAME}
         </Heading>
       </Link>

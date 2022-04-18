@@ -81,6 +81,7 @@ export const NoCard = () => {
       pointer
       flex="center"
       bg="secondary"
+      color="white"
       // border="1px dashed"
     >
       <Text p="0" font="13px" opacity="0.6">

@@ -124,7 +124,7 @@ const Banks = () => {
             m="0 0 0 12px"
             radius="6px"
             bg="secondary"
-            color="black"
+            // color="black"
             bold="true"
             to="/dashboard/wallets/withdraw"
           >

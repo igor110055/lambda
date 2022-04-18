@@ -126,7 +126,7 @@ const VerificationLevel = ({
       ) : !profile.meta.requireUpgrade ? (
         <Button
           bg="secondary"
-          color="black"
+          // color="black"
           m="12px 0"
           radius="4px"
           bold
@@ -154,7 +154,7 @@ const VerificationLevel = ({
       ) : (
         <Button
           bg="secondary"
-          color="black"
+          // color="black"
           m="12px 0"
           radius="4px"
           bold
