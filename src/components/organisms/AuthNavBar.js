@@ -97,7 +97,7 @@ const AuthNavBar = () => {
       <Menu onClick={toggleDropdown} />
       <Link to="/dashboard">
         <Heading>
-        <img src="/assets/icon/favicon.png" atl="logo" />
+        <img src="/assets/icon/favicon.png" alt="logo" />
           {process.env.REACT_APP_NAME}
         </Heading>
       </Link>
