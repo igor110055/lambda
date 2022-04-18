@@ -9,4 +9,4 @@ export const parseBalance = (balance, decimals = 2) => {
 };
 
 export const rawBalance = (balance) =>
-  parseFloat(balance.toString().replace(",", ""));
+  parseFloat(balance.toString().replaceAll(",", ""));
