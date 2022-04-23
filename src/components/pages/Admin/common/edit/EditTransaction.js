@@ -64,7 +64,6 @@ const EditTransaction = () => {
 
   useEffect(() => {
     if (transaction && !isSubmitted) {
-      // console.log("will update");
       reset(
         { ...transaction, amount: Math.abs(transaction.amount) },
         {
@@ -74,7 +73,7 @@ const EditTransaction = () => {
     }
   }, [transaction, reset, isSubmitted]);
 
-  const onSubmit = async ({ type, ...data }) => {
+  const onSubmit = async ({ type, receiver_email, ...data }) => {
     try {
       const { data: updatedTransaction } = await axiosInstance.put(
         "/transactions/" + transaction?._id,
@@ -100,7 +99,7 @@ const EditTransaction = () => {
       mutateUserTransactions();
       history.goBack();
     } catch (err) {
-      // console.log(err.response);
+      console.log(err.response);
     }
   };
 
@@ -202,6 +201,9 @@ const EditTransaction = () => {
           name="date"
           error={errors.date?.message}
         />
+        {type === "transfer" && (
+          <input hidden ref={register} name="receiver_email" defaultValue="placeholder@mail.com" />
+        )}
         {type === "investment" && (
           <>
             <Input
