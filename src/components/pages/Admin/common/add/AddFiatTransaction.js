@@ -53,8 +53,6 @@ const AddFiatTransaction = () => {
   const { isSubmitting } = formState;
   const { wallet } = watch();
 
-  console.log({wallet})
-
   const { total, available } = useAdminWalletBalance(userId, wallet);
 
   const onSubmit = async (data) => {
