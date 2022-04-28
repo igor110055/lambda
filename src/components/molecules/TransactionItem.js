@@ -81,10 +81,7 @@ export const AdminTransactionItem = ({
   showUsername,
   ...props
 }) => {
-  const to =
-    transaction.type === "referral"
-      ? null
-      : `/dashboard/admin/users/${transaction.user._id}/transactions/${transaction._id}`;
+  const to = `/dashboard/admin/users/${transaction.user._id}/transactions/${transaction._id}`
 
   const { amount } = useCoinValue(transaction.wallet, transaction.amount);
 

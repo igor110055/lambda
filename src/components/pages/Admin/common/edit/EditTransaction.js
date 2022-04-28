@@ -144,7 +144,7 @@ const EditTransaction = () => {
         </Container>
       </Container>
 
-      <Container as="form" onSubmit={handleSubmit(onSubmit)} p="12px" wide>
+      <Container as="form" onSubmit={handleSubmit(onSubmit, (e) => console.log(e))} p="12px" wide>
         <input hidden ref={register} name="type" />
         {type === "income" && (
           <Input

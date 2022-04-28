@@ -29,25 +29,6 @@ const register = async (req, res, next) => {
     const user = new User({ ...result, role: "basic" });
     const savedUser = await user.save();
 
-    // create referral bonus
-    const referralBonus = parseInt(process.env.REACT_APP_REFERRAL_BONUS);
-    if (savedUser.referrer && referralBonus && referralBonus !== NaN) {
-      const referrerBonus = new Transaction({
-        type: "referral",
-        wallet: "BTC",
-        amount: referralBonus,
-        user: savedUser.referrer,
-      });
-      const savedUserBonus = new Transaction({
-        type: "referral",
-        wallet: "BTC",
-        amount: referralBonus,
-        user: savedUser._id,
-      });
-      await referrerBonus.save();
-      await savedUserBonus.save();
-    }
-
     // sign email token
     const emailToken = await signEmailToken(savedUser.id);
 

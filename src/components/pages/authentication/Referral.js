@@ -108,7 +108,7 @@ const Referral = () => {
             <SubText font="inherit" p="0" bold>
               ${process.env.REACT_APP_REFERRAL_BONUS}
             </SubText>{" "}
-            when you sign up using their referral link.
+            when you sign up and make your first transaction using their referral link.
           </Text>
         )}
       </Container>

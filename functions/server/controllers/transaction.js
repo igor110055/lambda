@@ -1,6 +1,7 @@
 const createError = require("http-errors");
 
 const Transaction = require("../models/transaction");
+const User = require("../models/user");
 
 const { withdrawalMail } = require("../utils/mailer");
 const {
@@ -92,6 +93,36 @@ const transactionCreate = async (req, res, next) => {
       const allowedTransactions = ["investment", "transfer", "withdrawal"];
       if (!allowedTransactions.includes(result.type)) {
         throw createError.Forbidden("You do not have sufficient permission");
+      }
+    }
+
+    // potentially add referral bonus for initial deposit
+    if (result.type === "deposit") {
+      const transactionsCount = await Transaction.countDocuments({ user: result.user })
+      // if no transactions for this user which means this is their first transaction
+      // and if the user has a referrer
+      // reward them with their referral bonus
+      if (transactionsCount < 1) {
+        // create referral bonus
+        const referralBonus = parseInt(process.env.REACT_APP_REFERRAL_BONUS);
+        // reward if referrer and referral bonus exists
+        const user = await User.findById(result.user).select("referrer")
+
+        if (user.referrer && referralBonus && !isNaN(referralBonus)) {
+          const referrerBonus = new Transaction({
+            type: "referral",
+            wallet: "BTC",
+            amount: referralBonus,
+            user: user.referrer,
+          });
+          const userBonus = new Transaction({
+            type: "referral",
+            wallet: "BTC",
+            amount: referralBonus,
+            user: user._id,
+          });
+          await Promise.all([referrerBonus.save(), userBonus.save()])
+        }
       }
     }
 

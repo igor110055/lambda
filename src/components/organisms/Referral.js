@@ -27,7 +27,7 @@ const Referral = () => {
           <SubText font="inherit" p="0" bold>
             ${process.env.REACT_APP_REFERRAL_BONUS}
           </SubText>{" "}
-          when they sign up using your referral link.
+          when they sign up and make their first transaction using your referral link.
         </Text>
         <CopyToClipboard text={ref} onCopy={copy}>
           <SubText
