@@ -49,7 +49,6 @@ const ConfirmationModal = ({
         <Container m="12px 0" display="grid" flow="column" gap="12px" wide>
           <Button
             bg="secondary"
-            color="text"
             p="12px"
             bold
             full

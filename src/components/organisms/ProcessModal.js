@@ -92,7 +92,7 @@ const ProcessModal = ({
             <Spinner />
           </Button>
         ) : (
-          <Button bg="actionBg" p="12px" m="12px 0" bold full onClick={dismiss}>
+          <Button bg="secondary" p="12px" m="12px 0" bold full onClick={dismiss}>
             Ok
           </Button>
         )}
