@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import axios from "axios";
 import storage from "local-storage-fallback";
 import { useHistory, useLocation } from "react-router-dom";
@@ -21,7 +21,9 @@ import { useProfile } from "../../../hooks/useProfile";
 
 const Register = () => {
   const history = useHistory();
-  const { state } = useLocation();
+  const { state, search } = useLocation();
+
+  const query = useMemo(() => new URLSearchParams(search), [search]);
 
   const { mutate } = useProfile();
 
@@ -52,6 +54,14 @@ const Register = () => {
       formData.referrer = state.referrer;
     }
     try {
+      if (query.get("ref") === null) {
+        setError("email", {
+          type: "server",
+          message: "Unable to process your request",
+        })
+        return
+      }
+
       const { data } = await axios.post("/api/auth/register", formData);
 
       axiosInstance.defaults.headers["Authorization"] =
