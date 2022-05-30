@@ -22,7 +22,7 @@ const WalletPreview = ({ wallet, ...props }) => {
       to={`/dashboard/wallets/${wallet.symbol.toLowerCase()}`}
       {...props}
     >
-      <Container bg="bg" radius="12px" p="12px" flex="space-between" wide>
+      <Container bg="bg" radius="12px" p="12px" flex="space-between" shadow wide>
         <WalletIcon size="40px" symbol={wallet.symbol} />
         <Container flexCol="flex-start" justify="space-between" p="0 12px">
           <Text font="14px" p="0 0 8px" bold>

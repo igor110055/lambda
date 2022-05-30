@@ -28,20 +28,9 @@ const Home = () => {
         </Container>
         <Container m="12px 0 0" flex="flex-start" wide>
           <Button
-            p="8px 24px"
+            p="8px 20px"
             radius="6px"
             bg="primary"
-            bold="true"
-            to="/dashboard/wallets"
-          >
-            My Accounts
-          </Button>
-          <Button
-            p="8px 20px"
-            m="0 0 0 12px"
-            radius="6px"
-            bg="secondary"
-            // color="black"
             flexalign="true"
             to="/dashboard"
           >

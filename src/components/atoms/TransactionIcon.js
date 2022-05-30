@@ -13,18 +13,13 @@ const Wrapper = styled.div`
 
   min-width: ${({ size }) => size || "36px"};
 
-  border-radius: 6px;
+  border-radius: 50%;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background-color: ${({ theme, type }) =>
-    ["deposit", "investment"].includes(type)
-      ? theme.colors.success
-      : ["withdrawal", "transfer"].includes(type)
-      ? theme.colors.danger
-      : theme.colors.actionBg};
+  background-color: ${({ theme }) => theme.colors.actionBg};
   color: white;
 `;
 

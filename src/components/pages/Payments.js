@@ -30,27 +30,16 @@ const Payments = () => {
         </Container>
         <Container m="12px 0 0" flex="flex-start" wide>
           <Button
-            p="8px 24px"
+            p="8px 20px"
             radius="6px"
             bg="primary"
-            bold="true"
-            to="/dashboard/wallets"
-          >
-            My Accounts
-          </Button>
-          <Button
-            p="8px 20px"
-            m="0 0 0 12px"
-            radius="6px"
-            bg="secondary"
-            // color="black"
             flexalign="true"
             to="/dashboard"
           >
-            <SubText font="inherit" bold="true" p="0" m="0 8px 0 0" flexalign>
+            <SubText bold="true" p="0" m="0 8px 0 0" flexalign>
               <FaArrowLeft />
             </SubText>
-            <SubText font="inherit" bold="true" p="0" m="0">
+            <SubText bold="true" p="0" m="0">
               Go Back
             </SubText>
           </Button>

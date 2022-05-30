@@ -26,7 +26,7 @@ const GridWrapper = styled.div`
   margin-top: 48px;
 
   display: grid;
-  grid-template-columns: minmax(240px, 2fr) 8fr minmax(280px, 2fr);
+  grid-template-columns: minmax(240px, 2fr) 8fr minmax(240px, 2fr);
   grid-template-areas: "sidebar content userbar";
   grid-gap: 12px;
 
@@ -57,7 +57,7 @@ const Content = styled.main`
   }
 
   height: 100%;
-  border-radius: 6px;
+  border-radius: 8px;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     min-height: calc(100vh - 48px);

@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 
   color: ${({ theme }) => theme.colors.text};
   background-color: ${({ theme }) => theme.colors.bgContrast};
-  padding: 12px;
+  padding: 0px;
 
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  border-radius: 6px;
+  border-radius: 8px;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     border-radius: 0;
@@ -79,15 +79,14 @@ const Sidebar = ({ open, toggle }) => {
     <Container
       as="aside"
       z="10"
-      radius="4px"
+      radius="0px"
       wide
       media={{ breakpoint: "lg", overflowY: "hidden" }}
     >
       <Backdrop mobile open={open} onClick={toggle} />
       <Wrapper open={open}>
-        <Container m="12px 0 0" wide>
+        <Container m="0 0 0" wide>
           <SidebarItem name="Dashboard" to="/dashboard" exact />
-          <SidebarItem name="Wallets" to="/dashboard/wallets" />
           <SidebarItem name="Transactions" to="/dashboard/transactions" />
           <SidebarItem name="Messages" to="/dashboard/messages" />
           <SidebarItem name="Payments" to="/dashboard/payments" />

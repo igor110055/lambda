@@ -31,6 +31,27 @@ const Container = styled.div.attrs(({ to, scrollto }) => ({
     templatecolumns && templatecolumns};
   grid-template-rows: ${({ templaterows }) => templaterows && templaterows};
 
+  // shadow
+  ${({ shadow }) =>
+    shadow &&
+    css`
+      box-shadow: 0px 4px 6px 3px rgba(0, 0, 0, 0.1);
+    `}
+
+  // group-radius
+  ${({ groupradius }) =>
+    groupradius &&
+    css`
+      &:first-child { 
+        border-top-left-radius: ${({ groupradius }) => groupradius};
+        border-top-right-radius: ${({ groupradius }) => groupradius};
+      }
+      &:last-child { 
+        border-bottom-left-radius: ${({ groupradius }) => groupradius};
+        border-bottom-right-radius: ${({ groupradius }) => groupradius};
+      }
+    `}
+
   // full width and default height
   ${({ wide }) =>
     wide &&
@@ -46,6 +67,13 @@ const Container = styled.div.attrs(({ to, scrollto }) => ({
       display: flex;
       justify-content: ${({ flex }) => flex};
       align-items: center;
+    `}
+
+  // flex row with center align
+  ${({ flexGrow }) =>
+    flexGrow &&
+    css`
+      flex-grow: 1;
     `}
 
   // flex column with center align
@@ -158,13 +186,13 @@ const Container = styled.div.attrs(({ to, scrollto }) => ({
       return media.targetBelow
         ? css`
             @media screen and (max-width: ${({ theme }) =>
-                theme.breakpoints[breakpoint]}) {
+            theme.breakpoints[breakpoint]}) {
               ${mediaStyles}
             }
           `
         : css`
             @media screen and (min-width: ${({ theme }) =>
-                theme.breakpoints[breakpoint]}) {
+            theme.breakpoints[breakpoint]}) {
               ${mediaStyles}
             }
           `;

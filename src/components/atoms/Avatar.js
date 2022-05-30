@@ -14,9 +14,15 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  color: white;
+  color: ${({ color, theme }) => theme.colors[color] || color || "white"};
   font-size: ${({ font }) => font || "calc(0.4375 * var(--size))"};
+  font-weight: 500;
   cursor: pointer;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    background-color: ${({ bg, theme }) => theme.colors[bg] || bg || "white"};
+    color: ${({ color, theme }) => theme.colors[color] || color || theme.colors.primary};
+  }
 `;
 
 const Avatar = ({ name, ...props }) => {

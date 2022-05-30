@@ -35,6 +35,7 @@ export const TransactionItem = ({ transaction, ...props }) => {
       wide="wide"
       border="1px solid"
       borderbottom="none"
+      groupradius="8px"
       to={to}
       {...props}
     >

@@ -7,10 +7,11 @@ import styled, { css } from "styled-components";
 const Wrapper = styled(Link).attrs(({ to, href }) => ({
   as: href ? "a" : !to && "div",
 }))`
-  padding: 12px 16px;
-  margin-bottom: 12px;
-  border-radius: 6px;
+  padding: 18px 16px;
+  margin-bottom: 0px;
+  border-radius: 0px;
   font-size: 12px;
+  font-weight: 500;
 
   color: ${({ color, theme }) => theme.colors[color] || (color && color)};
 

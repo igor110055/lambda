@@ -1,18 +1,14 @@
 import React from "react";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 
-import Home from "./Home";
 import Withdraw from "./Withdraw";
 import Wallet from "./Wallet";
 
 const Wallets = () => {
-  const { path, url } = useRouteMatch();
+  const { path } = useRouteMatch();
 
   return (
     <Switch>
-      <Route exact path={`${path}`}>
-        <Home />
-      </Route>
       <Route path={`${path}/withdraw`}>
         <Withdraw />
       </Route>
@@ -21,7 +17,7 @@ const Wallets = () => {
       </Route>
 
       <Route>
-        <Redirect to={`${url}`} />
+        <Redirect to={`..`} />
       </Route>
     </Switch>
   );

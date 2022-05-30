@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FaBars } from "react-icons/fa";
+import { CgMenuGridO } from "react-icons/cg";
 
 import ProfilePic from "../molecules/ProfilePic";
 
@@ -19,8 +19,7 @@ const Wrapper = styled.aside`
 
   z-index: 2;
 
-  background-color: ${({ bg, theme }) =>
-    theme.colors[bg] || bg || theme.colors.bgContrast};
+  background-color: ${({ bg, theme }) => theme.colors.bgContrast};
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
@@ -30,14 +29,20 @@ const Wrapper = styled.aside`
 
   /* display: none; */
 
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    background-color: ${({ theme }) => theme.colors.board};
+    border-bottom: none;
+    color: white;
+  }
+
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.xl}) {
     padding: 0 12px;
   }
 `;
 
-const Menu = styled(FaBars)`
-  font-size: 24px;
-  width: 24px;
+const Menu = styled(CgMenuGridO)`
+  font-size: 28px;
+  width: 28px;
   display: none;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
@@ -61,6 +66,10 @@ const Heading = styled.h3`
     width: 20px;
     display: inline-block;
     margin-right: 8px;
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: none;
   }
 `;
 

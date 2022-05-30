@@ -61,18 +61,6 @@ const Transactions = () => {
               radius="6px"
               bg="primary"
               bold="true"
-              to="/dashboard/wallets"
-            >
-              My Wallets
-            </Button>
-            <Button
-              p="8px 20px"
-              m="0 0 0 12px"
-              radius="6px"
-              bg="secondary"
-              // color="black"
-              bold="true"
-              flexalign="true"
               to="/dashboard/wallets/withdraw"
             >
               Withdraw
