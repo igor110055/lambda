@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowUp, FaChevronRight, FaPlus, FaWallet } from "react-icons/fa";
+import styled from "styled-components";
 
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
@@ -20,7 +21,6 @@ import DashboardLayout from "../templates/Dashboard";
 import { useProfile } from "../../hooks/useProfile";
 import { useWallets } from "../../hooks/useWallets";
 import { useBalance } from "../../hooks/useBalance";
-import styled from "styled-components";
 
 const CtaIcon = styled(FaPlus)`
   font-size: 28px;
@@ -44,8 +44,6 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      <Upgrade />
-
       {/* portfolio start */}
       <Container p="0 12px 140px" bg="board" wide>
         <Container m="0 0 12px 0" wide>
@@ -53,6 +51,8 @@ const Dashboard = () => {
             Welcome {profile.firstName},
           </Text>
         </Container>
+        <Upgrade />
+        <Pending />
       </Container>
       <Container p="12px" m="-140px 0 0 0" flex wide>
         <Container
@@ -147,8 +147,6 @@ const Dashboard = () => {
         </Container>
       </Container>
       {/* portfolio end */}
-
-      <Pending />
 
       {/* top wallets start */}
       <Container m="12px 0 0" p="12px" display="grid" flow="column" gap="12px" scrollX wide>

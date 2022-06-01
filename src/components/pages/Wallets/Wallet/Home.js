@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams, useRouteMatch } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
+import styled from "styled-components";
 
 import Container from "../../../atoms/Container";
 import Button from "../../../atoms/Button";
@@ -12,6 +14,16 @@ import RecentTransactions from "../../../organisms/RecentTransactions";
 
 import { useWallet } from "../../../../hooks/useWallets";
 
+const CtaIcon = styled(FaPlus)`
+  font-size: 12px;
+  margin-left: 12px;
+  
+  &:hover {
+    transform: rotate(360deg);
+    transition: all 1s ease-in-out 0s;
+  }
+`
+
 const Home = () => {
   const { url } = useRouteMatch();
   const { symbol } = useParams();
@@ -22,32 +34,15 @@ const Home = () => {
     <Container display="grid" gap="12px" wide>
       <Container p="24px 12px 12px" wide>
         <WalletBalance wallet={wallet} />
-        <Container m="12px 0 0" display="grid" gap="12px" flow="column" wide>
+        <Container m="12px 0 0" display="flex" justify="flex-end" wide>
           <Button
-            p="12px"
-            bg="primary"
+            p="12px 32px"
             radius="6px"
-            full="true"
+            bg="primary"
             bold="true"
             to={`${url}/deposit`}
           >
-            Deposit
-          </Button>
-          <Button
-            p="12px"
-            bg="secondary"
-            // color="black"
-            radius="6px"
-            full="true"
-            bold="true"
-            to={{
-              pathname: "./withdraw",
-              state: {
-                wallet: symbol,
-              },
-            }}
-          >
-            Withdraw
+            Deposit <CtaIcon />
           </Button>
         </Container>
       </Container>

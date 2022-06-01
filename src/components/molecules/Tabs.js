@@ -5,6 +5,8 @@ import Button from "../atoms/Button";
 import Text from "../atoms/Text";
 
 const Tabs = ({ children, action, center, textStyle, ...props }) => {
+  children = Array.isArray(children) ? children : [children];
+
   const [active, setActive] = useState(null);
 
   const { name, ...buttonProps } = action || {};

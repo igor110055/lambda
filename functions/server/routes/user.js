@@ -96,13 +96,6 @@ router.delete(
   UserController.userWalletDelete
 );
 
-// delete user card
-router.delete(
-  "/:id/cards/:cardId",
-  permissions(["admin"]),
-  UserController.userCardDelete
-);
-
 // delete user bank
 router.delete(
   "/:id/banks/:bankId",

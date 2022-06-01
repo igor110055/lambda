@@ -18,7 +18,7 @@ const InputElement = styled.input`
   padding: ${({ p }) => p || "12px"};
   width: 100%;
 
-  font-size: 12px;
+  font-size: ${({ font }) => (font ? font : "12px")};
 
   background-color: ${({ bg, theme }) =>
     theme.colors[bg] || bg || theme.colors.bg};

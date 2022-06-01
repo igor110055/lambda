@@ -168,7 +168,7 @@ const AddTransaction = () => {
           error={errors.type?.message}
         >
           <option value="deposit">Deposit</option>
-          <option value="investment">Investment</option>
+          {/* <option value="investment">Investment</option> */}
           <option value="withdrawal">Withdrawal</option>
           <option value="transfer">Transfer</option>
           <option value="income">Income</option>

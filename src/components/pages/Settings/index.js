@@ -8,7 +8,6 @@ import ProfilePhoto from "./ProfilePhoto";
 import PersonalInformation from "./PersonalInformation";
 import Verification from "./Verification";
 import ChangePassword from "./ChangePassword";
-import Cards from "./Cards";
 import Banks from "./Banks";
 
 const Settings = () => {
@@ -31,9 +30,6 @@ const Settings = () => {
         </Route>
         <Route path={`${path}/change-password`}>
           <ChangePassword />
-        </Route>
-        <Route path={`${path}/cards`}>
-          <Cards />
         </Route>
         <Route path={`${path}/banks`}>
           <Banks />

@@ -115,7 +115,7 @@ const Home = () => {
   return (
     <Container p="12px 0" wide>
       <Container flexCol="center" p="12px" wide>
-        <ProfilePic size="64px" user={user} />
+        <ProfilePic size="64px" user={user} bg="primary" color="white" />
         <Text font="12px" p="12px 0 4px" bold>
           {user.fullName}
         </Text>

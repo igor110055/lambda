@@ -59,13 +59,14 @@ const Transaction = () => {
           <Entry title="Total Amount">
             {transaction.amount + (transaction.profit || 0)} USD
           </Entry>
-          <Container flex="center" wide>
+          <Container flex="center" m="0 0 24px 0" wide>
             <Button
               bg="primary"
-              p="8px"
+              p="16px"
               m="12px 0 0"
-              radius="4px"
+              radius="24px"
               full="full"
+              bold="true"
               to="/dashboard/transactions"
             >
               All Transactions

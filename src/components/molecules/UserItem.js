@@ -21,7 +21,8 @@ const UserItem = ({ user, ...props }) => {
       <Avatar
         size="36px"
         name={user.fullName}
-        bg={user.meta.isEmailVerified ? undefined : "orange"}
+        bg={user.meta.isEmailVerified ? "primary" : "actionBg"}
+        color="white"
       />
       <Container
         w="calc(100% - 36px)"

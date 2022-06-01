@@ -8,23 +8,13 @@ import Text from "../atoms/Text";
 import SubText from "../atoms/SubText";
 import BankBrand, { BankDefaultBrand } from "../atoms/BankBrand";
 
-import supportedBanks from "../../store/supportedBanks";
-
 const Wrapper = styled(Container)`
   transform: ${({ active }) => (active ? "scale(1)" : "scale(0.95)")};
   transition: transform 0.2s ease-in-out;
   box-shadow: 0px 4px 6px 3px rgba(0, 0, 0, 0.1);
 `;
 
-const bankColor = (name) => {
-  const bank = supportedBanks.find((b) => b.name === name);
-  return bank
-    ? { bg: bank?.color, text: "black" }
-    : { bg: "#EFF1ED", text: "black" };
-};
-
 export const Bank = ({ bank, action, active, ...props }) => {
-  const { bg, text } = bankColor(bank.bank);
   return (
     <Wrapper
       p="12px 16px 24px"
@@ -36,19 +26,22 @@ export const Bank = ({ bank, action, active, ...props }) => {
       position="relative"
       flexCol="flex-start"
       justify="space-between"
-      bg={bg}
-      color={text}
+      bg={active ? "primary" : "actionBg"}
+      color="white"
       active={active}
       onClick={() => (action ? action(bank) : undefined)}
       {...props}
     >
       <Container flex="flex-start" align="flex-start" wide>
-        <BankDefaultBrand size="36px" color={text} />
+        <BankDefaultBrand size="36px" color="white" />
       </Container>
       <Container flexCol="flex-start" wide>
         <Container>
-          <Text font="18px" p="0" m="0 0 24px 0" opacity="0.8" bold>
-            {bank.userId}
+          <Text font="16px" p="0" m="0 0 24px 0" opacity="0.8" bold>
+            {bank.accountName}
+          </Text>
+          <Text font="14px" p="0" m="0 0 24px 0" opacity="0.8" bold>
+            {bank.accountNumber}
           </Text>
         </Container>
         <Container flex="space-between">
@@ -69,9 +62,7 @@ export const NoBank = () => {
       radius="14px"
       pointer
       flex="center"
-      bg="secondary"
-      color="white"
-      // border="1px dashed"
+      border="1px dashed"
     >
       <Text p="0" font="13px" opacity="0.6">
         No Linked Bank
@@ -90,7 +81,7 @@ export const AdminBankItem = ({ bank, action, ...props }) => {
       onClick={action ? () => action(bank) : undefined}
       {...props}
     >
-      <BankBrand logo={bank.name} />
+      <BankBrand />
       <Container
         w="calc(100% - 36px)"
         p="2px 0px 2px 12px"
@@ -99,12 +90,12 @@ export const AdminBankItem = ({ bank, action, ...props }) => {
       >
         <Container flexCol="flex-start" o="hidden">
           <Text font="13px" p="0" bold>
-            {bank.name}
+            {bank.accountName}
           </Text>
         </Container>
         <Container flexCol="flex-end">
           <Text font="12px" p="0">
-            {bank.code.toUpperCase()}
+            {bank.bank.toUpperCase()}
           </Text>
         </Container>
       </Container>
@@ -113,14 +104,13 @@ export const AdminBankItem = ({ bank, action, ...props }) => {
 };
 
 export const BankItem = ({ bank, action, ...props }) => {
-  const selectedBank = supportedBanks.find((b) => b.name === bank.bank);
 
   return (
     <Container
       p="12px"
       m="12px 0"
       border="1px solid"
-      radius="12px"
+      radius="4px"
       flex="space-between"
       wide="true"
       onClick={() => (action ? action(bank) : undefined)}
@@ -128,14 +118,14 @@ export const BankItem = ({ bank, action, ...props }) => {
     >
       <Container flexCol="flex-start" wide>
         <Text font="13px" p="0" m="0 0 4px 0" bold>
-          {bank.userId}
+          {bank.accountName}
         </Text>
         <Text font="10px" p="0" opacity="0.6">
           {bank.bank.toUpperCase()}
         </Text>
       </Container>
 
-      <BankDefaultBrand size="26px" logo={bank.bank} bg={selectedBank?.color} />
+      <BankDefaultBrand size="26px" />
     </Container>
   );
 };

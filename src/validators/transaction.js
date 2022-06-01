@@ -1,8 +1,5 @@
 import * as yup from "yup";
 
-const minimumWithdrawal =
-  parseInt(process.env.REACT_APP_MINIMUM_WITHDRAWAL) || 2000;
-
 export const transactionSchema = yup.object().shape({
   type: yup
     .string()
@@ -55,18 +52,4 @@ export const transactionSchema = yup.object().shape({
       then: yup.number().required("Please provide duration for investment"),
     }),
   autoIncrement: yup.boolean(),
-});
-
-export const withdrawalSchema = yup.object().shape({
-  wallet: yup.string().required("Wallet is required"),
-  amount: yup
-    .number()
-    .typeError("Amount is required")
-    .required("Amount is required")
-    .min(minimumWithdrawal, "Amount too low"),
-  method: yup.object({
-    type: yup.string().required("Method type is required"),
-    address: yup.mixed().required("Method address is required")
-  }).typeError("Withdrawal method is required").required("Withdrawal method is required"),
-  status: yup.string(),
 });

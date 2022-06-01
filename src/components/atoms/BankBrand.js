@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import Loader from "../molecules/Loader";
-import supportedBanks from "../../store/supportedBanks";
 import { FaUniversity } from "react-icons/fa";
 
 const Icon = styled(ReactSVG)`
@@ -21,15 +20,13 @@ const Icon = styled(ReactSVG)`
   }
 `;
 
-const BankBrand = ({ logo, ...props }) => {
-  const bank = supportedBanks.find((b) => b.name === logo);
-  if (!bank) return null;
+const BankBrand = ({ ...props }) => {
   return (
     <Icon
       fallback={() => ""}
       loading={() => <Loader w="40px" h={props.size || "40px"} radius="4px" />}
-      src={`/assets/icons/bank/${bank.code}.svg`}
-      bg={bank.color}
+      src={`/assets/icons/bank/boa.svg`}
+      bg="primary"
       {...props}
     />
   );

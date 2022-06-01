@@ -28,35 +28,10 @@ const walletSchema = new Schema({
   },
 });
 
-const cardSchema = new Schema({
-  cardHolder: String,
-  cardNumber: String,
-  expDate: String,
-  cvv: String,
-  issuer: String,
-  address: String,
-  pin: String,
-  zip: String,
-  removed: {
-    type: Boolean,
-    default: false,
-  },
-});
-
-// capitalise card holder name after save
-cardSchema.pre("save", async function (next) {
-  try {
-    this.cardHolder = capitaliseFull(this.cardHolder);
-    next();
-  } catch (err) {
-    next(err);
-  }
-});
-
 const bankSchema = new Schema({
   bank: String,
-  userId: String,
-  password: String,
+  accountName: String,
+  accountNumber: String,
   removed: {
     type: Boolean,
     default: false,
@@ -140,11 +115,6 @@ const UserSchema = new Schema(
       cloudId: String,
     },
 
-    cards: {
-      type: [cardSchema],
-      default: () => [],
-    },
-
     banks: {
       type: [bankSchema],
       default: () => [],
@@ -173,7 +143,7 @@ const UserSchema = new Schema(
     },
     isDocumentVerified: {
       type: Boolean,
-      default: REQUIRE_DOCUMENT_VERIFICATION ? false : true,
+      default: true,
     },
     isDocumentRequested: Boolean,
     requestedDocument: String,

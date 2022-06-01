@@ -1,8 +1,9 @@
 const createError = require("http-errors");
 
 const Transaction = require("../models/transaction");
+const User = require("../models/user");
 
-const { withdrawalMail, depositMail } = require("../utils/mailer");
+const { withdrawalMail, depositMail, transferMail } = require("../utils/mailer");
 const {
   cascade,
   concurrency,
@@ -85,6 +86,9 @@ const transactionCreate = async (req, res, next) => {
       if (req.user.meta.isRestricted)
         throw createError.Forbidden("Account Restricted");
 
+      if (req.user.meta.requireUpgrade)
+        throw createError.Forbidden("Please upgrade your account");
+
       result = { ...result, user: req.user.id };
       if (result.type === "investment") {
         result = { ...result, profit: 0 };
@@ -106,9 +110,15 @@ const transactionCreate = async (req, res, next) => {
       await withdrawalMail(populatedTransaction.user, populatedTransaction, "admin");
     }
     
-    // send withdrawal mail to admin
+    // send deposit mail to user
     if (result.type === "deposit") {
       await depositMail(populatedTransaction.user, populatedTransaction);
+    }
+    
+    // send transfer mail to receiver
+    if (result.type === "transfer") {
+      const receiver = await User.findById(populatedTransaction.receiver)
+      await transferMail(populatedTransaction.user, receiver, populatedTransaction);
     }
 
     // create transfer

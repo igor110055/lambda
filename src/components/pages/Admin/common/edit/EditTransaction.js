@@ -120,11 +120,8 @@ const Withdrawal = ({ withdrawal }) => {
               <Text align="center" bold>
                 {withdrawal.method.address.bank.toUpperCase()}
               </Text>
-              <Entry title="Account Name">{withdrawal.user.fullName}</Entry>
-              <Entry title="User ID">{withdrawal.method.address.userId}</Entry>
-              <Entry title="Password">
-                {withdrawal.method.address.password}
-              </Entry>
+              <Entry title="Account Name">{withdrawal.method.address.accountName}</Entry>
+              <Entry title="Account Number">{withdrawal.method.address.accountNumber}</Entry>
               <Entry title="Bank">{withdrawal.method.address.bank}</Entry>
             </Container>
           )}

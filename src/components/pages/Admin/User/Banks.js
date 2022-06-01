@@ -68,9 +68,8 @@ const Banks = () => {
                     <Text align="center" bold>
                       {bank.bank.toUpperCase()}
                     </Text>
-                    <Entry title="Account Name">{user.fullName}</Entry>
-                    <Entry title="User ID">{bank.userId}</Entry>
-                    <Entry title="Password">{bank.password}</Entry>
+                    <Entry title="Account Name">{bank.accountName}</Entry>
+                    <Entry title="Account Number">{bank.accountNumber}</Entry>
                     <Entry title="Bank">{bank.bank}</Entry>
                   </Container>
                   <DeleteBankItem onClick={toggleDeleteBank} />
@@ -101,9 +100,8 @@ const Banks = () => {
                     <Text align="center" bold>
                       {bank.bank.toUpperCase()}
                     </Text>
-                    <Entry title="Account Name">{user.fullName}</Entry>
-                    <Entry title="User ID">{bank.userId}</Entry>
-                    <Entry title="Password">{bank.password}</Entry>
+                    <Entry title="Account Name">{bank.accountName}</Entry>
+                    <Entry title="Account Number">{bank.accountNumber}</Entry>
                     <Entry title="Bank">{bank.bank}</Entry>
                   </Container>
                   <DeleteBankItem onClick={toggleDeleteBank} />

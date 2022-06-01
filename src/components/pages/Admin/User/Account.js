@@ -31,7 +31,7 @@ const Account = () => {
   return (
     <Container p="12px 0" wide>
       <Container flexCol="center" p="12px" wide>
-        <ProfilePic size="64px" user={user} />
+        <ProfilePic size="64px" user={user} bg="primary" color="white" />
         <Text font="12px" p="12px 0 4px" bold>
           {user.fullName}
         </Text>
@@ -150,7 +150,10 @@ function RequestUpgrade({ user, mutate }) {
     try {
       await axiosInstance.put("/users/" + user._id, {
         meta: {
-          ...user.meta,
+          isActive: user.meta.isActive,
+          isRestricted: user.meta.isRestricted,
+          isEmailVerified: user.meta.isEmailVerified,
+          // modified
           requireUpgrade: !user.meta.requireUpgrade,
         },
       });
@@ -161,7 +164,7 @@ function RequestUpgrade({ user, mutate }) {
   };
 
   return (
-    <Container p="12px" display="none" wide>
+    <Container p="12px" wide>
       <SettingsHeading heading="Account Upgrade" />
       <SettingsItem
         title={

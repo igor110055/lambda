@@ -8,8 +8,6 @@ const auth = require("../middlewares/auth");
 const matchId = require("../middlewares/matchId");
 const validate = require("../middlewares/validate");
 
-// validators
-const { cardSchema } = require("../validators/card");
 const { bankSchema } = require("../validators/bank");
 const {
   profileByEmailSchema,
@@ -45,12 +43,6 @@ router.post(
   validate(profilePasswordUpdateSchema),
   ProfileController.profilePasswordUpdate
 );
-
-// add card
-router.post("/card", validate(cardSchema), ProfileController.profileCardCreate);
-
-// remove card
-router.delete("/card/:id", ProfileController.profileCardRemove);
 
 // add bank
 router.post("/bank", validate(bankSchema), ProfileController.profileBankCreate);

@@ -8,11 +8,11 @@ import Container from "../atoms/Container";
 import Text from "../atoms/Text";
 import SubText from "../atoms/SubText";
 import Input from "../atoms/Input";
-import Select from "../atoms/Select";
 import Button from "../atoms/Button";
 import Spinner from "../atoms/Spinner";
 
 import Tabs from "../molecules/Tabs";
+import ControlledWithdrawalInput from "../molecules/ControlledWithdrawalInput";
 
 import ConfirmationModal from "../organisms/ConfirmationModal";
 import ProcessModal from "../organisms/ProcessModal";
@@ -32,7 +32,7 @@ const WalletActionTab = (props) => {
   const { show, processing, response, success, start, complete, fail, close } =
     useProcess();
 
-  const makeTransaction = async (tx) => {
+  const makeTransaction = async (tx, cb) => {
     // console.log("submitting");
     const transaction = { ...tx, user: profile._id };
     try {
@@ -40,13 +40,10 @@ const WalletActionTab = (props) => {
       await axiosInstance.post("/transactions", transaction);
       complete("Transaction Successful");
       mutate();
+      cb()
     } catch (err) {
       // console.log(err.response);
-      fail(
-        err.response.data.message === "Account Restricted"
-          ? "Your Account has been temporarily restricted"
-          : undefined
-      );
+      fail(err.response.data.message);
     }
   };
 
@@ -65,8 +62,8 @@ const WalletActionTab = (props) => {
         }}
         {...props}
       >
-        <Container name="Invest" p="12px" wide>
-          <Invest action={makeTransaction} />
+        <Container name="Withdraw" p="12px" wide>
+          <Withdraw action={makeTransaction} />
         </Container>
         <Container name="Transfer" p="12px" wide>
           <Transfer action={makeTransaction} />
@@ -83,144 +80,6 @@ const WalletActionTab = (props) => {
     </>
   );
 };
-
-function Invest({ action }) {
-  const { symbol } = useParams();
-  const { available } = useWalletBalance(symbol);
-
-  const {
-    show: showInvestmentModal,
-    open: openInvestmentModal,
-    close: closeInvestmentModal,
-  } = useToggle();
-
-  const balance = rawBalance(available);
-
-  const schema = yup.object().shape({
-    amount: yup
-      .number()
-      .typeError("Minimum amount is 100 USD")
-      .required("Amount is required")
-      .min(100, "Minimum amount is 100 USD")
-      .max(balance, "You do not have sufficient balance"),
-    duration: yup.number().required(),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState,
-    reset,
-    setValue,
-    getValues,
-    errors,
-  } = useForm({
-    defaultValues: {
-      amount: null,
-      duration: 7,
-    },
-    resolver: yupResolver(schema),
-  });
-
-  const { amount } = watch();
-  const { isSubmitting } = formState;
-
-  const autoIncrementProfit =
-    process.env.REACT_APP_AUTO_INCREMENT_PROFIT &&
-    process.env.REACT_APP_AUTO_INCREMENT_PROFIT.toLowerCase() === "true";
-
-  const makeInvestment = async () => {
-    const formData = getValues();
-    // console.log("submitting investment");
-    action({
-      ...formData,
-      type: "investment",
-      wallet: symbol,
-      autoIncrement: autoIncrementProfit,
-    });
-    reset({
-      amount: null,
-      duration: 7,
-    });
-  };
-
-  const setMax = () =>
-    setValue("amount", balance, {
-      shouldValidate: true,
-    });
-
-  return (
-    <Container as="form" onSubmit={handleSubmit(openInvestmentModal)} wide>
-      <Text color="white" p="12px 8px 0" bold flexalign justify="flex-end">
-        {available} USD
-        <SubText
-          bg="bg"
-          color="text"
-          font="11px"
-          p="6px 8px"
-          m="0 0 0 12px"
-          radius="4px"
-          bold
-          pointer
-          onClick={setMax}
-        >
-          MAX
-        </SubText>
-      </Text>
-      <Input
-        color="white"
-        radius="8px"
-        label="Amount"
-        placeholder="Amount in USD"
-        type="number"
-        ref={register({
-          valueAsNumber: true,
-        })}
-        name="amount"
-        error={errors.amount?.message}
-      />
-      <Select
-        color="white"
-        radius="8px"
-        label="Duration"
-        ref={register({
-          valueAsNumber: true,
-        })}
-        name="duration"
-      >
-        <option value="7">7 Days</option>
-        <option value="14">14 Days</option>
-        <option value="21">21 Days</option>
-        <option value="30">1 Month</option>
-        <option value="60">2 Months</option>
-        <option value="90">3 Months</option>
-      </Select>
-
-      <Button
-        type="submit"
-        bg="white"
-        color="black"
-        bold
-        full
-        m="24px 0 0"
-        p="14px"
-        radius="8px"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? <Spinner /> : "Invest"}
-      </Button>
-
-      <ConfirmationModal
-        open={showInvestmentModal}
-        dismiss={closeInvestmentModal}
-        action={makeInvestment}
-        title="Confirm Investment"
-        message={`You are about to invest ${amount} USD from your ${symbol.toUpperCase()} wallet`}
-      />
-    </Container>
-  );
-}
 
 function Transfer({ action }) {
   const { profile } = useProfile();
@@ -242,7 +101,7 @@ function Transfer({ action }) {
       .required("Amount is required")
       .min(100, "Minimum amount is 100 USD")
       .max(balance, "You do not have sufficient balance"),
-    email: yup.string().email("Invalid Email").required("Email is required"),
+    email: yup.string().email("Invalid Email").required("Recipient is required"),
   });
 
   const {
@@ -298,18 +157,17 @@ function Transfer({ action }) {
   const makeTransfer = () => {
     const { email, receiver_name, ...formData } = getValues();
     // console.log("submiting transfer");
-    action({ ...formData, type: "transfer", wallet: symbol });
-    reset({
+    action({ ...formData, type: "transfer", wallet: symbol }, () => reset({
       amount: null,
       email: "",
       receiver: "",
       receiver_name: "",
-    });
+    }));
   };
 
   return (
     <Container as="form" onSubmit={handleSubmit(getReceiver)} wide>
-      <Text color="white" p="12px 8px 0" bold flexalign justify="flex-end">
+      <Text color="white" p="24px 8px 0" bold flexalign justify="flex-end">
         {available} USD
         <SubText
           bg="bg"
@@ -327,10 +185,12 @@ function Transfer({ action }) {
       </Text>
       <Input
         color="white"
-        radius="8px"
+        radius="4px"
         label="Amount"
         placeholder="Amount in USD"
         type="number"
+        p="24px 12px"
+        m="12px 0"
         ref={register({
           valueAsNumber: true,
         })}
@@ -339,10 +199,12 @@ function Transfer({ action }) {
       />
       <Input
         color="white"
-        radius="8px"
+        radius="4px"
         type="email"
         label="Recipient Email"
         placeholder="Recipient Email Address"
+        m="12px 0"
+        p="24px 12px"
         ref={register}
         name="email"
         error={errors.email?.message}
@@ -357,8 +219,8 @@ function Transfer({ action }) {
         bold
         full
         m="24px 0 0"
-        p="14px"
-        radius="8px"
+        p="24px"
+        radius="4px"
         disabled={isSubmitting}
       >
         {isSubmitting ? <Spinner /> : "Transfer"}
@@ -373,6 +235,137 @@ function Transfer({ action }) {
       />
     </Container>
   );
+}
+
+function Withdraw({ action }) {
+  const { profile } = useProfile();
+  const { symbol } = useParams();
+  const { available } = useWalletBalance(symbol);
+
+  const {
+    show: showWithdrawalModal,
+    open: openWithdrawalModal,
+    close: closeWithdrawalModal,
+  } = useToggle();
+
+  const balance = rawBalance(available);
+  const minimumWithdrawal = parseInt(process.env.REACT_APP_MINIMUM_WITHDRAWAL) || 2000;
+
+  const schema = yup.object().shape({
+    amount: yup
+      .number()
+      .typeError("Amount is required")
+      .required("Amount is required")
+      .min(minimumWithdrawal, "Amount too low")
+      .max(balance, "You do not have sufficient balance"),
+    method: yup.object({
+      type: yup.string().required("Method type is required"),
+      address: yup.mixed().required("Method address is required")
+    }).typeError("Withdrawal method is required").required("Withdrawal method is required")
+  });
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,
+    formState,
+    setValue,
+    getValues,
+    reset,
+    errors,
+  } = useForm({
+    defaultValues: {
+      amount: null,
+      method: null,
+    },
+    resolver: yupResolver(schema),
+  });
+
+  const { amount } = watch();
+  const { isSubmitting } = formState;
+
+  const setMax = () =>
+    setValue("amount", balance, {
+      shouldValidate: true,
+    });
+
+  const makeWithdrawal = async () => {
+    const formData = getValues();
+    action({ ...formData, type: "withdrawal", wallet: symbol, status: "pending" }, () => reset({
+      amount: null,
+      method: null,
+    }));
+  };
+
+  return (
+    <Container as="form" onSubmit={handleSubmit(openWithdrawalModal)} wide>
+      <Text color="white" p="24px 8px 0" bold flexalign justify="flex-end">
+        {available} USD
+        <SubText
+          bg="bg"
+          color="text"
+          font="11px"
+          p="6px 8px"
+          m="0 0 0 12px"
+          radius="4px"
+          bold
+          pointer
+          onClick={setMax}
+        >
+          MAX
+        </SubText>
+      </Text>
+      <Input
+        color="white"
+        radius="4px"
+        label="Amount"
+        placeholder="Amount in USD"
+        type="number"
+        m="12px 0"
+        p="24px 12px"
+        ref={register({
+          valueAsNumber: true,
+        })}
+        name="amount"
+        error={errors.amount?.message}
+      />
+      <ControlledWithdrawalInput
+        color="white"
+        radius="4px"
+        m="12px 0"
+        p="12px 12px"
+        label="Withdrawal Method"
+        placeholder="Withdrawal Method"
+        banks={profile.banks}
+        control={control}
+        name="method"
+        error={errors.method?.message}
+      />
+
+      <Button
+        type="submit"
+        bg="white"
+        color="black"
+        full
+        m="24px 0 0"
+        p="24px"
+        radius="4px"
+        bold
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? <Spinner /> : "Withdraw"}
+      </Button>
+
+      <ConfirmationModal
+        open={showWithdrawalModal}
+        dismiss={closeWithdrawalModal}
+        action={makeWithdrawal}
+        title="Confirm Withdrawal"
+        message={`Withdraw ${amount} USD from your ${symbol.toUpperCase()} wallet`}
+      />
+    </Container>
+  )
 }
 
 export default WalletActionTab;

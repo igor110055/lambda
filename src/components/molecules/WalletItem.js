@@ -183,12 +183,13 @@ export const WalletItemFullCard = ({ wallet, ...props }) => {
 
   return (
     <Container
-      m="0 0 12px 0"
-      radius="8px"
+      m="0 0 24px 0"
+      radius="16px"
       bg="bg"
       display="grid"
       gap="12px"
       wide="wide"
+      shadow
       {...props}
     >
       <Container

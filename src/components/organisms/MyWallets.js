@@ -14,24 +14,26 @@ const MyWallets = (props) => {
 
   return (
     <Section
-      heading="My Wallets"
+      heading="Your Wallets"
       wide
-      text={{
-        name: "View All",
-        color: "grey",
-        p: "0",
-        to: "/dashboard/wallets",
+      p="0"
+      hStyles={{
+        p: "0 12px"
       }}
       {...props}
     >
       {loading ? (
-        <WalletItemFullCardLoader />
+        <Container p="0 12px" wide>
+          <WalletItemFullCardLoader />
+        </Container>
       ) : wallets.length ? (
-        wallets.map((wallet) => (
-          <WalletItemFullCard key={wallet._id} wallet={wallet} />
-        ))
+        <Container p="0 12px" wide>
+          {wallets.map((wallet) => (
+            <WalletItemFullCard key={wallet._id} wallet={wallet} />
+          ))}
+        </Container>
       ) : (
-        <Container minH="240px" flex="center">
+        <Container minH="240px" p="0 12px" flex="center">
           <Text opacity="0.6" bold>
             No Wallets
           </Text>

@@ -177,8 +177,8 @@ const Banks = () => {
             <Text align="center" bold>
               {activeBank.bank.toUpperCase()}
             </Text>
-            <Entry title="Account Name">{profile.fullName}</Entry>
-            <Entry title="User ID">{activeBank.userId}</Entry>
+            <Entry title="Account Name">{activeBank.accountName}</Entry>
+            <Entry title="Account Number">{activeBank.accountNumber}</Entry>
             <Entry title="Bank">{activeBank.bank}</Entry>
 
             <Button

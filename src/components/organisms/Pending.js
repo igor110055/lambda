@@ -1,5 +1,6 @@
 import React from "react";
 
+import Container from "../atoms/Container";
 import Text from "../atoms/Text";
 import Button from "../atoms/Button";
 import Badge from "../atoms/Badge";
@@ -23,44 +24,48 @@ const Pending = () => {
   return (
     <>
       {pendingMessage > 0 && (
-        <Text flexalign p="0 12px" m="12px 0 12px" font="13px" opacity="0.8">
-          You have a new message
-          <Badge m="0 0 0 12px" bg="orangered" size="18px" font="10px" bold>
-            {pendingMessage}
-          </Badge>
-          <Button
-            font="12px"
-            p="0 12px"
-            m="0 0 0 auto"
-            bg="bg"
-            color="text"
-            radius="12px"
-            bold="bold"
-            to="/dashboard/messages"
-          >
-            View
-          </Button>
-        </Text>
+        <Container m="12px 0" bg="white" p="6px" radius="8px" shadow wide>
+          <Text flexalign font="13px" opacity="0.8">
+            You have a new message
+            <Badge m="0 0 0 12px" bg="orangered" size="18px" font="10px" bold>
+              {pendingMessage}
+            </Badge>
+            <Button
+              font="12px"
+              p="0 12px"
+              m="0 0 0 auto"
+              bg="bg"
+              color="text"
+              radius="12px"
+              bold="bold"
+              to="/dashboard/messages"
+            >
+              View
+            </Button>
+          </Text>
+        </Container>
       )}
       {pendingPayment > 0 && (
-        <Text flexalign p="0 12px" m="12px 0 12px" font="13px" opacity="0.8">
-          You have a pending payment
-          <Badge m="0 0 0 12px" bg="orangered" size="18px" font="10px" bold>
-            {pendingPayment}
-          </Badge>
-          <Button
-            font="12px"
-            p="0 12px"
-            m="0 0 0 auto"
-            bg="bg"
-            color="text"
-            radius="12px"
-            bold="true"
-            to="/dashboard/payments"
-          >
-            View
-          </Button>
-        </Text>
+        <Container m="12px 0" bg="white" p="6px" radius="8px" shadow wide>
+          <Text flexalign font="13px" opacity="0.8">
+            You have a pending payment
+            <Badge m="0 0 0 12px" bg="orangered" size="18px" font="10px" bold>
+              {pendingPayment}
+            </Badge>
+            <Button
+              font="12px"
+              p="0 12px"
+              m="0 0 0 auto"
+              bg="bg"
+              color="text"
+              radius="12px"
+              bold="true"
+              to="/dashboard/payments"
+            >
+              View
+            </Button>
+          </Text>
+        </Container>
       )}
     </>
   );

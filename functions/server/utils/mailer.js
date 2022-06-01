@@ -89,6 +89,20 @@ const depositMail = async (user, transaction) => {
   })
 };
 
+const transferMail = async (sender, receiver, transaction) => {
+  await mailer({
+    to: receiver.email,
+    subject: transaction.wallet + " Transfer",
+    template: "transfer",
+    context: {
+      name: receiver.firstName,
+      sender: sender.firstName + " " + sender.lastName,
+      amount: Math.abs(transaction.amount),
+      wallet: transaction.wallet
+    },
+  })
+};
+
 const customMailer = async ({ from, email, title, body }) => {
   const resp = await mailer({
     from: `${app_name} <${from}@${process.env.REACT_APP_DOMAIN}>`,
@@ -119,6 +133,7 @@ module.exports = {
   passwordResetMail,
   withdrawalMail,
   depositMail,
+  transferMail,
   customMailer,
   inboundMailer,
 };

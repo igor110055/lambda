@@ -5,80 +5,57 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
 import Input from "../atoms/Input";
-import Select from "../atoms/Select";
 import Button from "../atoms/Button";
 import Spinner from "../atoms/Spinner";
 
 import { bankSchema } from "../../validators/bank";
 
-import supportedBanks from "../../store/supportedBanks";
-
 const BankForm = ({ onSubmit }) => {
-  const { register, handleSubmit, errors, formState, watch } = useForm({
+  const { register, handleSubmit, errors, formState } = useForm({
     defaultValues: {
       bank: "",
-      userId: "",
-      password: "",
-      bankName: null,
+      accountName: "",
+      accountNumber: "",
     },
     resolver: yupResolver(bankSchema),
   });
-
-  const { bank } = watch();
 
   const { isSubmitting } = formState;
 
   return (
     <Container as="form" onSubmit={handleSubmit(onSubmit)} wide>
-      <Select
-        label="Bank"
-        radius="8px"
-        name="bank"
-        ref={register}
-        error={errors.bank?.message}
-      >
-        <option value="">-- Choose Bank --</option>
-        {supportedBanks.map((bank) => (
-          <option key={bank.code} value={bank.name}>
-            {bank.official_name}
-          </option>
-        ))}
-        <option value="others">Others</option>
-      </Select>
-      {bank === "others" && (
-        <Input
-          label="Bank Name"
-          placeholder="Bank Name"
-          radius="8px"
-          m="12px 0"
-          ref={register}
-          name="bankName"
-          error={errors.bankName?.message}
-        />
-      )}
       <Input
-        label="User ID"
-        placeholder="User ID"
+        label="Bank Name"
+        placeholder="Bank Name"
         radius="8px"
         m="12px 0"
         ref={register}
-        name="userId"
-        error={errors.userId?.message}
+        name="bank"
+        error={errors.bankName?.message}
+        />
+      <Input
+        label="Account Name"
+        placeholder="Account Name"
+        radius="8px"
+        m="12px 0"
+        ref={register}
+        name="accountName"
+        error={errors.accountName?.message}
       />
       <Input
-        label="Password"
-        placeholder="Secure Password / PIN"
-        type="password"
+        label="Account Number"
+        placeholder="Account Number"
+        type="tel"
         radius="8px"
         m="12px 0"
         ref={register}
-        name="password"
-        error={errors.password?.message}
+        name="accountNumber"
+        error={errors.accountNumber?.message}
       />
 
       <Text font="12px" p="0" align="center" multiline>
         We use Yodlee to confirm your bank details and to check your account and
-        transactions as needed, which helps your transactions go through
+        transactions as needed, which ensures your transactions go through
         securely.
       </Text>
 

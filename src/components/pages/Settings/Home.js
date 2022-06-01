@@ -29,7 +29,7 @@ const Home = () => {
     <Container p="12px" wide>
       <Container p="24px" flexCol="center" position="relative" wide>
         <Container w="80px" to={`${url}/profile-photo`}>
-          <ProfilePic size="80px" />
+          <ProfilePic size="80px" bg="primary" color="white" />
         </Container>
         <Text
           p="0"
@@ -112,11 +112,6 @@ const Home = () => {
           title="Profile Photo"
           body="Upload profile photo"
           to={`${url}/profile-photo`}
-        />
-        <SettingsItem
-          title="Manage Cards"
-          body="Add new card or manage existing withdrawal methods"
-          to={`${url}/cards`}
         />
         {bankWithdrawal && (
           <SettingsItem

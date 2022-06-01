@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import {
   FaChevronLeft,
-  FaCreditCard,
-  FaPaypal,
   FaUniversity,
 } from "react-icons/fa";
-import { AiFillDollarCircle } from "react-icons/ai";
 
 import Container from "../atoms/Container";
 import SubText from "../atoms/SubText";
@@ -13,7 +10,6 @@ import Text from "../atoms/Text";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
 
-import { CreditCardItem, AddCreditCardItem } from "../molecules/CreditCard";
 import { BankItem, AddBankItem } from "../molecules/Bank";
 import Modal from "../molecules/Modal";
 import WalletInput from "../molecules/WalletInput";
@@ -22,10 +18,10 @@ import supportedWallets from "../../store/supportedWallets";
 
 const ViewButton = ({ title, icon, ...props }) => (
   <Container
-    p="14px"
+    p="24px"
     m="12px 0"
-    bg="bg"
-    radius="12px"
+    border="1px solid"
+    radius="4px"
     flex="center"
     pointer
     wide
@@ -49,7 +45,7 @@ const WithdrawalPicker = ({
   dismiss: dismissModal,
   noadd,
 }) => {
-  const [view, setView] = useState("intro");
+  const [view, setView] = useState("bank");
 
   const dismiss = () => {
     dismissModal();
@@ -94,11 +90,6 @@ const WithdrawalPicker = ({
         </Container>
         {view === "intro" ? (
           <Container flexCol="center" h="calc(100% - 48px)" scroll>
-            <ViewButton
-              title="Withdraw to Card"
-              icon={<FaCreditCard />}
-              onClick={() => setView("card")}
-            />
             {bankWithdrawal && (
               <ViewButton
                 title="Withdraw to Bank"
@@ -106,59 +97,16 @@ const WithdrawalPicker = ({
                 onClick={() => setView("bank")}
               />
             )}
-            <ViewButton
-              title="Withdraw to Paypal"
-              icon={<FaPaypal />}
-              onClick={() => setView("paypal")}
-            />
-            <ViewButton
-              title="Withdraw to Skrill"
-              icon={<AiFillDollarCircle />}
-              onClick={() => setView("skrill")}
-            />
-            <ViewButton
-              title="Withdraw to Wallet Address"
-              icon={<FaCreditCard />}
-              onClick={() => setView("address")}
-            />
           </Container>
-        ) : view === "card" ? (
-          <Cards cards={cards} action={action} noadd={noadd} />
         ) : view === "bank" ? (
           <Banks banks={banks} action={action} noadd={noadd} />
-        ) : view === "paypal" ? (
-          <Paypal action={action} />
-        ) : view === "skrill" ? (
-          <Skrill action={action} />
-        ) : (
-          view === "address" && <Address action={action} />
-        )}
+        ) : view === "address" ? (
+          <Address banks={banks} action={action} noadd={noadd} />
+        ) : null}
       </Container>
     </Modal>
   );
 };
-
-function Cards({ cards, action: parentAction, noadd }) {
-  const action = (selected) => parentAction(selected, "card");
-
-  return (
-    <Container h="calc(100% - 48px)" scroll>
-      {cards
-        .filter((c) => !c.removed)
-        .map((card) => (
-          <CreditCardItem key={card._id} nolink action={action} card={card} />
-        ))}
-      {!noadd && <AddCreditCardItem />}
-      {!cards.length && (
-        <Container minH="120px" flex="center" wide>
-          <Text opacity="0.6" bold>
-            No card
-          </Text>
-        </Container>
-      )}
-    </Container>
-  );
-}
 
 function Banks({ banks, action: parentAction, noadd }) {
   const action = (selected) => parentAction(selected, "bank");
@@ -221,72 +169,6 @@ function Address({ action: parentAction }) {
         wallet={wallet.value}
         wallets={supportedWallets}
         error={wallet.error}
-      />
-      <Button bg="primary" full m="12px 0" radius="8px" onClick={action}>
-        Done
-      </Button>
-    </Container>
-  );
-}
-
-function Paypal({ action: parentAction }) {
-  const [email, setEmail] = useState({ value: "", error: null });
-
-  const handleChange = (e) => {
-    setEmail({ error: null, value: e.target.value });
-  };
-
-  const action = () => {
-    if (!email.value)
-      return setEmail((a) => ({
-        ...a,
-        error: "Please Enter Paypal Email Address",
-      }));
-    parentAction({ value: email.value }, "paypal");
-  };
-
-  return (
-    <Container h="calc(100% - 48px)" flexCol="center">
-      <Input
-        radius="8px"
-        label="Paypal Address"
-        placeholder="Enter paypal email address"
-        onChange={handleChange}
-        value={email.value}
-        error={email.error}
-      />
-      <Button bg="primary" full m="12px 0" radius="8px" onClick={action}>
-        Done
-      </Button>
-    </Container>
-  );
-}
-
-function Skrill({ action: parentAction }) {
-  const [email, setEmail] = useState({ value: "", error: null });
-
-  const handleChange = (e) => {
-    setEmail({ error: null, value: e.target.value });
-  };
-
-  const action = () => {
-    if (!email.value)
-      return setEmail((a) => ({
-        ...a,
-        error: "Please Enter Skrill Email Address",
-      }));
-    parentAction({ value: email.value }, "skrill");
-  };
-
-  return (
-    <Container h="calc(100% - 48px)" flexCol="center">
-      <Input
-        radius="8px"
-        label="Skrill Address"
-        placeholder="Enter skrill email address"
-        onChange={handleChange}
-        value={email.value}
-        error={email.error}
       />
       <Button bg="primary" full m="12px 0" radius="8px" onClick={action}>
         Done
