@@ -20,7 +20,6 @@ import DashboardLayout from "../templates/Dashboard";
 import { useProfile } from "../../hooks/useProfile";
 import { useWallets } from "../../hooks/useWallets";
 import { useBalance } from "../../hooks/useBalance";
-import Button from "../atoms/Button";
 import styled from "styled-components";
 
 const CtaIcon = styled(FaPlus)`
@@ -53,10 +52,6 @@ const Dashboard = () => {
           <Text color="white" font="16px" p="12px 0" bold>
             Welcome {profile.firstName},
           </Text>
-          <Container m="18px 0 0" flex wide>
-            <Button p="8px 18px" m="0 12px 0 0" bg="white" color="primary" bold="true" to="/dashboard/wallets/btc/deposit">Deposit</Button>
-            <Button p="8px 18px" bg="white" color="primary" bold="true" to="/dashboard/wallets/withdraw">Withdraw</Button>
-          </Container>
         </Container>
       </Container>
       <Container p="12px" m="-140px 0 0 0" flex wide>
