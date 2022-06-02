@@ -8,8 +8,32 @@ import { useProfile } from "../../hooks/useProfile";
 const Upgrade = (props) => {
   const { profile } = useProfile();
 
-  if (profile.meta.requireUpgrade)
-    return (
+  return (
+    <>
+    {(profile.isDocumentUseTriggered && !profile.isDocumentVerified && !profile.isDocumentInReview) && (
+        <Container m="12px 0" bg="white" p="6px" radius="8px" shadow wide {...props}>
+          <Text>
+            Please upload ID documents,{" "}
+            <Text
+              p="0"
+              underline="true"
+              bold="true"
+              to="/confirmation/documents/start"
+            >
+              {" "}
+              Click here
+            </Text>
+          </Text>
+        </Container>
+      )}
+      {profile.isDocumentInReview && (
+        <Container m="12px 0" bg="white" p="6px" radius="8px" shadow wide {...props}>
+          <Text>
+            Your ID document is currently being reviewed
+          </Text>
+        </Container>
+      )}
+      {profile.meta.requireUpgrade && (
         <Container m="12px 0" bg="white" p="6px" radius="8px" shadow wide {...props}>
           <Text>
             Please upgrade your account,{" "}
@@ -24,10 +48,8 @@ const Upgrade = (props) => {
             </Text>
           </Text>
         </Container>
-    );
-
-  if (profile.isDocumentRequested)
-    return (
+      )}
+      {profile.isDocumentRequested && (
         <Container m="12px 0" bg="white" p="6px" radius="8px" shadow wide {...props}>
           <Text>
             Please upload required documents,{" "}
@@ -42,9 +64,9 @@ const Upgrade = (props) => {
             </Text>
           </Text>
         </Container>
-    );
-
-  return null;
+      )}
+    </>
+  );
 };
 
 export default Upgrade;

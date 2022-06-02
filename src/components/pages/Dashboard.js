@@ -116,7 +116,7 @@ const Dashboard = () => {
               p="0"
               flexalign="true"
               bold="true"
-              to="/dashboard/wallets/withdraw"
+              to="/dashboard/wallets/btc"
             >
               <SubText font="11px" p="0" m="0 6px 0 0" flexalign>
                 <FaArrowUp />

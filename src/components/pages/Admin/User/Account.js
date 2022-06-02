@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { FaArrowAltCircleUp, FaMailBulk } from "react-icons/fa";
+import { FaArrowAltCircleUp, FaMailBulk, FaQuestionCircle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 
 import Container from "../../../atoms/Container";
@@ -86,11 +86,15 @@ const Account = () => {
 
 function RequestDocuments({ user, mutate }) {
   const { show, toggle } = useToggle();
+  const { show: showAccept, toggle: toggleAccept } = useToggle();
+  const { show: showReject, toggle: toggleReject } = useToggle();
 
-  const changeDocumentVerifiedStatus = async () => {
+  const requestDocument = async () => {
     try {
       await axiosInstance.put("/users/" + user._id, {
-        isDocumentVerified: !user.isDocumentVerified,
+        isDocumentVerified: false,
+        isDocumentInReview: false,
+        isDocumentUseTriggered: true,
       });
       mutate();
     } catch (err) {
@@ -98,13 +102,49 @@ function RequestDocuments({ user, mutate }) {
     }
   };
 
+  const cancelDocument = async () => {
+    try {
+      await axiosInstance.put("/users/" + user._id, {
+        isDocumentVerified: true,
+        isDocumentInReview: false
+      });
+      mutate();
+    } catch (err) {
+      // console.log(err.response);
+    }
+  };
+
+  const acceptDocument = async () => {
+    try {
+      await axiosInstance.put("/users/" + user._id, {
+        isDocumentVerified: true,
+        isDocumentInReview: false,
+      });
+      mutate();
+    } catch (err) {
+      // console.log(err.response);
+    }
+  }
+
+  const rejectDocument = async () => {
+    try {
+      await axiosInstance.put("/users/" + user._id, {
+        isDocumentVerified: false,
+        isDocumentInReview: false,
+      });
+      mutate();
+    } catch (err) {
+      // console.log(err.response);
+    }
+  }
+
   return (
     <Container p="12px" wide>
       <SettingsHeading heading="Document Upload" />
       <SettingsItem
         title={
           user.isDocumentVerified
-            ? "Request ID Document Re-Upload"
+            ? "Request ID Document Upload"
             : "Cancel ID Document Request"
         }
         body="Request this user to re-upload his ID documents"
@@ -113,8 +153,28 @@ function RequestDocuments({ user, mutate }) {
         icon={<FaMailBulk />}
         onClick={toggle}
       />
+      {user.isDocumentInReview && (
+        <>
+          <SettingsItem
+            title="Accept uploaded documents?"
+            body="This user has uploaded some ID documents, do you want to accept them?"
+            color="success"
+            opacity="1"
+            icon={<FaQuestionCircle />}
+            onClick={toggleAccept}
+          />
+          <SettingsItem
+            title="Reject uploaded documents?"
+            body="This user has uploaded some ID documents, do you want to reject them?"
+            color="danger"
+            opacity="1"
+            icon={<FaQuestionCircle />}
+            onClick={toggleReject}
+          />
+        </>
+      )}
       <SettingsItem
-        title="Request Document Upload"
+        title="Request Other Documents Upload"
         body="Request this user to upload a document"
         to={"./document-request"}
       />
@@ -136,8 +196,22 @@ function RequestDocuments({ user, mutate }) {
             ? "User would be required to upload his documents"
             : "User would no longer be required to upload his documents"
         }
-        action={changeDocumentVerifiedStatus}
+        action={!user.isDocumentVerified ? cancelDocument : requestDocument}
         dismiss={toggle}
+      />
+      <ConfirmationModal
+        open={showAccept}
+        title="Accept uploaded documents?"
+        message="This user has uploaded some ID documents, do you want to accept them?"
+        action={acceptDocument}
+        dismiss={toggleAccept}
+      />
+      <ConfirmationModal
+        open={showReject}
+        title="Reject uploaded documents?"
+        message="This user has uploaded some ID documents, do you want to reject them?"
+        action={rejectDocument}
+        dismiss={toggleReject}
       />
     </Container>
   );

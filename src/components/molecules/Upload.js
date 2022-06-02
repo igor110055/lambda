@@ -59,6 +59,7 @@ const Upload = ({
             flex="center"
             fit="initial"
             onClick={() => inputRef.current.click()}
+            pointer
           >
             <Text font="12px" p="0" bold opacity="0.6">
               {hint || "Click here to upload image"}

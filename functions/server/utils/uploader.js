@@ -84,7 +84,7 @@ const uploadDocumentSelfie = async (user, file) => {
       cloudId: resp.public_id,
       date: Date.now(),
     };
-    user.isDocumentVerified = true;
+    user.isDocumentInReview = true;
 
     await user.save();
   } catch (err) {

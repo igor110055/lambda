@@ -14,9 +14,9 @@ const Requirement = ({ title, desc }) => (
     <Text p="0" m="0 0 8px 0" opacity="0.8" font="12px" weight="500">
       {title}
     </Text>
-    <Text p="0" weight="400" opacity="0.9" font="10px" multiline>
+    {/* <Text p="0" weight="400" opacity="0.9" font="10px" multiline>
       {desc}
-    </Text>
+    </Text> */}
   </Container>
 );
 const DocumentStart = () => {

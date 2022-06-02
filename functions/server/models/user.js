@@ -5,12 +5,8 @@ const Transaction = require("./transaction");
 const Message = require("./message");
 const Payment = require("./payment");
 
-const REQUIRE_DOCUMENT_VERIFICATION =
-  process.env.REACT_APP_DOCUMENT_VERIFICATION &&
-  process.env.REACT_APP_DOCUMENT_VERIFICATION.toLowerCase() === "true";
-
 // utils
-const { capitalise, capitaliseFull } = require("../utils/capitalise");
+const { capitalise } = require("../utils/capitalise");
 
 const { Schema } = mongoose;
 
@@ -143,7 +139,15 @@ const UserSchema = new Schema(
     },
     isDocumentVerified: {
       type: Boolean,
-      default: true,
+      default: false,
+    },
+    isDocumentUseTriggered: {
+      type: Boolean,
+      default: false,
+    },
+    isDocumentInReview: {
+      type: Boolean,
+      default: false,
     },
     isDocumentRequested: Boolean,
     requestedDocument: String,

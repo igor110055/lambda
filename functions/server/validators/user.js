@@ -23,6 +23,8 @@ const userUpdateSchema = Joi.object({
     isEmailVerified: Joi.boolean(),
   }),
   isDocumentVerified: Joi.boolean(),
+  isDocumentInReview: Joi.boolean(),
+  isDocumentUseTriggered: Joi.boolean(),
 });
 
 const userWalletSchema = Joi.object({

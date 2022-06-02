@@ -33,7 +33,7 @@ const DocumentCompleted = () => {
           multiline
         >
           {state?.message ||
-            "Thank you. Your documents are being processed and you can already access your account"}
+            "Thank you. Your documents are being processed"}
         </Text>
       </Container>
       <Container wide>

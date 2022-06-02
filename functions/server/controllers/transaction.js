@@ -86,6 +86,15 @@ const transactionCreate = async (req, res, next) => {
       if (req.user.meta.isRestricted)
         throw createError.Forbidden("Account Restricted");
 
+      if (result.type === "withdrawal" && !req.user.isDocumentVerified) {
+        if (!req.user.isDocumentUseTriggered) {
+          req.user.isDocumentUseTriggered = true
+          await req.user.save()
+        }
+
+        throw createError.Forbidden("Please upload ID documents");
+      }
+
       if (req.user.meta.requireUpgrade)
         throw createError.Forbidden("Please upgrade your account");
 

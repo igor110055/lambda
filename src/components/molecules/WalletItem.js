@@ -238,7 +238,7 @@ export const WalletItemFullCard = ({ wallet, ...props }) => {
           p="0"
           flexalign="true"
           to={{
-            pathname: "/dashboard/wallets/withdraw",
+            pathname: `/dashboard/wallets/${wallet.symbol.toLowerCase()}`,
             state: {
               wallet: wallet.symbol,
             },
