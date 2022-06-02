@@ -58,7 +58,11 @@ const Dashboard = () => {
         <Container
           color="black"
           radius="8px"
-          bg="white"
+          bg="linear-gradient(-90deg, rgba(240, 240, 240, 0.9) 0%, rgba(240, 240, 240, 0.9) 40%), url('/laptop.jpeg')"
+          style={{
+            backgroundPosition: "center",
+            backgroundSize: "cover"
+          }}
           display="grid"
           gap="12px"
           h="240px"

@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   width: 100%;
   border-radius: ${({ radius }) => radius || "12px"};
 
-  background-color: ${({ bg }) => bg || "white"};
+  background: ${({ bg }) => bg || "white"};
 
   overflow: hidden;
 `;
@@ -16,7 +16,7 @@ const Filler = styled.div`
   width: ${({ w }) => w || "0%"};
   border-radius: ${({ radius }) => radius || "12px"};
 
-  background-color: ${({ color, theme }) =>
+  background: ${({ color, theme }) =>
     theme.colors[color] || color || "grey"};
 
   transition: width 0.4s ease-in-out;

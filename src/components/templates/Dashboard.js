@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   height: 100vh;
   overflow: hidden;
 
-  background-color: ${({ theme }) => theme.colors.bg};
+  background: ${({ theme }) => theme.colors.bg};
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     height: 100%;
@@ -49,7 +49,7 @@ const GridWrapper = styled.div`
 
 const Content = styled.main`
   grid-area: content;
-  background-color: ${({ theme }) => theme.colors.bgContrast};
+  background: ${({ theme }) => theme.colors.bgContrast};
 
   overflow-y: scroll;
   &::-webkit-scrollbar {

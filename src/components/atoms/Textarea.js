@@ -19,7 +19,7 @@ const TextareaElement = styled.textarea`
 
   font-size: 14px;
 
-  background-color: ${({ bg, theme }) =>
+  background: ${({ bg, theme }) =>
     theme.colors[bg] || bg || theme.colors.bg};
 
   color: ${({ theme, color }) =>

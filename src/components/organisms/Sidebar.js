@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   height: 100%;
 
   color: ${({ theme }) => theme.colors.text};
-  background-color: ${({ theme }) => theme.colors.bgContrast};
+  background: ${({ theme }) => theme.colors.bgContrast};
   padding: 0px;
 
   overflow-y: scroll;

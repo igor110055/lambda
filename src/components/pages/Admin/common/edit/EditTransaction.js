@@ -45,7 +45,7 @@ const MethodBrand = styled(FaWallet)`
   padding: 4px;
   vertical-align: top;
 
-  background-color: ${({ bg }) => bg && bg};
+  background: ${({ bg }) => bg && bg};
   color: ${({ color }) => color || "white"};
   border-radius: 4px;
 `;

@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   padding: ${({ p }) => p && p};
   margin: ${({ m }) => m && m};
 
-  background-color: ${({ theme, bg }) =>
+  background: ${({ theme, bg }) =>
     theme.colors[bg] || bg || theme.colors.bg};
   overflow: hidden;
 
@@ -27,7 +27,7 @@ const Icon = styled(FaSearch)`
 
 const Input = styled.input`
   padding: 12px;
-  background-color: transparent;
+  background: transparent;
   width: 100%;
   height: 100%;
   font-size: 12px;

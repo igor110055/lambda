@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: lightgrey;
+  background: lightgrey;
   color: ${({ theme }) => theme.colors.invertText};
 `;
 

@@ -305,13 +305,12 @@ function UpgradeForm({ user, mutate }) {
   return (
     <Container
       as="form"
-      bg="actionBg"
+      // bg="actionBg"
       p="12px 12px 36px"
       wide
       onSubmit={handleSubmit(onSubmit)}
     >
       <Select
-        color="white"
         radius="8px"
         label="Account Level"
         ref={register}
@@ -322,14 +321,12 @@ function UpgradeForm({ user, mutate }) {
         <option value="level 3">Level 3</option>
       </Select>
       <Checkbox
-        color="white"
         label="Change User Role"
         ref={register}
         name="changeUserRole"
       />
       {changeUserRole && (
         <Select
-          color="white"
           radius="8px"
           label="User Role (Please check properly)"
           ref={register}
@@ -343,8 +340,7 @@ function UpgradeForm({ user, mutate }) {
       <Button
         type="submit"
         m="24px 0 0"
-        bg="white"
-        color="black"
+        bg="primary"
         p="14px"
         radius="8px"
         bold

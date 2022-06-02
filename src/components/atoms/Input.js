@@ -20,17 +20,21 @@ const InputElement = styled.input`
 
   font-size: ${({ font }) => (font ? font : "12px")};
 
-  background-color: ${({ bg, theme }) =>
-    theme.colors[bg] || bg || theme.colors.bg};
+  background: ${({ bg, theme }) =>
+    "transparent" || theme.colors[bg] || bg || theme.colors.bg};
 
   color: ${({ theme, color }) =>
     theme.colors[color] || color || theme.colors.text};
 
   border-radius: ${({ radius }) => radius || "4px"};
 
-  border: none;
+  border: 1px solid #4ac1e0;
   appearance: none;
   outline: none;
+
+  &:focus {
+    border: 1px solid #00ce7c;
+  }
 
   ${({ outline }) =>
     outline &&

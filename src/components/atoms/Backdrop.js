@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Backdrop = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${({ bg, theme }) =>
+  background: ${({ bg, theme }) =>
     theme.colors[bg] || bg || "rgba(0, 0, 0, 0.4)"};
 
   position: fixed;

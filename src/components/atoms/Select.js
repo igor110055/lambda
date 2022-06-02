@@ -23,8 +23,16 @@ const SelectElement = styled.select`
 
   padding-right: 14px;
 
-  background-color: ${({ theme, bg }) =>
-    theme.colors[bg] || bg || theme.colors.bg};
+  border: 1px solid #4ac1e0;
+  appearance: none;
+  outline: none;
+
+  &:focus {
+    border: 1px solid #00ce7c;
+  }
+
+  background: ${({ theme, bg }) =>
+    "transparent" || theme.colors[bg] || bg || theme.colors.bg};
   font-size: 12px;
 
   color: ${({ theme, color }) =>

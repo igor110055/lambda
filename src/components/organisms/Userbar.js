@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   position: relative;
   height: 100%;
 
-  /* background-color: ${({ theme }) => theme.colors.bgContrast}; */
+  /* background: ${({ theme }) => theme.colors.bgContrast}; */
 
   overflow-y: hidden;
   &::-webkit-scrollbar {

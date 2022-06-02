@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { FaBars } from "react-icons/fa";
+import { CgMenuGridO } from "react-icons/cg";
 
-import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
+import { ReactComponent as Logo } from "../../assets/icons/gumgum.svg";
 
 import Backdrop from "../atoms/Backdrop";
 import Container from "../atoms/Container";
@@ -23,7 +23,7 @@ const Wrapper = styled.aside`
 
   z-index: 2;
 
-  background-color: ${({ bg, theme }) =>
+  background: ${({ bg, theme }) =>
     theme.colors[bg] || bg || theme.colors.bgContrast};
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -39,7 +39,7 @@ const Wrapper = styled.aside`
   }
 `;
 
-const Menu = styled(FaBars)`
+const Menu = styled(CgMenuGridO)`
   font-size: 24px;
   width: 24px;
 `;
@@ -57,7 +57,7 @@ const Heading = styled.h3`
   justify-content: center;
 
   svg {
-    width: 20px;
+    height: 32px;
     display: inline-block;
     margin-right: 8px;
   }
@@ -74,7 +74,7 @@ const Dropdown = styled.div`
   transition: max-height 0.15s ease-out;
   overflow: hidden;
 
-  background-color: ${({ bg, theme }) =>
+  background: ${({ bg, theme }) =>
     theme.colors[bg] || bg || theme.colors.bgContrast};
   border-radius: 12px;
 
@@ -100,7 +100,7 @@ const AuthNavBar = () => {
       <Link to="/dashboard">
         <Heading>
           <Logo />
-          {process.env.REACT_APP_NAME}
+          {/* {process.env.REACT_APP_NAME} */}
         </Heading>
       </Link>
 

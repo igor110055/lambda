@@ -61,14 +61,14 @@ const Transactions = () => {
               radius="6px"
               bg="primary"
               bold="true"
-              to="/dashboard/wallets/withdraw"
+              to="/dashboard/wallets/btc"
             >
               Withdraw
             </Button>
           </Container>
 
           <Select
-            bg="secondary"
+            bg="bg"
             p="8px"
             radius="6px"
             w="120px"

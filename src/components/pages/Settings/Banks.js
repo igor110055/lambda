@@ -126,7 +126,7 @@ const Banks = () => {
             bg="secondary"
             // color="black"
             bold="true"
-            to="/dashboard/wallets/withdraw"
+            to="/dashboard/wallets/btc"
           >
             Withdraw
           </Button>

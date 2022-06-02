@@ -7,7 +7,7 @@ const Badge = styled.span`
   margin: ${({ m }) => m || "0 6px"};
 
   border-radius: ${({ radius }) => radius || "50%"};
-  background-color: ${({ bg, theme }) =>
+  background: ${({ bg, theme }) =>
     theme.colors[bg] || bg || "darkseagreen"};
 
   color: ${({ color }) => color || "white"};

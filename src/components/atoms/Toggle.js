@@ -16,7 +16,7 @@ const Label = styled.label`
     right: 0;
     bottom: 0;
     border-radius: 24px;
-    background-color: #ccc;
+    background: #ccc;
     transition: 0.4s;
   }
 
@@ -28,12 +28,12 @@ const Label = styled.label`
     height: calc(0.75 * var(--size));
     width: calc(0.75 * var(--size));
     border-radius: 50%;
-    background-color: white;
+    background: white;
     transition: 0.4s;
   }
 
   input:checked + span {
-    background-color: ${({ color, theme }) =>
+    background: ${({ color, theme }) =>
       theme.colors[color] || color || "#2196f3"};
   }
 

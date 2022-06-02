@@ -154,7 +154,7 @@ const Container = styled.div.attrs(({ to, scrollto }) => ({
         margin: ${media.m};
         border-radius: ${media.radius};
 
-        background-color: ${({ media, theme }) =>
+        background: ${({ media, theme }) =>
           theme.colors[media.bg] || media.bg};
 
         max-width: ${media.maxW};

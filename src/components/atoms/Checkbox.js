@@ -22,7 +22,7 @@ const Label = styled.label`
     width: 18px;
     height: 18px;
 
-    background-color: lightgrey;
+    background: lightgrey;
     color: transparent;
 
     font-size: 12px;
@@ -41,7 +41,7 @@ const Label = styled.label`
   }
 
   input:checked + span {
-    background-color: #2196f3;
+    background: #2196f3;
     color: white;
     border-color: #2196f3;
   }

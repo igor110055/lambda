@@ -32,7 +32,7 @@ const Cursor = styled.div`
   height: ${({ h }) => h && h};
 
   padding: 8px 16px;
-  background-color: ${({ bg, theme }) =>
+  background: ${({ bg, theme }) =>
     theme.colors[bg] || bg || "darkseagreen"};
   border-radius: ${({ radius }) => radius || "16px"};
 

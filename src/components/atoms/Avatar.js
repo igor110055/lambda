@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   min-width: var(--size);
 
   border-radius: 50%;
-  background-color: ${({ bg, theme }) => theme.colors[bg] || bg || theme.colors.primary};
+  background: ${({ bg, theme }) => theme.colors[bg] || bg || theme.colors.primary};
 
   display: flex;
   justify-content: center;
@@ -20,8 +20,8 @@ const Wrapper = styled.div`
   cursor: pointer;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    background-color: ${({ bg, theme }) => theme.colors[bg] || bg || "white"};
-    color: ${({ color, theme }) => theme.colors[color] || color || theme.colors.primary};
+    background: ${({ bg, theme }) => theme.colors[bg] || bg || "white"};
+    color: ${({ color, theme }) => theme.colors[color] || color || theme.colors.secondary};
   }
 `;
 

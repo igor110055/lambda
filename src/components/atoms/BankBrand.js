@@ -8,7 +8,7 @@ import { FaUniversity } from "react-icons/fa";
 const Icon = styled(ReactSVG)`
   height: ${({ size }) => size || "40px"};
   overflow: hidden;
-  background-color: ${({ bg }) => bg};
+  background: ${({ bg }) => bg};
   border-radius: 4px;
 
   svg {
@@ -38,7 +38,7 @@ export const BankDefaultBrand = styled(FaUniversity)`
   padding: 4px;
   vertical-align: top;
 
-  background-color: ${({ bg }) => bg && bg};
+  background: ${({ bg }) => bg && bg};
   color: ${({ color }) => color || "white"};
   border-radius: 4px;
 `;

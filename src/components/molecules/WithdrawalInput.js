@@ -67,7 +67,9 @@ const WithdrawalInput = ({
       </Text>
       <Text
         as="div"
-        bg="bg"
+        // bg="bg"
+        border="1px solid"
+        bordercolor="#4ac1e0"
         p="0 8px 0 12px"
         radius="4px"
         onClick={toggle}

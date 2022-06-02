@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CgMenuGridO } from "react-icons/cg";
 
-import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
+import { ReactComponent as Logo } from "../../assets/icons/gumgum.svg";
 
 import ProfilePic from "../molecules/ProfilePic";
 
@@ -21,7 +21,7 @@ const Wrapper = styled.aside`
 
   z-index: 2;
 
-  background-color: ${({ bg, theme }) => theme.colors.bgContrast};
+  background: ${({ bg, theme }) => theme.colors.bgContrast};
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
@@ -32,7 +32,7 @@ const Wrapper = styled.aside`
   /* display: none; */
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    background-color: ${({ theme }) => theme.colors.board};
+    background: ${({ theme }) => theme.colors.board};
     border-bottom: none;
     color: white;
   }
@@ -65,7 +65,7 @@ const Heading = styled.h3`
   justify-content: center;
 
   svg {
-    width: 20px;
+    height: 32px;
     display: inline-block;
     margin-right: 8px;
   }
@@ -82,7 +82,7 @@ const NavBar = ({ action }) => {
       <Link to="/dashboard">
         <Heading>
           <Logo />
-          {process.env.REACT_APP_NAME}
+          {/* {process.env.REACT_APP_NAME} */}
         </Heading>
       </Link>
       <ProfilePic />

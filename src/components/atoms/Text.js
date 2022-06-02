@@ -11,9 +11,17 @@ const Text = styled.p.attrs(({ to, scrollto, href }) => ({
   height: ${({ h }) => h && h};
 
   color: ${({ color, theme }) => theme.colors[color] || (color && color)};
-  background-color: ${({ bg, theme }) => theme.colors[bg] || (bg && bg)};
+  background: ${({ bg, theme }) => theme.colors[bg] || (bg && bg)};
   opacity: ${({ opacity }) => opacity && opacity};
   border-radius: ${({ radius }) => radius && radius};
+
+  border: ${({ border }) => border && border};
+  border-top: ${({ bordertop }) => bordertop && bordertop};
+  border-bottom: ${({ borderbottom }) => borderbottom && borderbottom};
+  border-left: ${({ borderleft }) => borderleft && borderleft};
+  border-right: ${({ borderright }) => borderright && borderright};
+  border-color: ${({ theme, bordercolor }) =>
+    theme.colors[bordercolor] || bordercolor || "rgba(0, 0, 0, 0.1)"};
 
   font-weight: ${({ bold, weight }) =>
     weight ? weight : bold ? "600" : "400"};

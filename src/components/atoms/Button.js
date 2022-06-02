@@ -8,7 +8,7 @@ const Button = styled.button.attrs(({ to, scrollto }) => ({
   --bg: ${({ bg, theme }) => theme.colors[bg] || bg || "grey"};
   --color: ${({ color, theme }) => theme.colors[color] || color || "white"};
 
-  background-color: var(--bg);
+  background: var(--bg);
   color: var(--color);
 
   padding: 12px;
@@ -62,14 +62,14 @@ const Button = styled.button.attrs(({ to, scrollto }) => ({
     outline &&
     css`
       --color: ${({ color, theme }) => theme.colors[color] || color || "grey"};
-      background-color: transparent;
+      background: transparent;
       border: 1.5px solid;
 
       &:hover,
       &:active {
         --bg: ${({ bg, theme }) => theme.colors[bg] || bg || "white"};
         color: var(--bg);
-        background-color: var(--color);
+        background: var(--color);
         border: none;
       }
     `}

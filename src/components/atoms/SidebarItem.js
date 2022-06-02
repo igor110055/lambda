@@ -26,13 +26,13 @@ const Wrapper = styled(Link).attrs(({ to, href }) => ({
   }
 
   &:hover {
-    background-color: ${({ theme, nohover }) => !nohover && theme.colors.bg};
+    background: ${({ theme, nohover }) => !nohover && theme.colors.bg};
   }
 
   ${({ active }) =>
     active &&
     css`
-      background-color: ${({ theme }) => theme.colors.primary};
+      background: ${({ theme }) => theme.colors.primary};
       color: white;
 
       svg {
@@ -40,7 +40,7 @@ const Wrapper = styled(Link).attrs(({ to, href }) => ({
       }
 
       &:hover {
-        background-color: ${({ theme }) => theme.colors.primary};
+        background: ${({ theme }) => theme.colors.primary};
         color: white;
       }
     `}

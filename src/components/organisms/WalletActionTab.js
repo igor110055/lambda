@@ -52,7 +52,8 @@ const WalletActionTab = (props) => {
       <Tabs
         p="24px 0 12px"
         m="12px 0"
-        bg="actionBg"
+        // bg="actionBg"
+        bordertop="1px solid"
         center
         textStyle={{
           bg: "bg",
@@ -167,7 +168,7 @@ function Transfer({ action }) {
 
   return (
     <Container as="form" onSubmit={handleSubmit(getReceiver)} wide>
-      <Text color="white" p="24px 8px 0" bold flexalign justify="flex-end">
+      <Text p="24px 8px 0" bold flexalign justify="flex-end">
         {available} USD
         <SubText
           bg="bg"
@@ -184,7 +185,6 @@ function Transfer({ action }) {
         </SubText>
       </Text>
       <Input
-        color="white"
         radius="4px"
         label="Amount"
         placeholder="Amount in USD"
@@ -198,7 +198,6 @@ function Transfer({ action }) {
         error={errors.amount?.message}
       />
       <Input
-        color="white"
         radius="4px"
         type="email"
         label="Recipient Email"
@@ -214,8 +213,7 @@ function Transfer({ action }) {
 
       <Button
         type="submit"
-        bg="white"
-        color="black"
+        bg="primary"
         bold
         full
         m="24px 0 0"
@@ -300,7 +298,7 @@ function Withdraw({ action }) {
 
   return (
     <Container as="form" onSubmit={handleSubmit(openWithdrawalModal)} wide>
-      <Text color="white" p="24px 8px 0" bold flexalign justify="flex-end">
+      <Text p="24px 8px 0" bold flexalign justify="flex-end">
         {available} USD
         <SubText
           bg="bg"
@@ -317,7 +315,6 @@ function Withdraw({ action }) {
         </SubText>
       </Text>
       <Input
-        color="white"
         radius="4px"
         label="Amount"
         placeholder="Amount in USD"
@@ -331,7 +328,6 @@ function Withdraw({ action }) {
         error={errors.amount?.message}
       />
       <ControlledWithdrawalInput
-        color="white"
         radius="4px"
         m="12px 0"
         p="12px 12px"
@@ -345,8 +341,7 @@ function Withdraw({ action }) {
 
       <Button
         type="submit"
-        bg="white"
-        color="black"
+        bg="primary"
         full
         m="24px 0 0"
         p="24px"
