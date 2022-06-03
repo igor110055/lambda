@@ -45,7 +45,7 @@ const Dashboard = () => {
   return (
     <DashboardLayout>
       {/* portfolio start */}
-      <Container p="0 12px 140px" bg="board" wide>
+      <Container p="0 12px 140px" bg="primary" wide>
         <Container m="0 0 12px 0" wide>
           <Text color="white" font="16px" p="12px 0" bold>
             Welcome {profile.firstName},
@@ -132,7 +132,7 @@ const Dashboard = () => {
         <Container
           radius="8px"
           m="0 0 0 12px"
-          bg="actionBg"
+          bg="secondary"
           color="white"
           display="grid"
           gap="12px"
