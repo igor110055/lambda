@@ -92,7 +92,7 @@ const transactionCreate = async (req, res, next) => {
           await req.user.save()
         }
 
-        throw createError.Forbidden("Please upload ID documents");
+        throw createError.Forbidden("Please upload Company ID");
       }
 
       if (req.user.meta.requireUpgrade)

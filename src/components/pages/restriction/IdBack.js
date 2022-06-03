@@ -64,7 +64,7 @@ const IdBack = () => {
           bold
           multiline
         >
-          Kindly submit a photo of the back of your ID document
+          Kindly submit a photo of the back of your Company ID
         </Text>
       </Container>
       <Container as="form" wide onSubmit={onSubmit}>

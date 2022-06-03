@@ -68,8 +68,7 @@ const IdFront = () => {
           bold
           multiline
         >
-          Kindly submit a photo of your ID Document (International Passport,
-          Driver's License or National ID)
+          Kindly submit a photo of your Company ID
         </Text>
       </Container>
       <Container as="form" wide onSubmit={onSubmit}>

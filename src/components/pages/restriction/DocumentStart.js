@@ -9,14 +9,11 @@ import AuthLayout from "../../templates/Auth";
 
 import { useProfile } from "../../../hooks/useProfile";
 
-const Requirement = ({ title, desc }) => (
+const Requirement = ({ title }) => (
   <Container p="12px 16px" m="0 0 12px 0" bg="bg" radius="8px" wide>
     <Text p="0" m="0 0 8px 0" opacity="0.8" font="12px" weight="500">
       {title}
     </Text>
-    {/* <Text p="0" weight="400" opacity="0.9" font="10px" multiline>
-      {desc}
-    </Text> */}
   </Container>
 );
 const DocumentStart = () => {
@@ -46,16 +43,13 @@ const DocumentStart = () => {
 
       <Container p="12px 0" wide>
         <Requirement
-          title="1.) Photo of ID (front side)"
-          desc="International Passport, Driver's License or National ID"
+          title="1.) Photo of Company ID (front side)"
         />
         <Requirement
-          title="2.) Photo of ID (back side)"
-          desc="Same document as above"
+          title="2.) Photo of Company ID (back side)"
         />
         <Requirement
-          title="3.) Take a selfie holding your ID"
-          desc="A photo clearly showing your face and your ID"
+          title="3.) Take a selfie holding your Company ID"
         />
       </Container>
 
