@@ -50,14 +50,15 @@ const ConfirmationModal = ({
           <Button
             bg="secondary"
             // color="black"
-            p="12px"
+            p="16px"
+            radius="24px"
             bold
             full
             onClick={dismiss}
           >
             Cancel
           </Button>
-          <Button bg="primary" p="12px" bold full onClick={action}>
+          <Button bg="primary" p="16px" radius="24px" bold full onClick={action}>
             Continue
           </Button>
         </Container>

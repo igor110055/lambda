@@ -5,6 +5,7 @@ export const useProcess = () => {
   const [processing, setProcessing] = useState(false);
   const [response, setResponse] = useState("Processing...");
   const [success, setSuccess] = useState(false);
+  const [failContext, setFailContext] = useState(null); // { message: "", to: "" }
 
   const start = () => {
     setShow(true);
@@ -19,12 +20,13 @@ export const useProcess = () => {
     setProcessing(false);
   };
 
-  const fail = (mssg) => {
+  const fail = (mssg, failContext = null) => {
     setResponse(mssg || "Something went wrong");
     setProcessing(false);
+    setFailContext(failContext)
   };
 
   const close = () => setShow(false);
 
-  return { show, processing, response, success, start, complete, fail, close };
+  return { show, processing, response, success, start, complete, fail, close, failContext };
 };

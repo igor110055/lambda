@@ -29,7 +29,7 @@ import { rawBalance } from "../../utils/parseBalance";
 const WalletActionTab = (props) => {
   const { profile } = useProfile();
   const { mutate } = useTransactions();
-  const { show, processing, response, success, start, complete, fail, close } =
+  const { show, processing, response, success, start, complete, fail, close, failContext } =
     useProcess();
 
   const makeTransaction = async (tx, cb) => {
@@ -43,7 +43,11 @@ const WalletActionTab = (props) => {
       cb()
     } catch (err) {
       // console.log(err.response);
-      fail(err.response.data.message);
+      if (err.response.data.message === "Please upload Company ID") {
+        fail(err.response.data.message, { message: "Click here to upload", to: "/confirmation/documents/start"});
+      } else {
+        fail(err.response.data.message);
+      }
     }
   };
 
@@ -77,6 +81,7 @@ const WalletActionTab = (props) => {
         response={response}
         success={success}
         dismiss={close}
+        failContext={failContext}
       />
     </>
   );

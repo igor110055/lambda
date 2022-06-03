@@ -52,6 +52,7 @@ const ProcessModal = ({
   processing,
   response,
   success,
+  failContext
 }) => {
   return (
     <Modal open={open} dismiss={dismiss} preventDismiss>
@@ -84,15 +85,20 @@ const ProcessModal = ({
           <Button
             bg="secondary"
             // color="black"
-            p="12px"
+            p="16px"
             m="12px 0"
+            radius="24px"
             full
             disabled
           >
             <Spinner />
           </Button>
+        ) : failContext ? (
+          <Button bg="actionBg" p="16px" m="12px 0" radius="24px" bold="true" full="true" to={failContext.to}>
+            {failContext.message}
+          </Button>
         ) : (
-          <Button bg="actionBg" p="12px" m="12px 0" bold full onClick={dismiss}>
+          <Button bg="actionBg" p="16px" m="12px 0" radius="24px" bold full onClick={dismiss}>
             Ok
           </Button>
         )}
