@@ -32,7 +32,7 @@ const Wrapper = styled.aside`
   /* display: none; */
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    background: ${({ theme }) => theme.colors.board};
+    background: ${({ theme }) => theme.colors.primary};
     border-bottom: none;
     color: white;
   }

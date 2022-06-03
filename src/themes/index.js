@@ -27,7 +27,7 @@ export const light = {
 
     //computed
     actionBg: colors.actionBg || "#383B42",
-    secondary: "#003f58" || "#1A2C79",
+    secondary: "#4ac1e0" || "#1A2C79",
   },
 };
 

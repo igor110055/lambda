@@ -56,9 +56,9 @@ const Dashboard = () => {
       </Container>
       <Container p="12px" m="-140px 0 0 0" flex wide>
         <Container
-          color="black"
           radius="8px"
-          bg="linear-gradient(-90deg, rgba(240, 240, 240, 0.9) 0%, rgba(240, 240, 240, 0.9) 40%), url('/laptop.jpeg')"
+          bg="secondary"
+          color="white"
           style={{
             backgroundPosition: "center",
             backgroundSize: "cover"
@@ -132,7 +132,7 @@ const Dashboard = () => {
         <Container
           radius="8px"
           m="0 0 0 12px"
-          bg="secondary"
+          bg="primary"
           color="white"
           display="grid"
           gap="12px"
