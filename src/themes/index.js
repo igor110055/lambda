@@ -7,10 +7,10 @@ const base = {
 };
 
 const colors = {
-  primary: "#00c94c" || process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
-  board: "#00c94c" || process.env.REACT_APP_BOARD_COLOR,
+  primary: "#FF8F1F" || process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
+  board: "#FF8F1F" || process.env.REACT_APP_BOARD_COLOR,
   chart: process.env.REACT_APP_CHART_COLOR || "#68CA6D",
-  actionBg: "#4281A4" || process.env.REACT_APP_ACTION_BG,
+  actionBg: "#FFAD5C" || process.env.REACT_APP_ACTION_BG,
   danger: "#FF4747",
   success: "#68CA6D",
 };
@@ -27,7 +27,7 @@ export const light = {
 
     //computed
     actionBg: colors.actionBg || "#383B42",
-    secondary: "#1A2C79",
+    secondary: "#42424D",
   },
 };
 
@@ -43,6 +43,6 @@ export const dark = {
 
     //computed
     actionBg: colors.actionBg || "#383B42",
-    secondary: "#1A2C79",
+    secondary: "#42424D",
   },
 };
