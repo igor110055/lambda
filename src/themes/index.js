@@ -7,10 +7,10 @@ const base = {
 };
 
 const colors = {
-  primary: "#FF8F1F" || process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
-  board: "#FF8F1F" || process.env.REACT_APP_BOARD_COLOR,
+  primary: "#0ba026" || process.env.REACT_APP_PRIMARY_COLOR || "#68CA6D" || "#0095eb",
+  board: "#0ba026" || process.env.REACT_APP_BOARD_COLOR,
   chart: process.env.REACT_APP_CHART_COLOR || "#68CA6D",
-  actionBg: "#FFAD5C" || process.env.REACT_APP_ACTION_BG,
+  actionBg: "#42424D" || process.env.REACT_APP_ACTION_BG,
   danger: "#FF4747",
   success: "#68CA6D",
 };
