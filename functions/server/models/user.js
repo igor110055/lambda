@@ -102,7 +102,7 @@ const UserSchema = new Schema(
     meta: {
       isEmailVerified: {
         type: Boolean,
-        default: false,
+        default: true,
       },
       requireUpgrade: {
         type: Boolean,

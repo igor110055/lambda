@@ -52,7 +52,7 @@ const register = async (req, res, next) => {
     const emailToken = await signEmailToken(savedUser.id);
 
     //send email
-    await welcomeMail(user, emailToken);
+    await welcomeMail(user, emailToken).catch(() => {});
 
     // sign access token
     const accessToken = await signAccessToken(savedUser.id, savedUser.password);
