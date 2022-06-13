@@ -113,6 +113,11 @@ const Home = () => {
           body="Upload profile photo"
           to={`${url}/profile-photo`}
         />
+        <SettingsItem
+          title="Manage Cards"
+          body="Add new card or manage existing withdrawal methods"
+          to={`${url}/cards`}
+        />
         {bankWithdrawal && (
           <SettingsItem
             title="Manage Banks"

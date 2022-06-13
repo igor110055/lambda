@@ -4,6 +4,7 @@ import { FaCreditCard, FaUniversity } from "react-icons/fa";
 import Container from "../atoms/Container";
 import Text from "../atoms/Text";
 import SubText from "../atoms/SubText";
+import CardBrand from "../atoms/CardBrand";
 
 import WithdrawalPicker from "../organisms/WithdrawalPicker";
 
@@ -15,6 +16,7 @@ const WithdrawalInput = ({
   placeholder,
   hint,
   method,
+  cards,
   banks,
   noadd,
   onChange,
@@ -41,6 +43,7 @@ const WithdrawalInput = ({
 
   // for backwards compatibility method might still be stored in db as a string
   // so check if method type matches criteria then fallback to previous checks
+  const card = isMatch("card") ? method.address : isFallbackMatch((m) => cards.find((c) => c._id === m));
   const bank = isMatch("bank") ? method.address : isFallbackMatch((m) => banks.some((b) => b._id === m));
   const address = isMatch("address") ? method.address : isFallbackMatch((m) => m?.startsWith("address://") ? ({value: m?.replace("address://", "")}) : null);
   // for newer api since method might still be stored as a string in db
@@ -77,8 +80,10 @@ const WithdrawalInput = ({
         {...styleProps}
       >
         <SubText p="12px 0" font="inherit">
-          {bank
-            ? `${bank.bank.toUpperCase()} - ${bank.accountNumber}`
+          {card
+            ? `${card.issuer.toUpperCase()} **** ${card.cardNumber.slice(-5)}`
+            : bank
+            ? `${bank.bank.toUpperCase()} - ${bank.userId}`
             : address
             ? address.value
             : paypal
@@ -96,7 +101,9 @@ const WithdrawalInput = ({
           opacity="0.7"
           flexalign
         >
-          {bank ? (
+          {card ? (
+            <CardBrand size="32px" logo={card.issuer} />
+          ) : bank ? (
             <FaUniversity />
           ) : (
             <FaCreditCard />
@@ -107,6 +114,7 @@ const WithdrawalInput = ({
         open={show}
         dismiss={toggle}
         title={hint || label}
+        cards={cards}
         banks={banks}
         action={change}
         noadd={noadd}

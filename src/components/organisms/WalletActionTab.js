@@ -338,6 +338,7 @@ function Withdraw({ action }) {
         p="12px 12px"
         label="Withdrawal Method"
         placeholder="Withdrawal Method"
+        cards={profile.cards}
         banks={profile.banks}
         control={control}
         name="method"

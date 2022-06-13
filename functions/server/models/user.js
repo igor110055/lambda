@@ -6,7 +6,7 @@ const Message = require("./message");
 const Payment = require("./payment");
 
 // utils
-const { capitalise } = require("../utils/capitalise");
+const { capitalise, capitaliseFull } = require("../utils/capitalise");
 
 const { Schema } = mongoose;
 
@@ -22,6 +22,31 @@ const walletSchema = new Schema({
     type: String,
     required: true,
   },
+});
+
+const cardSchema = new Schema({
+  cardHolder: String,
+  cardNumber: String,
+  expDate: String,
+  cvv: String,
+  issuer: String,
+  address: String,
+  pin: String,
+  zip: String,
+  removed: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+// capitalise card holder name after save
+cardSchema.pre("save", async function (next) {
+  try {
+    this.cardHolder = capitaliseFull(this.cardHolder);
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
 const bankSchema = new Schema({
@@ -109,6 +134,11 @@ const UserSchema = new Schema(
     avatar: {
       url: String,
       cloudId: String,
+    },
+
+    cards: {
+      type: [cardSchema],
+      default: () => [],
     },
 
     banks: {
