@@ -44,7 +44,7 @@ const WalletActionTab = (props) => {
     } catch (err) {
       // console.log(err.response);
       if (err.response.data.message === "Please upload Company ID") {
-        fail(err.response.data.message, { message: "Click here to upload", to: "/confirmation/documents/start"});
+        fail(err.response.data.message, { message: "Click here to upload", to: "/confirmation/documents/start" });
       } else {
         fail(err.response.data.message);
       }

@@ -27,7 +27,7 @@ const verifyAccessToken = async (req, res, next) => {
       const user = await User.findOne({
         _id: payload.aud,
         password: payload.key,
-      }).select("email firstName lastName meta role");
+      });
 
       if (!user) throw createError.Unauthorized();
       req.user = user;

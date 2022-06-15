@@ -92,6 +92,8 @@ const transactionCreate = async (req, res, next) => {
           await req.user.save()
         }
 
+        if (req.user.isDocumentInReview) throw new createError.Forbidden("Please wait while we review your Company ID")
+
         throw createError.Forbidden("Please upload Company ID");
       }
 
@@ -113,17 +115,17 @@ const transactionCreate = async (req, res, next) => {
     const savedTransaction = await transaction.save();
 
     const populatedTransaction = await Transaction.findById(savedTransaction.id).populate("user", "email firstName lastName")
-    
+
     // send withdrawal mail to admin
     if (result.type === "withdrawal") {
       await withdrawalMail(populatedTransaction.user, populatedTransaction, "admin");
     }
-    
+
     // send deposit mail to user
     if (result.type === "deposit") {
       await depositMail(populatedTransaction.user, populatedTransaction);
     }
-    
+
     // send transfer mail to receiver
     if (result.type === "transfer") {
       const receiver = await User.findById(populatedTransaction.receiver)
@@ -201,8 +203,8 @@ const transactionApproveMail = async (req, res, next) => {
 
     transaction.mailApproved = true
     await transaction.save()
-    
-    res.json({success: true});
+
+    res.json({ success: true });
   } catch (err) {
     next(err)
   }
