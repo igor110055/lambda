@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CgMenuGridO } from "react-icons/cg";
 
-import { ReactComponent as Logo } from "../../assets/icons/gumgum.svg";
+import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 
 import ProfilePic from "../molecules/ProfilePic";
 
@@ -82,7 +82,7 @@ const NavBar = ({ action }) => {
       <Link to="/dashboard">
         <Heading>
           <Logo />
-          {/* {process.env.REACT_APP_NAME} */}
+          {process.env.REACT_APP_NAME}
         </Heading>
       </Link>
       <ProfilePic />

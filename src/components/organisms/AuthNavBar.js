@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { CgMenuGridO } from "react-icons/cg";
 
-import { ReactComponent as Logo } from "../../assets/icons/gumgum.svg";
+import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 
 import Backdrop from "../atoms/Backdrop";
 import Container from "../atoms/Container";
@@ -100,7 +100,7 @@ const AuthNavBar = () => {
       <Link to="/dashboard">
         <Heading>
           <Logo />
-          {/* {process.env.REACT_APP_NAME} */}
+          {process.env.REACT_APP_NAME}
         </Heading>
       </Link>
 
