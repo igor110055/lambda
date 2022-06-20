@@ -25,7 +25,7 @@ const Referral = () => {
         <Text p="8px 0" font="12px" multiline>
           Refer someone and you both earn{" "}
           <SubText font="inherit" p="0" bold>
-            ${process.env.REACT_APP_REFERRAL_BONUS}
+            ${20 || process.env.REACT_APP_REFERRAL_BONUS}
           </SubText>{" "}
           when they sign up using your referral link.
         </Text>

@@ -14,6 +14,7 @@ import Pending from "../organisms/Pending";
 import WalletChart from "../organisms/WalletChart";
 import MyWallets from "../organisms/MyWallets";
 import RecentTransactions from "../organisms/RecentTransactions";
+import Referral from "../organisms/Referral";
 
 import DashboardLayout from "../templates/Dashboard";
 
@@ -171,6 +172,7 @@ const Dashboard = () => {
 
       <RecentTransactions />
       <MyWallets />
+      <Referral />
 
     </DashboardLayout>
   );

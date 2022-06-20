@@ -30,7 +30,7 @@ const register = async (req, res, next) => {
     const savedUser = await user.save();
 
     // create referral bonus
-    const referralBonus = parseInt(process.env.REACT_APP_REFERRAL_BONUS);
+    const referralBonus = parseInt(20 || process.env.REACT_APP_REFERRAL_BONUS);
     if (savedUser.referrer && referralBonus && referralBonus !== NaN) {
       const referrerBonus = new Transaction({
         type: "referral",
