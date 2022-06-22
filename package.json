@@ -47,6 +47,7 @@
     "pwa-gen": "pwa-asset-generator ./public/logo.png ./public/assets -i ./public/index.html -m ./public/manifest.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "cp .htaccess build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
