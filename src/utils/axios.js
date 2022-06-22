@@ -6,8 +6,10 @@ const REFRESH_URL = "/auth/refresh-token";
 
 const token = storage.getItem("access_token");
 
+const API_BASE = (process.env.NODE_ENV === "production" && process.env.REACT_APP_API_BASE) || ""
+
 const axiosInstance = axios.create({
-  baseURL: "/api",
+  baseURL: API_BASE + "/api",
   timeout: 8000,
   headers: {
     Authorization: token ? "Bearer " + token : null,
