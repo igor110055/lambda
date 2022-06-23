@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import PreLoader from "../../atoms/PreLoader";
@@ -11,6 +10,8 @@ import Button from "../../atoms/Button";
 import ProfilePic from "../../molecules/ProfilePic";
 
 import AuthLayout from "../../templates/Auth";
+
+import axiosInstance from "../../../utils/axios";
 
 const initialState = {
   loading: true,
@@ -50,7 +51,7 @@ const Referral = () => {
     }
     const fetchReferrer = async () => {
       try {
-        const { data } = await axios.get("/api/profile/" + ref);
+        const { data } = await axiosInstance.get("/profile/" + ref);
         // console.log(data);
         dispatch({
           type: "success",
