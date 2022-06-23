@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import storage from "local-storage-fallback";
 import { useHistory, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -25,24 +24,18 @@ const Register = () => {
 
   const { mutate } = useProfile();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    errors,
-    setError,
-    formState,
-  } = useForm({
-    defaultValues: {
-      email: "",
-      firstName: "",
-      lastName: "",
-      password: "",
-      pass: "",
-      showPassword: false,
-    },
-    resolver: yupResolver(registrationSchema),
-  });
+  const { register, handleSubmit, watch, errors, setError, formState } =
+    useForm({
+      defaultValues: {
+        email: "",
+        firstName: "",
+        lastName: "",
+        password: "",
+        pass: "",
+        showPassword: false,
+      },
+      resolver: yupResolver(registrationSchema),
+    });
 
   const { isSubmitting } = formState;
   const { showPassword } = watch();
@@ -52,7 +45,7 @@ const Register = () => {
       formData.referrer = state.referrer;
     }
     try {
-      const { data } = await axios.post("/api/auth/register", formData);
+      const { data } = await axiosInstance.post("/auth/register", formData);
 
       axiosInstance.defaults.headers["Authorization"] =
         "Bearer " + data.accessToken;
