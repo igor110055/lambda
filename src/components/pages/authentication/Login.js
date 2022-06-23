@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import storage from "local-storage-fallback";
 import { useHistory, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -26,28 +25,22 @@ const Login = () => {
 
   const { mutate } = useProfile();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    errors,
-    setError,
-    formState,
-  } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-      showPassword: false,
-    },
-    resolver: yupResolver(loginSchema),
-  });
+  const { register, handleSubmit, watch, errors, setError, formState } =
+    useForm({
+      defaultValues: {
+        email: "",
+        password: "",
+        showPassword: false,
+      },
+      resolver: yupResolver(loginSchema),
+    });
 
   const { isSubmitting } = formState;
   const { showPassword } = watch();
 
   const onSubmit = async ({ showPassword, ...formData }) => {
     try {
-      const { data } = await axios.post("/api/auth/login", formData);
+      const { data } = await axiosInstance.post("/auth/login", formData);
 
       axiosInstance.defaults.headers["Authorization"] =
         "Bearer " + data.accessToken;
@@ -58,6 +51,7 @@ const Login = () => {
       await mutate();
       history.push(state?.from || "/dashboard");
     } catch (err) {
+      // console.log(err?.response);
       const status = err.response.data.status;
       setError("email", {
         type: "server",
