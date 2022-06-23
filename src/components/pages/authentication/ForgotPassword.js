@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -12,6 +11,8 @@ import Spinner from "../../atoms/Spinner";
 import AuthLayout from "../../templates/Auth";
 
 import { forgotPasswordSchema } from "../../../validators/password";
+
+import axiosInstance from "../../../utils/axios";
 
 const ForgotPassword = () => {
   const [done, setDone] = useState(false);
@@ -27,7 +28,7 @@ const ForgotPassword = () => {
 
   const onSubmit = async ({ email }) => {
     try {
-      await axios.post("/api/auth/reset-password", { email });
+      await axiosInstance.post("/auth/reset-password", { email });
       setDone(true);
     } catch (err) {
       // console.log(err.response);
