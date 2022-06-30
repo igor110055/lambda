@@ -10,6 +10,7 @@ const paymentRoute = require("./payment");
 const transactionRoute = require("./transaction");
 const servicesRoute = require("./services");
 const bankRoute = require("./bank");
+const supportRoute = require("./support");
 
 // middlewares
 const auth = require("../middlewares/auth");
@@ -22,6 +23,7 @@ routes.get("/", (req, res) => {
 routes.use("/auth", authRoute);
 routes.use("/profile", profileRoute);
 routes.use("/core", servicesRoute);
+routes.use("/support", supportRoute);
 
 // apply auth middleware to require req user beyond this point
 routes.use(auth);

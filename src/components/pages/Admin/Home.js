@@ -118,6 +118,9 @@ const Home = () => {
             <ListItem bg="bg" icon={<FaPlus />} to={`${url}/bank`}>
               Bank Details
             </ListItem>
+            <ListItem bg="bg" icon={<FaPlus />} to={`${url}/support`}>
+              Support Details
+            </ListItem>
           </List>
         </Container>
 
