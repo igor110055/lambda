@@ -88,7 +88,7 @@ const ResetPassword = () => {
   const resetPassword = async ({ showPassword, ...formData }) => {
     formData.passwordResetToken = token;
     try {
-      await axiosInstance.post("/api/auth/reset-password/change", formData);
+      await axiosInstance.post("/auth/reset-password/change", formData);
       history.push("/account/login");
     } catch (err) {
       // console.log(err.response);
