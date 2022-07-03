@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer } from "react";
-import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 
 import Container from "../../atoms/Container";
@@ -11,6 +10,8 @@ import PreLoader from "../../atoms/PreLoader";
 import AuthLayout from "../../templates/Auth";
 
 import { useProfile } from "../../../hooks/useProfile";
+
+import axiosInstance from "../../../utils/axios";
 
 const initialState = {
   loading: true,
@@ -52,7 +53,7 @@ const VerifyEmail = () => {
     const verifyEmail = async () => {
       try {
         // console.log(token);
-        const { data } = await axios.post("/api/auth/verify-email", {
+        const { data } = await axiosInstance.post("/auth/verify-email", {
           emailToken: token,
         });
         // console.log(data);
