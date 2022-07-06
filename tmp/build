@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+
+SRC="./build"
+DEST="../apps/$CURRENT_BRANCH"
+
+echo "running build"
+npm run build
+
+echo "clearing destination"
+rm -rf $DEST
+
+echo "copying build"
+cp -r $SRC $DEST
